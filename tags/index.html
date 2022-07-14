@@ -291,10 +291,52 @@
             </div>
             <div class="tag-chips">
                 
+                
+                <a href="/tags/blog/" title="blog: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="blog" style="background-color: #F9EBEA;">blog
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/hexo/" title="hexo: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="hexo" style="background-color: #F5EEF8;">hexo
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
             </div>
         </div>
     </div>
 </div>
+
+    
+    <link rel="stylesheet" type="text/css" href="/libs/jqcloud/jqcloud.css">
+<style type="text/css">
+    #tag-wordcloud {
+        width: 100%;
+        height: 300px;
+    }
+</style>
+
+<div class="container" data-aos="fade-up">
+    <div class="card">
+        <div id="tag-wordcloud" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/libs/jqcloud/jqcloud-1.0.4.min.js"></script>
+<script type="text/javascript">
+    
+
+    $('#tag-wordcloud').jQCloud([{"text":"blog","weight":1,"link":"/tags/blog/"},{"text":"hexo","weight":1,"link":"/tags/hexo/"}], {
+        autoResize: true
+    });
+</script>
 
     
 
@@ -373,20 +415,19 @@
         </div>
         <div class="col s12 m4 l4 social-link ">
     <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2018351840" class="tooltipped" target="_blank" data-tooltip="用QQ联系我: 2018351840" data-position="top" data-delay="50">
-        <i class="fa-brands fa-qq"></i>
+        <i class="fab fa-qq"></i>
     </a>
 
 
 
     <a href="https://space.bilibili.com/172382106" class="tooltipped" target="_blank" data-tooltip="访问我的B站" data-position="top" data-delay="50">
-        <i class="fa-brands fa-bilibili"></i>
+        <i class="fas fa-bilibili"></i>
     </a>
 
 
-<a href="https://space.bilibili.com/172382106" class="tooltipped" target="_blank" data-tooltip="访问我的B站" data-position="top" data-delay="50">
-    <i class="fa-brands fa-bilibili"></i>
+<a href="https://mp.weixin.qq.com/" class="tooltipped" target="_blank" data-tooltip="访问我的公众号" data-position="top" data-delay="50">
+    <i class="fas fa-wechat"></i>
 </a>
-
 
 
     <a href="mailto:xiaobai.sheep@foxmail.com" class="tooltipped" target="_blank" data-tooltip="发邮件联系我" data-position="top" data-delay="50">
