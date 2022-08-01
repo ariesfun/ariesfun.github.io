@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ariesfunの进阶之旅</title>
+  
+  <subtitle>欢迎来到我の小破站！</subtitle>
+  <link href="https://ariesfun.gitee.io/atom.xml" rel="self"/>
+  
+  <link href="https://ariesfun.gitee.io/"/>
+  <updated>2022-07-14T16:35:52.646Z</updated>
+  <id>https://ariesfun.gitee.io/</id>
+  
+  <author>
+    <name>Ariesfun</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我的第一篇博客</title>
+    <link href="https://ariesfun.gitee.io/2021/07/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://ariesfun.gitee.io/2021/07/14/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+    <published>2021-07-14T04:00:00.000Z</published>
+    <updated>2022-07-14T16:35:52.646Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="用MarkDown进行博文编写"><a href="#用MarkDown进行博文编写" class="headerlink" title="用MarkDown进行博文编写"></a>用MarkDown进行博文编写</h1><span id="more"></span> <h2 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h2><p>使用标题时需要用#号  </p><h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><p>这是第一个段落内容 </p><p>这是第二个段落内容</p><h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><blockquote><p>这是一段引用段落，将会被高亮显示</p></blockquote><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>[网易云] (<a href="https://music.163.com/?from=infinity">https://music.163.com/?from=infinity</a>)</p><h2 id="风景图"><a href="#风景图" class="headerlink" title="风景图"></a>风景图</h2><p><img src="https://img.zcool.cn/community/01d5725e6eea9ba80121651859942f.jpg@1280w_1l_2o_100sh.jpg" alt="图片1"></p><p><img src="D:///Blog/themes/yilia/source/assets/imghans-vlog01.png" alt="avatar"> </p><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul><li>无序列表项</li><li>无序列表项</li><li>无序列表项 <h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2></li></ul><ol><li>有序列表项1</li><li>有序列表项2</li><li>有序列表项3 <h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2></li></ol><hr><hr><hr><hr><p>（ps：只要符号不小于三个以上都可显示分割线。）</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;用MarkDown进行博文编写&quot;&gt;&lt;a href=&quot;#用MarkDown进行博文编写&quot; class=&quot;headerlink&quot; title=&quot;用MarkDown进行博文编写&quot;&gt;&lt;/a&gt;用MarkDown进行博文编写&lt;/h1&gt;</summary>
+    
+    
+    
+    <category term="Markdown" scheme="https://ariesfun.gitee.io/categories/Markdown/"/>
+    
+    
+    <category term="blog" scheme="https://ariesfun.gitee.io/tags/blog/"/>
+    
+    <category term="hexo" scheme="https://ariesfun.gitee.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://ariesfun.gitee.io/2021/04/01/hello-world/"/>
+    <id>https://ariesfun.gitee.io/2021/04/01/hello-world/</id>
+    <published>2021-03-31T16:27:24.675Z</published>
+    <updated>2022-07-22T14:39:29.761Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="应用分类标签"><a href="#应用分类标签" class="headerlink" title="应用分类标签"></a>应用分类标签</h1><hr><p>title: Hello World<br>categories: 说明<br>top: 5<br>tags: 随笔</p><hr><h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><span id="more"></span> <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;应用分类标签&quot;&gt;&lt;a href=&quot;#应用分类标签&quot; class=&quot;headerlink&quot; title=&quot;应用分类标签&quot;&gt;&lt;/a&gt;应用分类标签&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;title: Hello World&lt;br&gt;categories: 说明&lt;br&gt;top: 5&lt;br&gt;tags: 随笔&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;Hello-World&quot;&gt;&lt;a href=&quot;#Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Hello World&quot;&gt;&lt;/a&gt;Hello World&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>
