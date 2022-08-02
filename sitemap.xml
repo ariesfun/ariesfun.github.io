@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ariesfun.gitee.io/2022/08/02/Markdown%E8%AF%AD%E6%B3%95/</loc>
+    
+    <lastmod>2022-08-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ariesfun.gitee.io/2021/04/01/hello-world/</loc>
     
     <lastmod>2022-07-22</lastmod>
@@ -58,7 +67,7 @@
 
   <url>
     <loc>https://ariesfun.gitee.io/</loc>
-    <lastmod>2022-08-01</lastmod>
+    <lastmod>2022-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -66,14 +75,21 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/tags/blog/</loc>
-    <lastmod>2022-08-01</lastmod>
+    <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://ariesfun.gitee.io/tags/hexo/</loc>
-    <lastmod>2022-08-01</lastmod>
+    <lastmod>2022-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/Markdown/</loc>
+    <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -82,7 +98,7 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/categories/Markdown/</loc>
-    <lastmod>2022-08-01</lastmod>
+    <lastmod>2022-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -6,7 +6,7 @@
   <link href="https://ariesfun.gitee.io/atom.xml" rel="self"/>
   
   <link href="https://ariesfun.gitee.io/"/>
-  <updated>2022-07-14T16:35:52.646Z</updated>
+  <updated>2022-08-02T04:09:36.130Z</updated>
   <id>https://ariesfun.gitee.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Markdown语法</title>
+    <link href="https://ariesfun.gitee.io/2022/08/02/Markdown%E8%AF%AD%E6%B3%95/"/>
+    <id>https://ariesfun.gitee.io/2022/08/02/Markdown%E8%AF%AD%E6%B3%95/</id>
+    <published>2022-08-02T02:59:40.680Z</published>
+    <updated>2022-08-02T04:09:36.130Z</updated>
+    
+    <content type="html"><![CDATA[<p>6级标题：</p><h1 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h1><h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><h3 id="标题3"><a href="#标题3" class="headerlink" title="标题3"></a>标题3</h3><h4 id="标题4"><a href="#标题4" class="headerlink" title="标题4"></a>标题4</h4><h5 id="标题5"><a href="#标题5" class="headerlink" title="标题5"></a>标题5</h5><h6 id="标题6"><a href="#标题6" class="headerlink" title="标题6"></a>标题6</h6><p>引用：</p><blockquote><p>这是一段引用</p></blockquote><p>有序列表：<br>把大象放进冰箱<br>1.打开冰箱<br>2.把大象塞进去<br>3.关上冰箱</p><p>无序列表：</p><ul><li>阿里巴巴</li><li>华为云</li></ul><ul><li>千叶结锤</li><li>稚晖君</li></ul><p>任务列表：<br>明天要做的事：</p><ul><li><input disabled="" type="checkbox"> 吃饭</li><li><input disabled="" type="checkbox"> 睡觉</li><li><input checked="" disabled="" type="checkbox"> 打豆豆</li></ul><p>代码块：<br>‘’’c<br>int main()<br>{<br>    return 0;<br>}</p><p>数学公式：<br>$$<br>\frac{\partial f}{\partial x} = 2\sqrt{a}x<br>$$</p><p>表格：<br>|姓名|年龄|成绩|<br>|:—|—:|:—:|<br>|张三|19|99|<br>|李四|20|88|</p><p>脚注：</p><p>内容型</p><p>一键三连[^三连]</p><p>[^三连]：点赞、投币、收藏</p><h2 id="添加横线："><a href="#添加横线：" class="headerlink" title="添加横线："></a>添加横线：</h2><p>链接型</p><p>引用链接：<br><a href="www.baidu.com" title="搜索引擎">百度</a></p><p>[百度][id]<br>[id]:<a href="http://www.baidu.com/">www.baidu.com</a> “搜索引擎”</p><p>跳转链接：<br>请参考[标题1][#标题1]</p><p>ULR:<br><a href="http://www.baidu.com/">http://www.baidu.com</a></p><p>图片链接：<br><img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="百度" title="百度搜索"></p><p>其他行内格式：</p><p>斜体：<em>斜体</em><br>加粗：<strong>加粗</strong><br>行内代码：’printf()’<br>下划线：<u>下划线</u><br>表情符号：:smile:<br>行内数学公式：$\theta=x^2$<br>化学式：H<del>2</del>O<br>次方：X^2^<br>文字高亮：==这是一段高亮文字==</p><p>嵌入视频：</p><iframe src="//player.bilibili.com/player.html?aid=327623069&bvid=BV1JA411h7Gw&cid=171385214&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;6级标题：&lt;/p&gt;
+&lt;h1 id=&quot;标题1&quot;&gt;&lt;a href=&quot;#标题1&quot; class=&quot;headerlink&quot; title=&quot;标题1&quot;&gt;&lt;/a&gt;标题1&lt;/h1&gt;&lt;h2 id=&quot;标题2&quot;&gt;&lt;a href=&quot;#标题2&quot; class=&quot;headerlink&quot; title=&quot;标题</summary>
+      
+    
+    
+    
+    <category term="Markdown" scheme="https://ariesfun.gitee.io/categories/Markdown/"/>
+    
+    
+    <category term="Markdown" scheme="https://ariesfun.gitee.io/tags/Markdown/"/>
+    
+  </entry>
   
   <entry>
     <title>我的第一篇博客</title>
