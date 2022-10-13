@@ -4,7 +4,7 @@
   <url>
     <loc>https://ariesfun.gitee.io/2022/10/07/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B7%E4%BD%93%E6%A1%88%E4%BE%8B%E5%BA%94%E7%94%A8/MySQL%E6%A1%88%E4%BE%8B1%20MySQL%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8%E5%8F%8A%E7%94%A8Java%E6%93%8D%E4%BD%9C/</loc>
     
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -94,7 +94,7 @@
 
   <url>
     <loc>https://ariesfun.gitee.io/</loc>
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -102,28 +102,28 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/tags/Markdown/</loc>
-    <lastmod>2022-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/blog/</loc>
-    <lastmod>2022-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/hexo/</loc>
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://ariesfun.gitee.io/tags/MySQL/</loc>
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/blog/</loc>
+    <lastmod>2022-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/hexo/</loc>
+    <lastmod>2022-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -132,14 +132,14 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/categories/Markdown/</loc>
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://ariesfun.gitee.io/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-10-07</lastmod>
+    <lastmod>2022-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

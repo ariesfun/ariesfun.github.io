@@ -10,8 +10,8 @@ https://ariesfun.gitee.io/tags/index.html
 https://ariesfun.gitee.io/about/index.html
 https://ariesfun.gitee.io/
 https://ariesfun.gitee.io/tags/Markdown/
+https://ariesfun.gitee.io/tags/MySQL/
 https://ariesfun.gitee.io/tags/blog/
 https://ariesfun.gitee.io/tags/hexo/
-https://ariesfun.gitee.io/tags/MySQL/
 https://ariesfun.gitee.io/categories/Markdown/
 https://ariesfun.gitee.io/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/
