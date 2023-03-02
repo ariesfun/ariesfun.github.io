@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容) | AriesfunのBlog</title><meta name="keywords" content="Hexo,Gitee"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)一、问题说明大概是在22年12月的时候，我用git服务提交本地代码到Gitee仓库后，再启用Gitee Pages服务开始部署推送新文章时出现了下面的提示界面，导致博客部署错误。 Gitee Pages服务提示的错误为：index.html页面可能包含违禁违归内容 想来就觉得纳闷，自己写的内容也不至于直接违规了吧，我的内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/31f8.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)一、问题说明大概是在22年12月的时候，我用git服务提交本地代码到Gitee仓库后，再启用Gitee Pages服务开始部署推送新文章时出现了下面的提示界面，导致博客部署错误。 Gitee Pages服务提示的错误为：index.html页面可能包含违禁违归内容 想来就觉得纳闷，自己写的内容也不至于直接违规了吧，我的内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg">
+<meta property="article:published_time" content="2023-03-01T18:03:27.327Z">
+<meta property="article:modified_time" content="2023-03-02T06:05:24.287Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Gitee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/31f8"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-02 14:05:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 我的</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 我的</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-01T18:03:27.327Z" title="发表于 2023-03-02 02:03:27">2023-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-02T06:05:24.287Z" title="更新于 2023-03-02 14:05:24">2023-03-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hexo%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">Hexo博客问题解决</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">649</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Gitee-Hexo-博客推送部署失败问题解决-排除文档中的不合规内容"><a href="#Gitee-Hexo-博客推送部署失败问题解决-排除文档中的不合规内容" class="headerlink" title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"></a>Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</h2><h3 id="一、问题说明"><a href="#一、问题说明" class="headerlink" title="一、问题说明"></a>一、问题说明</h3><p>大概是在22年12月的时候，我用git服务提交本地代码到Gitee仓库后，再启用<a target="_blank" rel="noopener" href="https://gitee.com/help/articles/4136">Gitee Pages服务</a>开始部署推送新文章时出现了下面的提示界面，导致博客部署错误。</p>
+<p>Gitee Pages服务提示的错误为：<code>index.html页面可能包含违禁违归内容</code></p>
+<p>想来就觉得纳闷，自己写的内容也不至于直接违规了吧，我的内容大多数是知识笔记的记录而已。</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020014895.jpg" alt="img-202303020014895"  />
+
+
+
+<h3 id="二、排查问题"><a href="#二、排查问题" class="headerlink" title="二、排查问题"></a>二、排查问题</h3><p>接着按照说明，我到指定的html页面中查找问题，发现好像是某篇数据库MySQL案例中的题干涉及到了政治问题，我感觉就这块内容确实不太好说，言多必失。</p>
+<p>学习案例里用的数据库是Google的一个老sql数据库文件，涵盖了全世界的国家、国家语言和城市的相关信息。题干中就出现了有数据库更新操作要求，图我就不贴了。总之咱的政治方向不能错哈。</p>
+<p>我仔细校对原博客文章，修改了一些关键词后，再次推送文章后，但问题依旧。我也上网查了相关的案例，但还是没有找到好的解决方法。</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020122925.jpg" alt="img-202303020122925"></p>
+<p>嗯索性就简单粗暴点，我把这篇问题文章给移除了，不让它推送出来，果真问题得到解决了。</p>
+<p>这样就能继续愉快的更新文章了哈~</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020110605.jpg" alt="img-202303020110605"></p>
+<h3 id="三、简单总结"><a href="#三、简单总结" class="headerlink" title="三、简单总结"></a>三、简单总结</h3><p>22年的12月算是很特殊的一个时间段，寒假提前到来，接着疫情放开，我也被要求早早离校。将近在家又上一段时间的线上课，博客部署的问题就被搁置了，直到最近这个问题才给解决掉。</p>
+<p>出问题的那篇文章在12月的时候，距离文章发布已经一个多月了，后面部署推送的文章都没出现上面问题。按照官方的说明，想必是Gitee的服务器升级了，对现有的Gitee Pages服务审核更严格了，我才会遇到这类问题。但这也是好事，我作为内容分享者，更应对自己公开发表的内容负责，传播正确的政治立场。</p>
+<p>现在已经2023年春了，博客文章推送已经鸽了快4个月，后续我还会继续更新的，寒假期间还有点存货哈~</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020128742.jpg" alt="img/202303020128742.jpg" style="zoom:67%;" />
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/31f8.html">https://ariesfun.gitee.io/posts/31f8.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Gitee/">Gitee</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/bb40.html"><img class="next-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211290912984.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计组CH1 第一章 计算机概要与技术</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:2018351840@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Ariesfun's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Gitee-Hexo-%E5%8D%9A%E5%AE%A2%E6%8E%A8%E9%80%81%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3-%E6%8E%92%E9%99%A4%E6%96%87%E6%A1%A3%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%90%88%E8%A7%84%E5%86%85%E5%AE%B9"><span class="toc-text">Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E8%AF%B4%E6%98%8E"><span class="toc-text">一、问题说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98"><span class="toc-text">二、排查问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-text">三、简单总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/31f8.html" title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"/></a><div class="content"><a class="title" href="/posts/31f8.html" title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)">Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</a><time datetime="2023-03-01T18:03:27.327Z" title="发表于 2023-03-02 02:03:27">2023-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bb40.html" title="计组CH1 第一章 计算机概要与技术"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211290912984.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计组CH1 第一章 计算机概要与技术"/></a><div class="content"><a class="title" href="/posts/bb40.html" title="计组CH1 第一章 计算机概要与技术">计组CH1 第一章 计算机概要与技术</a><time datetime="2022-11-29T00:57:17.110Z" title="发表于 2022-11-29 08:57:17">2022-11-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d5e3.html" title="计组CH0  第零章 计组课程概述"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211290912984.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计组CH0  第零章 计组课程概述"/></a><div class="content"><a class="title" href="/posts/d5e3.html" title="计组CH0  第零章 计组课程概述">计组CH0  第零章 计组课程概述</a><time datetime="2022-11-29T00:57:08.416Z" title="发表于 2022-11-29 08:57:08">2022-11-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/edef.html" title="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)"><img src="/true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)"/></a><div class="content"><a class="title" href="/posts/edef.html" title="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)">操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)</a><time datetime="2022-11-16T00:14:39.248Z" title="发表于 2022-11-16 08:14:39">2022-11-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/52d4.html" title="大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作"><img src="/true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作"/></a><div class="content"><a class="title" href="/posts/52d4.html" title="大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作">大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作</a><time datetime="2022-11-15T12:19:07.425Z" title="发表于 2022-11-15 20:19:07">2022-11-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
