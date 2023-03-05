@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux基础  第一讲 常用文件管理命令 | AriesfunのBlog</title><meta name="keywords" content="Linux"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第一讲 常用文件管理命令PS：（Linux学习基础：需具备一定的算法基础） ​ ​各种命令学习注重实用主义，应用为主 ​各种命令的用法学习不能求全，不会的现查即可，边学先查。 0. 课程概论  1. 课程概论    （1）目标：锻炼动手能力，学完之后可以做出什么项目      后端服务端开发必备技能。  （2）什么是Linux ? Ubuntu、CentOS ?      [Linux-百度百科]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础  第一讲 常用文件管理命令">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/54cf.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="第一讲 常用文件管理命令PS：（Linux学习基础：需具备一定的算法基础） ​ ​各种命令学习注重实用主义，应用为主 ​各种命令的用法学习不能求全，不会的现查即可，边学先查。 0. 课程概论  1. 课程概论    （1）目标：锻炼动手能力，学完之后可以做出什么项目      后端服务端开发必备技能。  （2）什么是Linux ? Ubuntu、CentOS ?      [Linux-百度百科]">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png">
+<meta property="article:published_time" content="2023-03-05T08:43:12.888Z">
+<meta property="article:modified_time" content="2023-03-05T08:47:48.021Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/54cf"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux基础  第一讲 常用文件管理命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-05 16:47:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 我的</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 我的</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux基础  第一讲 常用文件管理命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-05T08:43:12.888Z" title="发表于 2023-03-05 16:43:12">2023-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-05T08:47:48.021Z" title="更新于 2023-03-05 16:47:48">2023-03-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Linux基础知识</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux基础  第一讲 常用文件管理命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第一讲-常用文件管理命令"><a href="#第一讲-常用文件管理命令" class="headerlink" title="第一讲 常用文件管理命令"></a>第一讲 常用文件管理命令</h1><p>PS：（Linux学习基础：需具备一定的算法基础） ​<br> ​<strong>各种命令学习注重实用主义，应用为主</strong><br> ​<strong>各种命令的用法学习不能求全，不会的现查即可，边学先查。</strong></p>
+<h2 id="0-课程概论"><a href="#0-课程概论" class="headerlink" title="0. 课程概论"></a>0. 课程概论</h2><ul>
+<li><pre><code> 1. 课程概论
+</code></pre>
+</li>
+</ul>
+<pre><code>（1）目标：锻炼动手能力，学完之后可以做出什么项目
+
+    后端服务端开发必备技能。
+
+（2）什么是Linux ? Ubuntu、CentOS ?
+
+    [Linux-百度百科](https://baike.baidu.com/item/Linux?fromModule=lemma_search-box)
+    
+    Ubuntu 和 Centos 都是基于Linux的操作系统(Linux的不同发行版本)，它们的编译方式有所不同。
+
+（3）未来工作方式，Terminal,  命令行交互方式
+    入云（数字化）
+
+    Terminal：终端就是连接内核与交互界面的这座桥，并且使用命令行的交互方式。
+</code></pre>
+<ul>
+<li><ol start="2">
+<li>文件系统</li>
+</ol>
+<p>  （1）文件系统结构</p>
+<p>​    在 Linux 或 Unix 操作系统中，所有的文件和目录都被组织成以一个根节点<code>/</code> 开始的倒置的树状结构。</p>
+<p>​    <code>tree</code>: 该命令可以用树状图列出目录的内容。</p>
+<p>  （2）路径</p>
+<p>​    绝对路径、相对路径、根目录</p>
+<p>​    </p>
+<p>​    <strong>a. 绝对路径</strong>：从<code>/</code> 开始描述</p>
+<p>​    <strong>b. 相对路径</strong>:  （可使用<code>pwd</code>命令）输出当前所在的路径</p>
+<p>​    <strong>c. 根目录名称</strong>：<code>/</code>（除号）</p>
+</li>
+</ul>
+<p>​            根目录下常见的子目录有，</p>
+<p>​            bin: 包含常用的可执行文件的命令</p>
+<p>​            etc: 一些配置文件，比如nginx服务器</p>
+<p>​            var:  存一些日志文件（log）</p>
+<p>​            lib: 存一些安装包（静态文件库）、头文件</p>
+<p>​            home: 系统用户的家目录</p>
+<p>​        补充：</p>
+<p>​        <code>.</code>  ，一个点： 表示当前目录</p>
+<p>​        <code>..</code> ，两个点：到上级目录</p>
+<p>​        <code>~/ </code> ,  表示家目录（等价于用户的目录<code>/home/user01/</code>）</p>
+<ul>
+<li><ol start="3">
+<li>文件管理的常用命令</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="1-常用命令介绍"><a href="#1-常用命令介绍" class="headerlink" title="1. 常用命令介绍"></a>1. 常用命令介绍</h2><p>(1)  <code>ctrl c</code>:  取消命令，并且换行(换行并清空)</p>
+<p>(2)  <code>ctrl u</code>:  清空本行命令</p>
+<p>(3) <code>tab键</code>： 可以补全命令和文件名，如果补全不了快速按两下tab键，可以显示备选选项</p>
+<p>(4) <code>ls</code>:  列出当前目录下所有文件，蓝色的是文件夹，白色的是普通文件，绿色的是可执行文件</p>
+<p><code>ls -l</code>:  查看文件详细信息（权限、创建时间、名称等）<br><code>ls -h</code>:  命令加h,可将文件大小按格式化输出<br><code>ls -a</code>:  查看隐藏文件（文件名以<code>.</code>开头的）<br><code>ll </code>: 等价于<code> ls -la</code>, 查看所有文件详细信息<br><code>ls -文件名</code> : 查看该文件目录下的所有文件</p>
+<p><code>ls -l | wc -l</code>:  统计当前目录下的文件数量</p>
+<p>(5)     <code>pwd</code>:  显示当前路径</p>
+<p>(6)     <code>cd XXX</code>:  进入XXX目录下(绝对或相对), </p>
+<p><code>cd</code>:  回到家目录<br><code>cd .. </code>：返回上层目录<br><code>cd ~</code>: 返回改变路径前的路径</p>
+<p>(7)  <strong><code>cp</code> : 复制 + 粘贴 + 重命名</strong></p>
+<p><code>cp XXX YYY</code>:  将XXX文件复制成YYY，XXX和YYY可以是一个路径，</p>
+<p><code>cp XXX YYY -r</code> 将XXX目录（文件夹）复制到YYY下</p>
+<p><code>../dir_c/a.txt</code>，表示上层目录下的dir_c文件夹下的文件a.txt</p>
+<p>(8) <code>mkdir XXX</code>: 创建目录XXX（文件夹）</p>
+<p><code>mkdir XXX -p</code>：如果文件夹XXX不存在，会自动创建</p>
+<p>(9) <code>rm XXX</code>: 删除普通文件</p>
+<p><code>rm XXX -r</code>:  删除文件夹, -r是递归删</p>
+<p><code>rm *.txt</code>:  删除所有<code>.txt</code>类型文件,文件名是支持正则表达式的</p>
+<p><code>rm *</code>: 删除所有文件（不包括文件夹）,eg. <code>rm a/*</code> 删除目录a下的所有文件</p>
+<p><code>rm * -r</code>: 删除所有文件夹(不会删除隐藏文件), 支持正则表达式</p>
+<p>(10) <strong><code>mv</code>: 剪切 + 粘贴 + 重命名</strong></p>
+<p><code>mv XXX YYY</code>: 将XXX文件移动到YYY，</p>
+<p>和cp命令一样，XXX和YYY可以是一个路径，重命名也是用这个命令</p>
+<p>(11) <code>touch XXX</code>: 创建一个文件</p>
+<p>(12) <code>cat XXX</code>: 展示文件XXX中的内容</p>
+<p>(13) 复制文本<br>    Windows/Linux下：<code>Ctrl + insert</code>，Mac下：<code>command + c</code></p>
+<p>(14) 粘贴文本<br>    Windows/Linux下：<code>shift + insert</code>，Mac下：<code>command + v</code></p>
+<p>ps: 其他命令</p>
+<pre><code>`tmux`:（一种工具） 可以让任务一直挂在后台运行
+
+`tree`: 可以用树状图列出目录的内容
+
+`history`: 可查看输入命令的历史记录
+</code></pre>
+<h2 id="2-创建作业-amp-测试作业的正确性"><a href="#2-创建作业-amp-测试作业的正确性" class="headerlink" title="2. 创建作业 &amp; 测试作业的正确性"></a>2. 创建作业 &amp; 测试作业的正确性</h2><pre><code>`homework 1 create` 可以重新创建所有lesson_1的作业
+`homework 1 create id` 可以单独创建lesson_1的第id个作业. e.g.
+`homework 1 create 0` 可以只重新创建lesson_1的第0个作业
+`homework 1 test` 可以评测lesson_1的所有作业
+</code></pre>
+<h2 id="3-作业"><a href="#3-作业" class="headerlink" title="3. 作业"></a>3. 作业</h2><pre><code>见AcWing课程打卡笔记。
+
+第一次课截图打卡hhh
+
+![lesson_1](https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640533.jpg)
+</code></pre>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4. 参考文章"></a>4. 参考文章</h2><pre><code>[AcWing工程课系列 - Linux基础课](https://www.acwing.com/activity/content/57/)
+
+[讲义1. 常用文件管理命令](https://www.acwing.com/file_system/file/content/whole/index/content/2855530/)
+
+[zst同学笔记](https://www.acwing.com/blog/content/13214/)
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/54cf.html">https://ariesfun.gitee.io/posts/54cf.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/62ad.html"><img class="prev-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux基础  第二讲 Tmux 和 Vim</div></div></a></div><div class="next-post pull-right"><a href="/posts/31f9.html"><img class="next-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/62ad.html" title="Linux基础  第二讲 Tmux 和 Vim"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-05</div><div class="title">Linux基础  第二讲 Tmux 和 Vim</div></div></a></div><div><a href="/posts/52d4.html" title="大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作"><img class="cover" src="/true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-15</div><div class="title">大数据原理实验(一、二)  熟悉常用的Linux操作和Hadoop操作</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:2018351840@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Ariesfun's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2-%E5%B8%B8%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">第一讲 常用文件管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%AE%BA"><span class="toc-text">0. 课程概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. 常用命令介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E4%BD%9C%E4%B8%9A-amp-%E6%B5%8B%E8%AF%95%E4%BD%9C%E4%B8%9A%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-text">2. 创建作业 &amp; 测试作业的正确性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%9C%E4%B8%9A"><span class="toc-text">3. 作业</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-text">4. 参考文章</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/62ad.html" title="Linux基础  第二讲 Tmux 和 Vim"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础  第二讲 Tmux 和 Vim"/></a><div class="content"><a class="title" href="/posts/62ad.html" title="Linux基础  第二讲 Tmux 和 Vim">Linux基础  第二讲 Tmux 和 Vim</a><time datetime="2023-03-05T08:50:02.726Z" title="发表于 2023-03-05 16:50:02">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/54cf.html" title="Linux基础  第一讲 常用文件管理命令"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础  第一讲 常用文件管理命令"/></a><div class="content"><a class="title" href="/posts/54cf.html" title="Linux基础  第一讲 常用文件管理命令">Linux基础  第一讲 常用文件管理命令</a><time datetime="2023-03-05T08:43:12.888Z" title="发表于 2023-03-05 16:43:12">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/31f9.html" title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303020159955.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)"/></a><div class="content"><a class="title" href="/posts/31f9.html" title="Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)">Gitee + Hexo 博客推送部署失败问题解决(排除文档中的不合规内容)</a><time datetime="2023-03-01T18:03:27.327Z" title="发表于 2023-03-02 02:03:27">2023-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bb40.html" title="计组CH1 第一章 计算机概要与技术"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211290912984.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计组CH1 第一章 计算机概要与技术"/></a><div class="content"><a class="title" href="/posts/bb40.html" title="计组CH1 第一章 计算机概要与技术">计组CH1 第一章 计算机概要与技术</a><time datetime="2022-11-29T00:57:17.110Z" title="发表于 2022-11-29 08:57:17">2022-11-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d5e3.html" title="计组CH0  第零章 计组课程概述"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211290912984.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计组CH0  第零章 计组课程概述"/></a><div class="content"><a class="title" href="/posts/d5e3.html" title="计组CH0  第零章 计组课程概述">计组CH0  第零章 计组课程概述</a><time datetime="2022-11-29T00:57:08.416Z" title="发表于 2022-11-29 08:57:08">2022-11-29</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640434.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
