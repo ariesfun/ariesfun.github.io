@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>在Anaconda3中安装OpenCV库报错问题解决（使用命令行安装 Pip Install Opencv-Python -I）</title>
+      <link href="/posts/c0cf.html"/>
+      <url>/posts/c0cf.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="在Anaconda3中安装OpenCV库问题解决（使用命令行安装-pip-install-opencv-python-i-）"><a href="#在Anaconda3中安装OpenCV库问题解决（使用命令行安装-pip-install-opencv-python-i-）" class="headerlink" title="在Anaconda3中安装OpenCV库问题解决（使用命令行安装 pip install opencv-python -i ）"></a>在Anaconda3中安装OpenCV库问题解决（使用命令行安装 pip install opencv-python -i ）</h2><hr><h3 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h3><p>我最近因做计算机视觉课程的上机实验，需要对图像做一些处理，具体实验要求中会用到<code>cv2</code>库，需要我们提前安装，配置好自己的电脑环境。<br>我就按着常规的方式从Anaconda3软件中的环境配置选项里下载对应的库文件。虽说opencv库已经安装好了，但在Jupyter Notebook中执行python程序时，导入 <code>cv2</code> 库时会发生报错现象，这说明我的opencv库并没有正确安装成功。网上冲浪一番，才知道opencv库安装这个问题确实很让人苦恼，我尝试了一些教程但还是以失败告终。</p><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160053507.jpg" alt="img-202303160053507"></p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160045386.jpg" alt="img-202303160045386" style="zoom: 150%;" /><p>也上了B站，翻看一些课程教学<a href="https://www.bilibili.com/video/BV1u5411Y72L/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">OpenCV计算机视觉实战</a>的安装步骤，还是不太行。。。</p><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160053800.jpg" alt="img-202303160053800"></p><h3 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h3><p>接着又听了同学建议，让我试试这篇文章的教程，<a href="http://t.csdn.cn/slbBq">Anaconda安装OpenCV</a>，但还是出了一堆问题。</p><p>大致步骤如下，你可能会用上哈。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 打开Anaconda Prompt命令行工具</span><br><span class="line">2. 输入 cd :\ 回车   接着输入 d: 回车</span><br><span class="line">3. 进入到你的Anaconda安装目录下的Scripts文件夹   </span><br><span class="line">   cd D:\Anaconda3\Scripts</span><br><span class="line">4. 输入 pip install opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">   (这里用清华镜像来下载opencv库，国内网站访问的速度会亿点~)</span><br></pre></td></tr></table></figure><hr><p>这里爆红的错误大致跟上面用命令行安装的出现的问题一致。</p><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160054158.jpg" alt="img-202303160054158"></p><p>然后我就找是否有与我遇到同类型问题的解决方案，<a href="http://t.csdn.cn/xr18Y">pip安装OpenCV报错</a>，哈哈果不其然让我找到了。</p><p>我在试了试评论区这位老哥说的方法，遇到佬了，亲测有效哈。</p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160055515.jpg" alt="img-202303160055515" style="zoom: 80%;" /><p>这里在Windows 上更新了pip软件包安装程序：<code>python -m pip install -U pip</code></p><p>接着我试了前面步骤里的镜像安装库的方式，就可以成功安装了。</p><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160055717.jpg" alt="img-202303160055717"></p><h3 id="三、测试OpenCV库"><a href="#三、测试OpenCV库" class="headerlink" title="三、测试OpenCV库"></a>三、测试OpenCV库</h3><p>使用 <code>pip list</code> 命令可查看当前Python中已安装的库及版本号，这时候发现opencv库已经安装好了。</p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160055609.jpg" alt="img-202303160055609"  /><p>最后到Jupyter Notebook中测试发现，已经可以正常导入<code>cv2</code>库了。</p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160055448.jpg" alt="img-202303160055448" style="zoom: 67%;" /><h3 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h3><p><a href="https://www.bilibili.com/video/BV1u5411Y72L/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">OpenCV计算机视觉实战</a></p><p><a href="http://t.csdn.cn/PfPbY">谈谈全自动安装常使用的pip install的原理及作用</a></p><p><a href="http://t.csdn.cn/slbBq">Anaconda安装OpenCV</a></p><p><a href="http://t.csdn.cn/xr18Y">pip安装OpenCV报错</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉（CV） </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> OpenCV </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据分析与可视化 实践基础作业二（NumPy）</title>
       <link href="/posts/7b51.html"/>
       <url>/posts/7b51.html</url>
