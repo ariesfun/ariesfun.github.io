@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数据分析与可视化 实践基础作业四（Pandas） | AriesfunのBlog</title><meta name="keywords" content="Python,Pandas"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据分析与可视化 实践基础作业四 （Pandas） 一、本节需掌握的Pandas相关函数或属性12345678910111213141516171819202122232425262728293031321. Series和DataFrame数据类型的创建# Series创建（可以是列表，标量值，字典，ndarray，其他函数），index是行索引pd.Series(data&#x3D;None, inde">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析与可视化 实践基础作业四（Pandas）">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/94f1.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="数据分析与可视化 实践基础作业四 （Pandas） 一、本节需掌握的Pandas相关函数或属性12345678910111213141516171819202122232425262728293031321. Series和DataFrame数据类型的创建# Series创建（可以是列表，标量值，字典，ndarray，其他函数），index是行索引pd.Series(data&#x3D;None, inde">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg">
+<meta property="article:published_time" content="2023-04-01T12:08:48.513Z">
+<meta property="article:modified_time" content="2023-04-01T12:09:33.338Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/94f1"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据分析与可视化 实践基础作业四（Pandas）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-01 20:09:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据分析与可视化 实践基础作业四（Pandas）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-01T12:08:48.513Z" title="发表于 2023-04-01 20:08:48">2023-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-01T12:09:33.338Z" title="更新于 2023-04-01 20:09:33">2023-04-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96/">数据分析与可视化</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据分析与可视化 实践基础作业四（Pandas）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="数据分析与可视化-实践基础作业四-（Pandas）"><a href="#数据分析与可视化-实践基础作业四-（Pandas）" class="headerlink" title="数据分析与可视化 实践基础作业四 （Pandas）"></a>数据分析与可视化 实践基础作业四 （Pandas）</h2><hr>
+<h3 id="一、本节需掌握的Pandas相关函数或属性"><a href="#一、本节需掌握的Pandas相关函数或属性" class="headerlink" title="一、本节需掌握的Pandas相关函数或属性"></a>一、本节需掌握的Pandas相关函数或属性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> Series和DataFrame数据类型的创建</span><br><span class="line"></span><br><span class="line"><span class="comment"># Series创建（可以是列表，标量值，字典，ndarray，其他函数），index是行索引</span></span><br><span class="line">pd.Series(data=<span class="literal">None</span>, index=<span class="literal">None</span>, dtype=<span class="literal">None</span>, name=<span class="literal">None</span>, copy=<span class="literal">False</span>, fastpath)</span><br><span class="line"></span><br><span class="line"><span class="comment"># DataFrame创建（有行索引和列索引，其类型可以是列表，字典，元组或Series，n维的ndarray）</span></span><br><span class="line">eg. pd.DataFrame(np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> Series的基本操作（类似ndarray，字典类型的操作）</span><br><span class="line">可通过自定义索引列表来切片，自定义索引访问，get()方法</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> DataFrame数据查找、增加、删除和修改</span><br><span class="line"></span><br><span class="line">d[ [<span class="string">&#x27;col_1&#x27;</span>,<span class="string">&#x27;col_2&#x27;</span>] ] <span class="comment"># 通过列索引或以属性的方式可单独或取DataFrame的列数据 </span></span><br><span class="line">d[<span class="number">0</span>:<span class="number">2</span>] <span class="comment"># 切片方式，取0到1行</span></span><br><span class="line"></span><br><span class="line">head(),tail() <span class="comment"># 获取连续的数据</span></span><br><span class="line">loc(),iloc() <span class="comment"># 一个是跟行/列索引名（或是条件查询）loc的切片方式是闭区间，一个是跟行/列索引下标</span></span><br><span class="line"></span><br><span class="line">append() <span class="comment"># 增加一行数据</span></span><br><span class="line">insert() <span class="comment"># 可插入新的一列数据</span></span><br><span class="line"></span><br><span class="line">drop() <span class="comment">#删除， ！！！稍微特殊：axis为1是按列删，0是按行删</span></span><br><span class="line">set_index() <span class="comment">#更换索引</span></span><br><span class="line"></span><br><span class="line">直接修改是对DataFrame数据修改</span><br><span class="line">replace() <span class="comment"># 对数据进行替换,以字典形式</span></span><br><span class="line">rename() <span class="comment"># 修改列名，需传入需要修改列名的字典</span></span><br><span class="line">eg. d.rename(colmus=&#123;<span class="string">&#x27;城市&#x27;</span>:<span class="string">&#x27;city&#x27;</span>&#125;),inplace=<span class="literal">True</span>) <span class="comment"># 将右值赋给左值，加上布尔值是否要替换</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> DataFrame索引重建reindex( )  </span><br><span class="line">.reindex(index=<span class="literal">None</span>, columns=<span class="literal">None</span>, fill_value...) <span class="comment">#可进行新的自定义索引，填充指定值</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="二、实训案例"><a href="#二、实训案例" class="headerlink" title="二、实训案例"></a>二、实训案例</h3><h4 id="1-Pokemon宠物小精灵数据初步探索。"><a href="#1-Pokemon宠物小精灵数据初步探索。" class="headerlink" title="1. Pokemon宠物小精灵数据初步探索。"></a>1. Pokemon宠物小精灵数据初步探索。</h4><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1T6mHGFvxg6W7RRX3JMq-Mg?pwd=2023">Pokemon数据集下载</a></p>
+<p>案例中使用宠物小精灵的相关数据进行分析，其中各列的列名意义为：</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011253221.jpg" alt="img-202304011253221"></p>
+<p>·    name：宠物小精灵的名称</p>
+<p>·    Type 1：宠物小精灵的第一类型    Type 2：宠物小精灵的第二类型</p>
+<p>·    Total：综合能力（生命点数、攻击强度、防御强度、特殊攻击强度、特殊防御强度和速度的总和）</p>
+<p>·    HP：生命点数</p>
+<p>·    Attack：攻击强度          Defense：防御强度</p>
+<p>·    Sp.Atk：特殊攻击强度        Sp.Def：特殊防御强度</p>
+<p>·    Speed：速度            Generation：世代数</p>
+<p>·    Lengendary：True表示为传奇小精灵，False表示非传奇小精灵</p>
+<hr>
+<h4 id="2-结合数据集完成以下相关操作。"><a href="#2-结合数据集完成以下相关操作。" class="headerlink" title="2. 结合数据集完成以下相关操作。"></a>2. 结合数据集完成以下相关操作。</h4><p>（1）读取Pokemon.csv文件；</p>
+<p>（2）展示数据前10行；</p>
+<p>（3）删除名为“#”的列；</p>
+<p>（4）将各列名改为中文, 参数inplace设置替换原数据；</p>
+<p>（5）分别查看数据表的行、列索引；</p>
+<p>（6）查看第一类型的唯一值；</p>
+<p>（7）查看行标签为2、4小精灵的名称和综合能力；</p>
+<p>（8）查看行标签为5到10小精灵的名称和综合能力；</p>
+<p>（9）通过切片方式查看前6个小精灵的数据；</p>
+<p>（10）查看攻击强度大于160的小精灵的所有数据；</p>
+<p> （11）查看传奇小精灵的数据，只展示前十行数据；</p>
+<p>（12）创建新列“能力600”，插入到综合能力一列的后面，该列显示综合能力大于等于600的为True，小于600为False；</p>
+<p>（13）创建新列“世代456”，插入到最后一列，该列显示世代数为4、5和6的小精灵为True, 其他为False，随机选取10行数据进行展示。</p>
+<hr>
+<h3 id="三、题解"><a href="#三、题解" class="headerlink" title="三、题解"></a>三、题解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （1）读取Pokemon.csv文件；</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">&#x27;display.unicode.east_asian_width&#x27;</span>, <span class="literal">True</span>)</span><br><span class="line">d = pd.read_csv(<span class="string">&#x27;Pokemon.csv&#x27;</span>,sep = <span class="string">&#x27;,&#x27;</span>) <span class="comment"># 读取文件</span></span><br><span class="line">d.head() <span class="comment"># 默认输出前5行数据</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011925325.jpg" alt="001"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （2）展示数据前10行；</span></span><br><span class="line"></span><br><span class="line">d.head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011925442.jpg" alt="002"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （3）删除名为“#”的列；</span></span><br><span class="line"></span><br><span class="line">d.drop(<span class="string">&#x27;#&#x27;</span>, axis = <span class="number">1</span>, inplace = <span class="literal">True</span>) <span class="comment"># 确认替换原数据</span></span><br><span class="line">d.head()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011925979.jpg" alt="003"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （4）将各列名改为中文, 参数inplace设置替换原数据；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 传入字典类型值</span></span><br><span class="line">d.rename(columns=&#123;<span class="string">&#x27;Name&#x27;</span>:<span class="string">&#x27;名称&#x27;</span>, <span class="string">&#x27;Type 1&#x27;</span>:<span class="string">&#x27;第一类型&#x27;</span>, <span class="string">&#x27;Type 2&#x27;</span>:<span class="string">&#x27;第一类型&#x27;</span>, <span class="string">&#x27;Total&#x27;</span>:<span class="string">&#x27;综合能力&#x27;</span>, <span class="string">&#x27;HP&#x27;</span>:<span class="string">&#x27;生命点数&#x27;</span>, <span class="string">&#x27;Attack&#x27;</span>:<span class="string">&#x27;攻击强度&#x27;</span>, <span class="string">&#x27;Defense&#x27;</span>:<span class="string">&#x27;防御强度&#x27;</span>, <span class="string">&#x27;Sp.Atk&#x27;</span>:<span class="string">&#x27;特殊攻击强度&#x27;</span>, <span class="string">&#x27;Sp.Def&#x27;</span>:<span class="string">&#x27;特殊攻击强度&#x27;</span>, <span class="string">&#x27;Speed&#x27;</span>:<span class="string">&#x27;速度&#x27;</span>, <span class="string">&#x27;Generation&#x27;</span>:<span class="string">&#x27;世代数&#x27;</span>, <span class="string">&#x27;Legendary&#x27;</span>:<span class="string">&#x27;传奇小精灵&#x27;</span>, &#125;, inplace = <span class="literal">True</span>)</span><br><span class="line">d.head()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011926259.jpg" alt="004"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （5）分别查看数据表的行、列索引；</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(d.index) <span class="comment"># 共800行</span></span><br><span class="line"><span class="built_in">list</span>(d.columns) <span class="comment"># 输出列索引</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[&#x27;名称&#x27;,</span><br><span class="line">    &#x27;第一类型&#x27;,</span><br><span class="line">    &#x27;第一类型&#x27;,</span><br><span class="line">    &#x27;综合能力&#x27;,</span><br><span class="line">    &#x27;生命点数&#x27;,</span><br><span class="line">    &#x27;攻击强度&#x27;,</span><br><span class="line">    &#x27;防御强度&#x27;,</span><br><span class="line">    &#x27;Sp. Atk&#x27;,</span><br><span class="line">    &#x27;Sp. Def&#x27;,</span><br><span class="line">    &#x27;速度&#x27;,</span><br><span class="line">    &#x27;世代数&#x27;,</span><br><span class="line">    &#x27;传奇小精灵&#x27;]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （6）查看第一类型的唯一值；</span></span><br><span class="line"></span><br><span class="line">d[<span class="string">&#x27;第一类型&#x27;</span>].nunique() </span><br><span class="line"><span class="comment"># nunique统计去重后元素的个数（过滤掉nan，但会统计空字符串）</span></span><br><span class="line"><span class="comment"># unique统计去重后所有元素（包含nan以及空字符串）</span></span><br><span class="line"><span class="comment"># value_counts()是Series拥有的方法，一般在DataFrame中使用时，需要指定对哪一列或行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">第一类型    18</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （7）查看行标签为2、4小精灵的名称和综合能力；</span></span><br><span class="line"></span><br><span class="line">d.loc[ [<span class="number">2</span>, <span class="number">4</span>], [<span class="string">&#x27;名称&#x27;</span>, <span class="string">&#x27;综合能力&#x27;</span>] ]</span><br></pre></td></tr></table></figure>
+
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011927577.jpg" alt="007" style="zoom: 67%;" />
+
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （8）查看行标签为5到10小精灵的名称和综合能力；</span></span><br><span class="line"></span><br><span class="line">d.iloc[ <span class="number">5</span>:<span class="number">11</span>, [<span class="number">0</span>, <span class="number">3</span>] ] <span class="comment"># 名称和综合能力分别在第0列和第3列</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011927045.jpg" alt="008" style="zoom:67%;" />
+
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （9）通过切片方式查看前6个小精灵的数据；</span></span><br><span class="line"></span><br><span class="line">d.loc[<span class="number">0</span>:<span class="number">5</span>] <span class="comment"># 索引值是闭区间</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011928939.jpg" alt="009"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （10）查看攻击强度大于160的小精灵的所有数据；</span></span><br><span class="line"></span><br><span class="line">d.loc[d[<span class="string">&#x27;攻击强度&#x27;</span>] &gt; <span class="number">160</span>] <span class="comment"># 条件查询，返回结果为True的那些行</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011928156.jpg" alt="010"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  （11）查看传奇小精灵的数据，只展示前十行数据；</span></span><br><span class="line"></span><br><span class="line">d1 = d.loc[d[<span class="string">&#x27;传奇小精灵&#x27;</span>] == <span class="literal">True</span>]</span><br><span class="line">d1.head(<span class="number">10</span>) <span class="comment"># 或者 d[d[&#x27;传奇小精灵&#x27;] == True].head(10)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011929780.jpg" alt="011"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （12）创建新列“能力600”，插入到综合能力一列的后面，该列显示综合能力大于等于600的为True，小于600为False；</span></span><br><span class="line"></span><br><span class="line">col_new = <span class="string">&#x27;能力600&#x27;</span></span><br><span class="line">d.insert(<span class="number">4</span>, col_new, d[<span class="string">&#x27;综合能力&#x27;</span>] &gt; <span class="number">600</span>) <span class="comment"># insert()用于插入列（参数跟插入列后的位置，列索引名，插入的值）</span></span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011932776.jpg" alt="012"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># （13）创建新列“世代456”，插入到最后一列，该列显示世代数为4、5和6的小精灵为True, 其他为False，随机选取10行数据进行展示。</span></span><br><span class="line"></span><br><span class="line">col_new1 = <span class="string">&#x27;世代456&#x27;</span></span><br><span class="line">d.insert(<span class="number">13</span>, col_new1, d[<span class="string">&#x27;世代数&#x27;</span>].isin([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]) ) <span class="comment"># 最后一列的下标是12, isin()接受一个列表，来判断该列中元素是否在列表中</span></span><br><span class="line">d.sample(<span class="number">10</span>) <span class="comment"># sample()用于从DataFrame中随机选择行或列</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011929160.jpg" alt="013"></p>
+<hr>
+<h3 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h3><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1T6mHGFvxg6W7RRX3JMq-Mg?pwd=2023">Pokemon数据集</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_49705298/article/details/119142523">Pandas统计函数count，unique，nunique的区别</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/94f1.html">https://ariesfun.gitee.io/posts/94f1.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Pandas/">Pandas</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/420.html"><img class="prev-cover" src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AcWing-周赛 第97场题解</div></div></a></div><div class="next-post pull-right"><a href="/posts/355a.html"><img class="next-cover" src="https://numpy.org/doc/_static/numpylogo.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据分析与可视化 实践基础作业三（NumPy）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/355a.html" title="数据分析与可视化 实践基础作业三（NumPy）"><img class="cover" src="https://numpy.org/doc/_static/numpylogo.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-01</div><div class="title">数据分析与可视化 实践基础作业三（NumPy）</div></div></a></div><div><a href="/posts/85c6.html" title="计算机视觉 上机实践一 图像的基本操作"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160810160.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-18</div><div class="title">计算机视觉 上机实践一 图像的基本操作</div></div></a></div><div><a href="/posts/c0cf.html" title="在Anaconda3中安装OpenCV库报错问题解决（使用命令行安装 Pip Install Opencv-Python -I）"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303160810160.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-16</div><div class="title">在Anaconda3中安装OpenCV库报错问题解决（使用命令行安装 Pip Install Opencv-Python -I）</div></div></a></div><div><a href="/posts/7b51.html" title="数据分析与可视化 实践基础作业二（NumPy）"><img class="cover" src="https://numpy.org/doc/_static/numpylogo.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-12</div><div class="title">数据分析与可视化 实践基础作业二（NumPy）</div></div></a></div><div><a href="/posts/2946.html" title="数据分析与可视化 实践基础作业一（NumPy）"><img class="cover" src="https://numpy.org/doc/_static/numpylogo.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-07</div><div class="title">数据分析与可视化 实践基础作业一（NumPy）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:2018351840@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Ariesfun's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96-%E5%AE%9E%E8%B7%B5%E5%9F%BA%E7%A1%80%E4%BD%9C%E4%B8%9A%E5%9B%9B-%EF%BC%88Pandas%EF%BC%89"><span class="toc-text">数据分析与可视化 实践基础作业四 （Pandas）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E8%8A%82%E9%9C%80%E6%8E%8C%E6%8F%A1%E7%9A%84Pandas%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E6%88%96%E5%B1%9E%E6%80%A7"><span class="toc-text">一、本节需掌握的Pandas相关函数或属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E8%AE%AD%E6%A1%88%E4%BE%8B"><span class="toc-text">二、实训案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Pokemon%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E6%95%B0%E6%8D%AE%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2%E3%80%82"><span class="toc-text">1. Pokemon宠物小精灵数据初步探索。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%93%E5%90%88%E6%95%B0%E6%8D%AE%E9%9B%86%E5%AE%8C%E6%88%90%E4%BB%A5%E4%B8%8B%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E3%80%82"><span class="toc-text">2. 结合数据集完成以下相关操作。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%A2%98%E8%A7%A3"><span class="toc-text">三、题解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">四、参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/420.html" title="AcWing-周赛 第97场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第97场题解"/></a><div class="content"><a class="title" href="/posts/420.html" title="AcWing-周赛 第97场题解">AcWing-周赛 第97场题解</a><time datetime="2023-04-02T18:38:55.951Z" title="发表于 2023-04-03 02:38:55">2023-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/94f1.html" title="数据分析与可视化 实践基础作业四（Pandas）"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 实践基础作业四（Pandas）"/></a><div class="content"><a class="title" href="/posts/94f1.html" title="数据分析与可视化 实践基础作业四（Pandas）">数据分析与可视化 实践基础作业四（Pandas）</a><time datetime="2023-04-01T12:08:48.513Z" title="发表于 2023-04-01 20:08:48">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/355a.html" title="数据分析与可视化 实践基础作业三（NumPy）"><img src="https://numpy.org/doc/_static/numpylogo.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 实践基础作业三（NumPy）"/></a><div class="content"><a class="title" href="/posts/355a.html" title="数据分析与可视化 实践基础作业三（NumPy）">数据分析与可视化 实践基础作业三（NumPy）</a><time datetime="2023-04-01T11:59:01.372Z" title="发表于 2023-04-01 19:59:01">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c171.html" title="AcWing-周赛 第96场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第96场题解"/></a><div class="content"><a class="title" href="/posts/c171.html" title="AcWing-周赛 第96场题解">AcWing-周赛 第96场题解</a><time datetime="2023-03-28T08:54:45.005Z" title="发表于 2023-03-28 16:54:45">2023-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/ce81.html" title="AcWing-周赛 第95场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第95场题解"/></a><div class="content"><a class="title" href="/posts/ce81.html" title="AcWing-周赛 第95场题解">AcWing-周赛 第95场题解</a><time datetime="2023-03-20T19:11:25.519Z" title="发表于 2023-03-21 03:11:25">2023-03-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

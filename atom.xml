@@ -396,9 +396,9 @@
     <category term="操作系统实验" scheme="https://ariesfun.gitee.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/"/>
     
     
-    <category term="操作系统" scheme="https://ariesfun.gitee.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
     <category term="C/C++" scheme="https://ariesfun.gitee.io/tags/C-C/"/>
+    
+    <category term="操作系统" scheme="https://ariesfun.gitee.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -474,9 +474,9 @@
     
     <category term="C/C++" scheme="https://ariesfun.gitee.io/tags/C-C/"/>
     
-    <category term="数据结构与算法" scheme="https://ariesfun.gitee.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
     <category term="AcWing" scheme="https://ariesfun.gitee.io/tags/AcWing/"/>
+    
+    <category term="数据结构与算法" scheme="https://ariesfun.gitee.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

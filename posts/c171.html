@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>AcWing-周赛 第96场题解 | AriesfunのBlog</title><meta name="keywords" content="C/C++,AcWing"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="AcWing-周赛 第96场题解T1: AcWing 4876. 完美数题目如果一个正整数能够被 2520 整除，则称该数为完美数。给定一个正整数 n，请你计算 [1,n] 范围内有多少个完美数。 输入格式一个整数 n。 输出格式一个整数，表示 [1,n] 范围内完美数的个数。 数据范围前 3个测试点满足 1≤n≤3000。所有测试点满足 1≤n≤1e18。 输入样例13000  输出样例11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AcWing-周赛 第96场题解">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/c171.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="AcWing-周赛 第96场题解T1: AcWing 4876. 完美数题目如果一个正整数能够被 2520 整除，则称该数为完美数。给定一个正整数 n，请你计算 [1,n] 范围内有多少个完美数。 输入格式一个整数 n。 输出格式一个整数，表示 [1,n] 范围内完美数的个数。 数据范围前 3个测试点满足 1≤n≤3000。所有测试点满足 1≤n≤1e18。 输入样例13000  输出样例11">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png">
+<meta property="article:published_time" content="2023-03-28T08:54:45.005Z">
+<meta property="article:modified_time" content="2023-03-28T08:55:43.109Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="AcWing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/c171"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AcWing-周赛 第96场题解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-28 16:55:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AcWing-周赛 第96场题解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-28T08:54:45.005Z" title="发表于 2023-03-28 16:54:45">2023-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-28T08:55:43.109Z" title="更新于 2023-03-28 16:55:43">2023-03-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AcWing%E5%91%A8%E8%B5%9B/">AcWing周赛</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">893</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AcWing-周赛 第96场题解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="AcWing-周赛-第96场题解"><a href="#AcWing-周赛-第96场题解" class="headerlink" title="AcWing-周赛 第96场题解"></a>AcWing-周赛 第96场题解</h2><h3 id="T1-AcWing-4876-完美数"><a href="#T1-AcWing-4876-完美数" class="headerlink" title="T1: AcWing 4876. 完美数"></a>T1: AcWing 4876. 完美数</h3><h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>如果一个正整数能够被 2520 整除，则称该数为完美数。<br>给定一个正整数 n，请你计算 [1,n] 范围内有多少个完美数。</p>
+<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>一个整数 n。</p>
+<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>一个整数，表示 [1,n] 范围内完美数的个数。</p>
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>前 3个测试点满足 1≤n≤3000。<br>所有测试点满足 1≤n≤1e18。</p>
+<h4 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3000</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n; <span class="comment">// 会爆int(2.1 x 10 ^9)</span></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="comment">// 完美数的个数k,应要满足 k * 2520 &lt;= n, 即 k &lt;= (n / 2520) 下取整即可</span></span><br><span class="line">    cout &lt;&lt; n / <span class="number">2520</span> &lt;&lt; endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="T2-AcWing-4877-最大价值"><a href="#T2-AcWing-4877-最大价值" class="headerlink" title="T2: AcWing 4877. 最大价值"></a>T2: AcWing 4877. 最大价值</h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>有一个容量为 n 的背包和 m+1 种物品，每种物品都有无限多个。</p>
+<p>物品种类编号为 0∼m。</p>
+<p>第 i种物品的体积为 vi，价值为 wi。</p>
+<p>在使用背包装入物品时，每种物品的限重如下：</p>
+<ul>
+<li>第 0 种物品：重量忽略不计，在装入时没有重量限制。</li>
+<li>第 1∼m 种物品：第 i 种物品的单个重量为 hi，如果该种物品的装入总重量超过 li，则视为超重。</li>
+</ul>
+<p>现在，请你挑选物品装入背包，要求</p>
+<ul>
+<li>所有装入物品的总体积不得超过背包容量。</li>
+<li>所有存在重量限制的物品均不得超重。</li>
+<li>满足以上所有条件的前提下，所有装入物品的总价值尽可能大。</li>
+</ul>
+<p>输出总价值的最大可能值。</p>
+<p>注意审题，不要将 n,m的含义弄混。</p>
+<h4 id="输入格式。"><a href="#输入格式。" class="headerlink" title="输入格式。"></a>输入格式。</h4><p>第一行包含四个整数 n,m,v0,w0。</p>
+<p>接下来 m 行，每行包含四个整数 li,hi,vi,wi。</p>
+<h4 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h4><p>一个整数，表示总价值的最大可能值。</p>
+<h4 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h4><p>前 44 个测试点满足 1≤n≤100，1≤m≤2。<br>所有测试点满足 1≤n≤1000，1≤m≤10，1≤li,hi,vi,wi≤100。</p>
+<h4 id="输入样例1"><a href="#输入样例1" class="headerlink" title="输入样例1"></a>输入样例1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10 2 2 1</span><br><span class="line">7 3 2 100</span><br><span class="line">12 3 1 10</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例1"><a href="#输出样例1" class="headerlink" title="输出样例1"></a>输出样例1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">241</span><br></pre></td></tr></table></figure>
+
+<h4 id="输入样例2"><a href="#输入样例2" class="headerlink" title="输入样例2"></a>输入样例2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">100 1 25 50</span><br><span class="line">15 5 20 10</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出样例2"><a href="#输出样例2" class="headerlink" title="输出样例2"></a>输出样例2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">200</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1010</span>;</span><br><span class="line"><span class="type">int</span> n, m, v[N], w[N];</span><br><span class="line"><span class="type">int</span> dp[N]; <span class="comment">// dp[j]表示背包容量为j时的最大价值</span></span><br><span class="line"><span class="type">int</span> s[N]; <span class="comment">// 每个物品最多有s[i]个转化为多重背包问题</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 数组范围10^6，完全背包+多重背包优化结合</span></span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; v[<span class="number">0</span>] &gt;&gt; w[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, h;</span><br><span class="line">        cin &gt;&gt; l &gt;&gt; h &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line">        s[i] = l / h;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第0种物品m0，有无限多个，完全背包问题</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = v[<span class="number">0</span>]; i &lt;= n; i ++) <span class="comment">// 预处理第0件物品的最大价值</span></span><br><span class="line">        dp[i] = <span class="built_in">max</span>(dp[i], dp[i - v[<span class="number">0</span>]] + w[<span class="number">0</span>]); </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第1∼m种物品，最多有(l/h)个，多重背包问题(三重for循环)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i ++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = n; j &gt;= <span class="number">1</span>; j --)</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>; k &lt;= s[i] &amp;&amp; k * v[i] &lt;= j; k ++)</span><br><span class="line">                <span class="comment">// 该状态是从(i-1)层转移过来，需从大到小来枚举体积n</span></span><br><span class="line">                dp[j] = <span class="built_in">max</span>(dp[j], dp[j - k * v[i]] + k *w[i]); </span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; dp[n] &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://www.acwing.com/video/4674/">y总直播讲解</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/solution/content/179457/">最大价值？披着羊皮的多重背包！！</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/4663006/">AcWing 3. 完全背包问题</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/6062057/">AcWing 4. 多重背包问题I</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/6062906/">AcWing 4877. 最大价值 - 打卡记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1RU4y1h7BN/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">B站-动态规划dp求解01背包问题讲解</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/c171.html">https://ariesfun.gitee.io/posts/c171.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C-C/">C/C++</a><a class="post-meta__tags" href="/tags/AcWing/">AcWing</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/355a.html"><img class="prev-cover" src="https://numpy.org/doc/_static/numpylogo.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据分析与可视化 实践基础作业三（NumPy）</div></div></a></div><div class="next-post pull-right"><a href="/posts/ce81.html"><img class="next-cover" src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AcWing-周赛 第95场题解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/420.html" title="AcWing-周赛 第97场题解"><img class="cover" src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-03</div><div class="title">AcWing-周赛 第97场题解</div></div></a></div><div><a href="/posts/ce81.html" title="AcWing-周赛 第95场题解"><img class="cover" src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-21</div><div class="title">AcWing-周赛 第95场题解</div></div></a></div><div><a href="/posts/61475.html" title="AcWing算法基础课 基础算法1"><img class="cover" src="/true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-16</div><div class="title">AcWing算法基础课 基础算法1</div></div></a></div><div><a href="/posts/edef.html" title="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)"><img class="cover" src="/true" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-16</div><div class="title">操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:2018351840@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Ariesfun's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AcWing-%E5%91%A8%E8%B5%9B-%E7%AC%AC96%E5%9C%BA%E9%A2%98%E8%A7%A3"><span class="toc-text">AcWing-周赛 第96场题解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#T1-AcWing-4876-%E5%AE%8C%E7%BE%8E%E6%95%B0"><span class="toc-text">T1: AcWing 4876. 完美数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="toc-text">数据范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-text">输入样例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-text">输出样例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-text">题解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#T2-AcWing-4877-%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC"><span class="toc-text">T2: AcWing 4877. 最大价值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-1"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%E3%80%82"><span class="toc-text">输入格式。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4-1"><span class="toc-text">数据范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B1"><span class="toc-text">输入样例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B1"><span class="toc-text">输出样例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B2"><span class="toc-text">输入样例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B2"><span class="toc-text">输出样例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="toc-text">题解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/420.html" title="AcWing-周赛 第97场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第97场题解"/></a><div class="content"><a class="title" href="/posts/420.html" title="AcWing-周赛 第97场题解">AcWing-周赛 第97场题解</a><time datetime="2023-04-02T18:38:55.951Z" title="发表于 2023-04-03 02:38:55">2023-04-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/94f1.html" title="数据分析与可视化 实践基础作业四（Pandas）"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 实践基础作业四（Pandas）"/></a><div class="content"><a class="title" href="/posts/94f1.html" title="数据分析与可视化 实践基础作业四（Pandas）">数据分析与可视化 实践基础作业四（Pandas）</a><time datetime="2023-04-01T12:08:48.513Z" title="发表于 2023-04-01 20:08:48">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/355a.html" title="数据分析与可视化 实践基础作业三（NumPy）"><img src="https://numpy.org/doc/_static/numpylogo.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 实践基础作业三（NumPy）"/></a><div class="content"><a class="title" href="/posts/355a.html" title="数据分析与可视化 实践基础作业三（NumPy）">数据分析与可视化 实践基础作业三（NumPy）</a><time datetime="2023-04-01T11:59:01.372Z" title="发表于 2023-04-01 19:59:01">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c171.html" title="AcWing-周赛 第96场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第96场题解"/></a><div class="content"><a class="title" href="/posts/c171.html" title="AcWing-周赛 第96场题解">AcWing-周赛 第96场题解</a><time datetime="2023-03-28T08:54:45.005Z" title="发表于 2023-03-28 16:54:45">2023-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/ce81.html" title="AcWing-周赛 第95场题解"><img src="https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AcWing-周赛 第95场题解"/></a><div class="content"><a class="title" href="/posts/ce81.html" title="AcWing-周赛 第95场题解">AcWing-周赛 第95场题解</a><time datetime="2023-03-20T19:11:25.519Z" title="发表于 2023-03-21 03:11:25">2023-03-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.acwing.com/media/activity/surface/QQ%E6%88%AA%E5%9B%BE20210519235656_e5c7OQ1_6YSmOKI_nZCgxAM.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
