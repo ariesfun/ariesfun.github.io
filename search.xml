@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>春季每日一题2023-更新Ing</title>
+      <link href="/posts/2825.html"/>
+      <url>/posts/2825.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="AcWing-春季每日一题2023-持续更新中"><a href="#AcWing-春季每日一题2023-持续更新中" class="headerlink" title="AcWing 春季每日一题2023 持续更新中"></a>AcWing 春季每日一题2023 持续更新中</h2><h4 id="打卡题目（内容有疑问或错误，欢迎随时指正哈-）"><a href="#打卡题目（内容有疑问或错误，欢迎随时指正哈-）" class="headerlink" title="打卡题目（内容有疑问或错误，欢迎随时指正哈~）"></a>打卡题目（内容有疑问或错误，欢迎随时指正哈~）</h4><hr><p>**Day4: 04/22 **</p><p>题目：<a href="https://www.acwing.com/problem/content/4961/">【接龙数列】</a>)    考查知识点： <u>动态规划，线性DP，最长上升子序列变形</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6320641/">AcWing 4958. 接龙数列</a></p><hr><p><strong>Day3: 04/12</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/4960/">【飞机降落】</a>    考查知识点： <u>DFS，全排列，(状态压缩DP)</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6260091/">AcWing 4957. 飞机降落</a></p><hr><p><strong>Day2: 04/11</strong></p><p>题目：[【冶炼金属】](<a href="https://www.acwing.com/problem/content/4959/">4956. 冶炼金属 - AcWing题库</a>)    考查知识点： <u>二分，推公式，整除性质</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6254141/">AcWing 4956. 冶炼金属</a></p><hr><p><strong>Day1: 04/09</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/description/3387/">【二叉树遍历】</a>    考查知识点： <u>DFS，树的遍历(前中后)，递归搜索树</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6237121/">AcWing 3384. 二叉树遍历</a></p><hr><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p>活动地址：<a href="https://www.acwing.com/activity/content/introduction/3166/">AcWing-春季每日一题</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 每日一题打卡 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+            <tag> 每日一题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux基础 第三讲 Shell语法</title>
       <link href="/posts/1e1a.html"/>
       <url>/posts/1e1a.html</url>
