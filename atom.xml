@@ -6,7 +6,7 @@
   <link href="https://ariesfun.gitee.io/atom.xml" rel="self"/>
   
   <link href="https://ariesfun.gitee.io/"/>
-  <updated>2023-04-27T14:56:30.264Z</updated>
+  <updated>2023-04-28T13:46:37.479Z</updated>
   <id>https://ariesfun.gitee.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://ariesfun.gitee.io/posts/72e3.html"/>
     <id>https://ariesfun.gitee.io/posts/72e3.html</id>
     <published>2023-04-22T02:15:55.087Z</published>
-    <updated>2023-04-27T14:56:30.264Z</updated>
+    <updated>2023-04-28T13:46:37.479Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="AcWing-春季每日一题2023-持续更新中…"><a href="#AcWing-春季每日一题2023-持续更新中…" class="headerlink" title="AcWing 春季每日一题2023 持续更新中…"></a>AcWing 春季每日一题2023 持续更新中…</h2><h3 id="打卡题目（内容有疑问或错误，欢迎随时询问或指正哈-）"><a href="#打卡题目（内容有疑问或错误，欢迎随时询问或指正哈-）" class="headerlink" title="打卡题目（内容有疑问或错误，欢迎随时询问或指正哈~）"></a>打卡题目（内容有疑问或错误，欢迎随时询问或指正哈~）</h3><hr><p><strong>Day7: 04/27</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/3511/">【最长公共子串】</a>    考查知识点： <u>最长公共子串问题，二分，字符串哈希，哈希表(STL)</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9132682/">AcWing 3508. 最长公共子串 </a></p><hr><p><strong>Day6: 04/26</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/3449/">【整数奇偶排序】</a>    考查知识点： <u>模拟题，简单排序</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9126853/">AcWing 3446. 整数奇偶排序</a></p><p>题目：<a href="https://www.acwing.com/problem/content/3434/">【skew数】</a>    考查知识点： <u>模拟题，字符串处理</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9126817/">AcWing 3431. skew数 </a></p><hr><p><strong>Day5: 04/25（补）</strong> 很有思维难度，写了好久呜呜~~</p><p>题目：<a href="https://www.acwing.com/problem/content/4967/">【子矩阵】</a>    考查知识点： <u>（二维）单调队列，滑动窗口拓展</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9122007/">AcWing 4964. 子矩阵 </a></p><hr><p><strong>Day4: 04/22</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/4961/">【接龙数列】</a>    考查知识点： <u>动态规划，线性DP，最长上升子序列变形</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6320641/">AcWing 4958. 接龙数列</a></p><hr><p><strong>Day3: 04/12</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/4960/">【飞机降落】</a>    考查知识点： <u>DFS，全排列，(状态压缩DP)</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6260091/">AcWing 4957. 飞机降落</a></p><hr><p><strong>Day2: 04/11</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/4959/">【冶炼金属】</a>    考查知识点： <u>二分，推公式，整除性质</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6254141/">AcWing 4956. 冶炼金属</a></p><hr><p><strong>Day1: 04/09</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/description/3387/">【二叉树遍历】</a>    考查知识点： <u>DFS，树的遍历(前中后)，递归搜索树</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6237121/">AcWing 3384. 二叉树遍历</a></p><hr><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>活动地址：<a href="https://www.acwing.com/activity/content/introduction/3166/">AcWing-春季每日一题</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="AcWing-春季每日一题2023-持续更新中…"><a href="#AcWing-春季每日一题2023-持续更新中…" class="headerlink" title="AcWing 春季每日一题2023 持续更新中…"></a>AcWing 春季每日一题2023 持续更新中…</h2><h3 id="打卡题目（内容有疑问或错误，欢迎随时询问或指正哈-）"><a href="#打卡题目（内容有疑问或错误，欢迎随时询问或指正哈-）" class="headerlink" title="打卡题目（内容有疑问或错误，欢迎随时询问或指正哈~）"></a>打卡题目（内容有疑问或错误，欢迎随时询问或指正哈~）</h3><hr><p><strong>Day8: 04/28</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/3546/">【 三元组】</a>    考查知识点： <u>简单模拟，(考研机试题)</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6362210/">AcWing 3543. 三元组 </a></p><hr><p><strong>Day7: 04/27</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/3511/">【最长公共子串】</a>    考查知识点： <u>最长公共子串问题，二分，字符串哈希，哈希表(STL)</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9132682/">AcWing 3508. 最长公共子串 </a></p><hr><p><strong>Day6: 04/26</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/3449/">【整数奇偶排序】</a>    考查知识点： <u>模拟题，简单排序</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9126853/">AcWing 3446. 整数奇偶排序</a></p><p>题目：<a href="https://www.acwing.com/problem/content/3434/">【skew数】</a>    考查知识点： <u>模拟题，字符串处理</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9126817/">AcWing 3431. skew数 </a></p><hr><p><strong>Day5: 04/25（补）</strong> 很有思维难度，写了好久呜呜~~</p><p>题目：<a href="https://www.acwing.com/problem/content/4967/">【子矩阵】</a>    考查知识点： <u>（二维）单调队列，滑动窗口拓展</u></p><p>题解：<a href="https://www.acwing.com/file_system/file/content/whole/index/content/9122007/">AcWing 4964. 子矩阵 </a></p><hr><p><strong>Day4: 04/22</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/4961/">【接龙数列】</a>    考查知识点： <u>动态规划，线性DP，最长上升子序列变形</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6320641/">AcWing 4958. 接龙数列</a></p><hr><p><strong>Day3: 04/12</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/4960/">【飞机降落】</a>    考查知识点： <u>DFS，全排列，(状态压缩DP)</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6260091/">AcWing 4957. 飞机降落</a></p><hr><p><strong>Day2: 04/11</strong></p><p>题目：<a href="https://www.acwing.com/problem/content/4959/">【冶炼金属】</a>    考查知识点： <u>二分，推公式，整除性质</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6254141/">AcWing 4956. 冶炼金属</a></p><hr><p><strong>Day1: 04/09</strong> </p><p>题目：<a href="https://www.acwing.com/problem/content/description/3387/">【二叉树遍历】</a>    考查知识点： <u>DFS，树的遍历(前中后)，递归搜索树</u></p><p>题解：<a href="https://www.acwing.com/activity/content/code/content/6237121/">AcWing 3384. 二叉树遍历</a></p><hr><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>活动地址：<a href="https://www.acwing.com/activity/content/introduction/3166/">AcWing-春季每日一题</a></p>]]></content>
     
     
       
@@ -528,9 +528,9 @@
     
     <category term="C/C++" scheme="https://ariesfun.gitee.io/tags/C-C/"/>
     
-    <category term="数据结构与算法" scheme="https://ariesfun.gitee.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
     <category term="AcWing" scheme="https://ariesfun.gitee.io/tags/AcWing/"/>
+    
+    <category term="数据结构与算法" scheme="https://ariesfun.gitee.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
