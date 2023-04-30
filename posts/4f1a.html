@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数据挖掘与机器学习 线性回归设计 实训1 | AriesfunのBlog</title><meta name="keywords" content="Numpy,Matplotlib,Python,学习记录"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据挖掘与机器学习 线性回归设计 实训1（1）实训目的1.掌握回归的基本思想； 2.掌握梯度法的基本原理 。  （2）主要内容1.实现一元线性回归； 2.画出散点图、回归参数与迭代次数的变化曲线； 3.分析不同数据变化对回归结果的影响。  （3）具体处理步骤1. 导入数据集，绘制数据的散点图data1.txt 数据集下载 123456789import numpy as npimport matp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘与机器学习 线性回归设计 实训1">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/4f1a.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="数据挖掘与机器学习 线性回归设计 实训1（1）实训目的1.掌握回归的基本思想； 2.掌握梯度法的基本原理 。  （2）主要内容1.实现一元线性回归； 2.画出散点图、回归参数与迭代次数的变化曲线； 3.分析不同数据变化对回归结果的影响。  （3）具体处理步骤1. 导入数据集，绘制数据的散点图data1.txt 数据集下载 123456789import numpy as npimport matp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg">
+<meta property="article:published_time" content="2023-04-30T07:52:52.221Z">
+<meta property="article:modified_time" content="2023-04-30T07:52:52.368Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="Numpy">
+<meta property="article:tag" content="Matplotlib">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="学习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/4f1a"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据挖掘与机器学习 线性回归设计 实训1',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-30 15:52:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 学习记录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 数据库MySQL</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 摄影&amp;随想</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据挖掘与机器学习 线性回归设计 实训1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-30T07:52:52.221Z" title="发表于 2023-04-30 15:52:52">2023-04-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-30T07:52:52.368Z" title="更新于 2023-04-30 15:52:52">2023-04-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">数据挖掘与机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">822</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据挖掘与机器学习 线性回归设计 实训1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="数据挖掘与机器学习-线性回归设计-实训1"><a href="#数据挖掘与机器学习-线性回归设计-实训1" class="headerlink" title="数据挖掘与机器学习 线性回归设计 实训1"></a>数据挖掘与机器学习 线性回归设计 实训1</h2><h3 id="（1）实训目的"><a href="#（1）实训目的" class="headerlink" title="（1）实训目的"></a>（1）实训目的</h3><p><strong>1.掌握回归的基本思想；</strong></p>
+<p><strong>2.掌握梯度法的基本原理 。</strong></p>
+<hr>
+<h3 id="（2）主要内容"><a href="#（2）主要内容" class="headerlink" title="（2）主要内容"></a>（2）主要内容</h3><p>1.实现一元线性回归；</p>
+<p>2.画出散点图、回归参数与迭代次数的变化曲线；</p>
+<p>3.分析不同数据变化对回归结果的影响。</p>
+<hr>
+<h3 id="（3）具体处理步骤"><a href="#（3）具体处理步骤" class="headerlink" title="（3）具体处理步骤"></a>（3）具体处理步骤</h3><h4 id="1-导入数据集，绘制数据的散点图"><a href="#1-导入数据集，绘制数据的散点图" class="headerlink" title="1. 导入数据集，绘制数据的散点图"></a>1. 导入数据集，绘制数据的散点图</h4><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1jO2p0CSBQedb7QE7PkbJ3A?pwd=2023">data1.txt 数据集下载</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">data=np.loadtxt(<span class="string">&quot;data1.txt&quot;</span>, delimiter=<span class="string">&quot;,&quot;</span>) <span class="comment"># 读取数据集，列索引分别是x和y</span></span><br><span class="line"></span><br><span class="line">x=data[:,<span class="number">0</span>:<span class="number">1</span>] <span class="comment"># 取x这列所有值,训练数据</span></span><br><span class="line">y=data[:,<span class="number">1</span>:]</span><br><span class="line">plt.scatter(x,y) <span class="comment"># 绘制散点图</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291223504.png" alt="img-202304291223504"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.shape <span class="comment"># 原数据集形状，n行m列</span></span><br></pre></td></tr></table></figure>
+<pre><code>(97, 2)
+</code></pre>
+<hr>
+<h4 id="2-对特征进行归一化处理"><a href="#2-对特征进行归一化处理" class="headerlink" title="2. 对特征进行归一化处理"></a>2. 对特征进行归一化处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">featureNormalize</span>(<span class="params">x</span>): <span class="comment"># （特征值x的取值差别较大）需消除特征值的量纲</span></span><br><span class="line">    avg = x.mean()</span><br><span class="line">    sstd = np.std(x, axis=<span class="number">0</span>, ddof=<span class="number">1</span>) <span class="comment"># 进行标准差标准化处理（ddof是分母为n-1,无偏估计）</span></span><br><span class="line">    x = (x-avg)/sstd</span><br><span class="line">    <span class="keyword">return</span> x, avg, sstd</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-1-定义损失函数-h-theta是预测函数（假设函数），j-theta是损失函数"><a href="#3-1-定义损失函数-h-theta是预测函数（假设函数），j-theta是损失函数" class="headerlink" title="3.1 定义损失函数   h_theta是预测函数（假设函数），j_theta是损失函数"></a>3.1 定义损失函数   h_theta是预测函数（假设函数），j_theta是损失函数</h4><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291221890.png" alt="img-202304291221890" style="zoom:67%;" />
+
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291221178.png" alt="img-202304291221178" style="zoom: 80%;" />
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">computeCost</span>(<span class="params">x, y, theta</span>): <span class="comment"># 损失函数j_theta</span></span><br><span class="line">    m = x.shape[<span class="number">0</span>] <span class="comment"># 获取第一维度的长度（行数），即X特征项对应的个数</span></span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>((np.dot(x,theta) - y)**<span class="number">2</span>)/(<span class="number">2</span>*m)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-2-梯度下降算法"><a href="#3-2-梯度下降算法" class="headerlink" title="3.2 梯度下降算法"></a>3.2 梯度下降算法</h4><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291222715.png" alt="img-202304291222715" style="zoom:67%;" />
+
+<h6 id="利用公式-theta-是预测函数每项的系数，times：梯度下降次数，alpha：梯度下降参数变化率"><a href="#利用公式-theta-是预测函数每项的系数，times：梯度下降次数，alpha：梯度下降参数变化率" class="headerlink" title="利用公式 theta : 是预测函数每项的系数，times：梯度下降次数，alpha：梯度下降参数变化率"></a>利用公式 theta : 是预测函数每项的系数，times：梯度下降次数，alpha：梯度下降参数变化率</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gradientDescent</span>(<span class="params">x, y, theta, times, alpha</span>):</span><br><span class="line">    theta_0 = np.ones(x.shape[<span class="number">0</span>]).T</span><br><span class="line">    x = np.insert(x, <span class="number">0</span>, theta_0, axis=<span class="number">1</span>) <span class="comment"># 对原始数据加入一个全为1的列，方便后续计算</span></span><br><span class="line">    m = x.shape[<span class="number">0</span>] <span class="comment"># 行数</span></span><br><span class="line">    n = x.shape[<span class="number">1</span>] <span class="comment"># 列数</span></span><br><span class="line">    costs = np.zeros(times) <span class="comment"># 初始化损失数组</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(times): <span class="comment"># 循环迭代，计算梯度下降的值</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            theta[j] = theta[j] + (alpha/m) * np.<span class="built_in">sum</span>(y - np.dot(x,theta) * x[:,j].reshape(-<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">        costs[num] = computeCost(x, y, theta)</span><br><span class="line">    <span class="keyword">return</span> costs <span class="comment"># 返回每次迭代计算的损失</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-计算求得的直线"><a href="#4-计算求得的直线" class="headerlink" title="4. 计算求得的直线"></a>4. 计算求得的直线</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x_orgin=x <span class="comment"># 分别取x，y这列的值</span></span><br><span class="line">y_orgin=y</span><br><span class="line"></span><br><span class="line">x1, avg, sstd = featureNormalize(x_orgin) <span class="comment"># 得到经特征归一化后的特征值x</span></span><br><span class="line"></span><br><span class="line">theta = np.zeros(x1.shape[<span class="number">1</span>]+<span class="number">1</span>).reshape(-<span class="number">1</span>,<span class="number">1</span>) <span class="comment"># 变为1列的列向量（2个theta值）</span></span><br><span class="line">times = <span class="number">600</span></span><br><span class="line">alpha = <span class="number">0.01</span></span><br><span class="line">costs = gradientDescent(x1, y_orgin, theta, times, alpha)</span><br><span class="line"></span><br><span class="line">plt.scatter(x1, y_orgin) <span class="comment"># x1是（-1~4）</span></span><br><span class="line">h_theta = theta[<span class="number">0</span>]+theta[<span class="number">1</span>]*x1 <span class="comment"># 预测的直线</span></span><br><span class="line">plt.plot(x1, h_theta, color= <span class="string">&#x27;red&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291224464.png" alt="img-202304291224464"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;预测函数: y = %f + %f * x&#x27;</span> % (theta[<span class="number">0</span>], theta[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证，x=3时，y应该在23附近</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;x=3, y = %f&#x27;</span> % (theta[<span class="number">0</span>] + <span class="number">3</span>*theta[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>预测函数: y = 5.825092 + 5.884855 * x
+x=3, y = 23.479657
+</code></pre>
+<hr>
+<h4 id="5-画损失函数，损失随迭代次数变化的曲线"><a href="#5-画损失函数，损失随迭代次数变化的曲线" class="headerlink" title="5. 画损失函数，损失随迭代次数变化的曲线"></a>5. 画损失函数，损失随迭代次数变化的曲线</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_times = np.linspace(<span class="number">1</span>,times,times)</span><br><span class="line">plt.plot(x_times, costs[<span class="number">0</span>:times], color=<span class="string">&quot;orange&quot;</span>,linewidth=<span class="number">3</span>) <span class="comment"># 纵坐标是损失值</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304291224616.png" alt="img-202304291224616"></p>
+<hr>
+<h4 id="6-结果分析"><a href="#6-结果分析" class="headerlink" title="6. 结果分析"></a>6. 结果分析</h4><p><strong>分析可知，当迭代次数到200次左右时，损失函数趋于收敛损失值达到最小值，迭代次数太多，可能使得出现过拟合现象</strong></p>
+<p><strong>alpha 越小时，即步长越小，使得训练过程中的变化速度较慢，但可能更易于损失函数收敛</strong></p>
+<hr>
+<h3 id="（4）参考资料"><a href="#（4）参考资料" class="headerlink" title="（4）参考资料"></a>（4）参考资料</h3><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1jO2p0CSBQedb7QE7PkbJ3A?pwd=2023">data1.txt 数据集下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yf4y1o7A5/?spm_id_from=333.788&vd_source=29b001fc6ca0d80398a993dc92c03a9b">机器学习讲解-B站</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GZ4y1e7fK/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">使用梯度下降法求解线性回归问题</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/blog/content/25336/">Python机器学习笔记 - AcWing</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/4f1a.html">https://ariesfun.gitee.io/posts/4f1a.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Numpy/">Numpy</a><a class="post-meta__tags" href="/tags/Matplotlib/">Matplotlib</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/1908.html"><img class="next-cover" src="https://matplotlib.org/stable/_static/images/logo2.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据分析与可视化 上机实践4（Matplotlib 数据可视化）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1908.html" title="数据分析与可视化 上机实践4（Matplotlib 数据可视化）"><img class="cover" src="https://matplotlib.org/stable/_static/images/logo2.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 上机实践4（Matplotlib 数据可视化）</div></div></a></div><div><a href="/posts/e26c.html" title="数据分析与可视化 上机实践3（Pandas 数据预处理）"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 上机实践3（Pandas 数据预处理）</div></div></a></div><div><a href="/posts/54a7.html" title="数据分析与可视化 上机实践2（Pandas 统计分析）"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 上机实践2（Pandas 统计分析）</div></div></a></div><div><a href="/posts/8203.html" title="数据分析与可视化 上机实践1（Numpy 数值计算）"><img class="cover" src="https://numpy.org/doc/_static/numpylogo.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 上机实践1（Numpy 数值计算）</div></div></a></div><div><a href="/posts/1c4c.html" title="数据分析与可视化 实践基础练习六（Pandas）"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 实践基础练习六（Pandas）</div></div></a></div><div><a href="/posts/1aee.html" title="数据分析与可视化 实践基础练习五（Pandas）"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 实践基础练习五（Pandas）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:2018351840@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Ariesfun's Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E8%AE%BE%E8%AE%A1-%E5%AE%9E%E8%AE%AD1"><span class="toc-text">数据挖掘与机器学习 线性回归设计 实训1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%AE%9E%E8%AE%AD%E7%9B%AE%E7%9A%84"><span class="toc-text">（1）实训目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="toc-text">（2）主要内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%85%B7%E4%BD%93%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4"><span class="toc-text">（3）具体处理步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%8C%E7%BB%98%E5%88%B6%E6%95%B0%E6%8D%AE%E7%9A%84%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-text">1. 导入数据集，绘制数据的散点图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AF%B9%E7%89%B9%E5%BE%81%E8%BF%9B%E8%A1%8C%E5%BD%92%E4%B8%80%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-text">2. 对特征进行归一化处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-h-theta%E6%98%AF%E9%A2%84%E6%B5%8B%E5%87%BD%E6%95%B0%EF%BC%88%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%EF%BC%89%EF%BC%8Cj-theta%E6%98%AF%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">3.1 定义损失函数   h_theta是预测函数（假设函数），j_theta是损失函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95"><span class="toc-text">3.2 梯度下降算法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%85%AC%E5%BC%8F-theta-%E6%98%AF%E9%A2%84%E6%B5%8B%E5%87%BD%E6%95%B0%E6%AF%8F%E9%A1%B9%E7%9A%84%E7%B3%BB%E6%95%B0%EF%BC%8Ctimes%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%AC%A1%E6%95%B0%EF%BC%8Calpha%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%8F%82%E6%95%B0%E5%8F%98%E5%8C%96%E7%8E%87"><span class="toc-text">利用公式 theta : 是预测函数每项的系数，times：梯度下降次数，alpha：梯度下降参数变化率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%AE%A1%E7%AE%97%E6%B1%82%E5%BE%97%E7%9A%84%E7%9B%B4%E7%BA%BF"><span class="toc-text">4. 计算求得的直线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%94%BB%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8D%9F%E5%A4%B1%E9%9A%8F%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%8F%98%E5%8C%96%E7%9A%84%E6%9B%B2%E7%BA%BF"><span class="toc-text">5. 画损失函数，损失随迭代次数变化的曲线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-text">6. 结果分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">（4）参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/4f1a.html" title="数据挖掘与机器学习 线性回归设计 实训1"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据挖掘与机器学习 线性回归设计 实训1"/></a><div class="content"><a class="title" href="/posts/4f1a.html" title="数据挖掘与机器学习 线性回归设计 实训1">数据挖掘与机器学习 线性回归设计 实训1</a><time datetime="2023-04-30T07:52:52.221Z" title="发表于 2023-04-30 15:52:52">2023-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/1908.html" title="数据分析与可视化 上机实践4（Matplotlib 数据可视化）"><img src="https://matplotlib.org/stable/_static/images/logo2.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 上机实践4（Matplotlib 数据可视化）"/></a><div class="content"><a class="title" href="/posts/1908.html" title="数据分析与可视化 上机实践4（Matplotlib 数据可视化）">数据分析与可视化 上机实践4（Matplotlib 数据可视化）</a><time datetime="2023-04-30T07:30:51.829Z" title="发表于 2023-04-30 15:30:51">2023-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/e26c.html" title="数据分析与可视化 上机实践3（Pandas 数据预处理）"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 上机实践3（Pandas 数据预处理）"/></a><div class="content"><a class="title" href="/posts/e26c.html" title="数据分析与可视化 上机实践3（Pandas 数据预处理）">数据分析与可视化 上机实践3（Pandas 数据预处理）</a><time datetime="2023-04-30T07:29:39.353Z" title="发表于 2023-04-30 15:29:39">2023-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/54a7.html" title="数据分析与可视化 上机实践2（Pandas 统计分析）"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304011950106.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 上机实践2（Pandas 统计分析）"/></a><div class="content"><a class="title" href="/posts/54a7.html" title="数据分析与可视化 上机实践2（Pandas 统计分析）">数据分析与可视化 上机实践2（Pandas 统计分析）</a><time datetime="2023-04-30T07:28:18.294Z" title="发表于 2023-04-30 15:28:18">2023-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8203.html" title="数据分析与可视化 上机实践1（Numpy 数值计算）"><img src="https://numpy.org/doc/_static/numpylogo.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据分析与可视化 上机实践1（Numpy 数值计算）"/></a><div class="content"><a class="title" href="/posts/8203.html" title="数据分析与可视化 上机实践1（Numpy 数值计算）">数据分析与可视化 上机实践1（Numpy 数值计算）</a><time datetime="2023-04-30T07:03:17.825Z" title="发表于 2023-04-30 15:03:17">2023-04-30</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
