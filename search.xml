@@ -109,11 +109,11 @@
       
         <tags>
             
+            <tag> Pandas </tag>
+            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
-            
-            <tag> Pandas </tag>
             
         </tags>
       
@@ -138,11 +138,11 @@
       
         <tags>
             
+            <tag> Pandas </tag>
+            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
-            
-            <tag> Pandas </tag>
             
         </tags>
       
@@ -167,11 +167,11 @@
       
         <tags>
             
-            <tag> NumPy </tag>
-            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
+            
+            <tag> NumPy </tag>
             
         </tags>
       
@@ -196,11 +196,11 @@
       
         <tags>
             
+            <tag> Pandas </tag>
+            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
-            
-            <tag> Pandas </tag>
             
         </tags>
       
@@ -225,11 +225,11 @@
       
         <tags>
             
+            <tag> Pandas </tag>
+            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
-            
-            <tag> Pandas </tag>
             
         </tags>
       
@@ -339,11 +339,11 @@
       
         <tags>
             
+            <tag> Pandas </tag>
+            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
-            
-            <tag> Pandas </tag>
             
         </tags>
       
@@ -368,11 +368,11 @@
       
         <tags>
             
-            <tag> NumPy </tag>
-            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
+            
+            <tag> NumPy </tag>
             
         </tags>
       
@@ -505,11 +505,11 @@
       
         <tags>
             
-            <tag> NumPy </tag>
-            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
+            
+            <tag> NumPy </tag>
             
         </tags>
       
@@ -534,11 +534,11 @@
       
         <tags>
             
-            <tag> NumPy </tag>
-            
             <tag> Python </tag>
             
             <tag> 学习记录 </tag>
+            
+            <tag> NumPy </tag>
             
         </tags>
       
@@ -576,7 +576,7 @@
       <link href="/posts/54cf.html"/>
       <url>/posts/54cf.html</url>
       
-        <content type="html"><![CDATA[<h1 id="第一讲-常用文件管理命令"><a href="#第一讲-常用文件管理命令" class="headerlink" title="第一讲 常用文件管理命令"></a>第一讲 常用文件管理命令</h1><p>PS：（Linux学习基础：需具备一定的算法基础） ​<br> ​<strong>各种命令学习注重实用主义，应用为主</strong><br> ​<strong>各种命令的用法学习不能求全，不会的现查即可，边学先查。</strong></p><h2 id="0-课程概论"><a href="#0-课程概论" class="headerlink" title="0. 课程概论"></a>0. 课程概论</h2><ul><li><pre><code> 1. 课程概论</code></pre></li></ul><pre><code>（1）目标：锻炼动手能力，学完之后可以做出什么项目    后端服务端开发必备技能。（2）什么是Linux ? Ubuntu、CentOS ?    [Linux-百度百科](https://baike.baidu.com/item/Linux?fromModule=lemma_search-box)        Ubuntu 和 Centos 都是基于Linux的操作系统(Linux的不同发行版本)，它们的编译方式有所不同。（3）未来工作方式，Terminal,  命令行交互方式    入云（数字化）    Terminal：终端就是连接内核与交互界面的这座桥，并且使用命令行的交互方式。</code></pre><ul><li><ol start="2"><li>文件系统</li></ol><p>  （1）文件系统结构</p><p>​    在 Linux 或 Unix 操作系统中，所有的文件和目录都被组织成以一个根节点<code>/</code> 开始的倒置的树状结构。</p><p>​    <code>tree</code>: 该命令可以用树状图列出目录的内容。</p><p>  （2）路径</p><p>​    绝对路径、相对路径、根目录</p><p>​    </p><p>​    <strong>a. 绝对路径</strong>：从<code>/</code> 开始描述</p><p>​    <strong>b. 相对路径</strong>:  （可使用<code>pwd</code>命令）输出当前所在的路径</p><p>​    <strong>c. 根目录名称</strong>：<code>/</code>（除号）</p></li></ul><p>​            根目录下常见的子目录有，</p><p>​            bin: 包含常用的可执行文件的命令</p><p>​            etc: 一些配置文件，比如nginx服务器</p><p>​            var:  存一些日志文件（log）</p><p>​            lib: 存一些安装包（静态文件库）、头文件</p><p>​            home: 系统用户的家目录</p><p>​        补充：</p><p>​        <code>.</code>  ，一个点： 表示当前目录</p><p>​        <code>..</code> ，两个点：到上级目录</p><p>​        <code>~/ </code> ,  表示家目录（等价于用户的目录<code>/home/user01/</code>）</p><ul><li><ol start="3"><li>文件管理的常用命令</li></ol></li></ul><hr><h2 id="1-常用命令介绍"><a href="#1-常用命令介绍" class="headerlink" title="1. 常用命令介绍"></a>1. 常用命令介绍</h2><p>(1)  <code>ctrl c</code>:  取消命令，并且换行(换行并清空)</p><p>(2)  <code>ctrl u</code>:  清空本行命令</p><p>(3) <code>tab键</code>： 可以补全命令和文件名，如果补全不了快速按两下tab键，可以显示备选选项</p><p>(4) <code>ls</code>:  列出当前目录下所有文件，蓝色的是文件夹，白色的是普通文件，绿色的是可执行文件</p><p><code>ls -l</code>:  查看文件详细信息（权限、创建时间、名称等）<br><code>ls -h</code>:  命令加h,可将文件大小按格式化输出<br><code>ls -a</code>:  查看隐藏文件（文件名以<code>.</code>开头的）<br><code>ll </code>: 等价于<code> ls -la</code>, 查看所有文件详细信息<br><code>ls -文件名</code> : 查看该文件目录下的所有文件</p><p><code>ls -l | wc -l</code>:  统计当前目录下的文件数量</p><p>(5)     <code>pwd</code>:  显示当前路径</p><p>(6)     <code>cd XXX</code>:  进入XXX目录下(绝对或相对), </p><p><code>cd</code>:  回到家目录<br><code>cd .. </code>：返回上层目录<br><code>cd ~</code>: 返回改变路径前的路径</p><p>(7)  <strong><code>cp</code> : 复制 + 粘贴 + 重命名</strong></p><p><code>cp XXX YYY</code>:  将XXX文件复制成YYY，XXX和YYY可以是一个路径，</p><p><code>cp XXX YYY -r</code> 将XXX目录（文件夹）复制到YYY下</p><p><code>../dir_c/a.txt</code>，表示上层目录下的dir_c文件夹下的文件a.txt</p><p>(8) <code>mkdir XXX</code>: 创建目录XXX（文件夹）</p><p><code>mkdir XXX -p</code>：如果文件夹XXX不存在，会自动创建</p><p>(9) <code>rm XXX</code>: 删除普通文件</p><p><code>rm XXX -r</code>:  删除文件夹, -r是递归删</p><p><code>rm *.txt</code>:  删除所有<code>.txt</code>类型文件,文件名是支持正则表达式的</p><p><code>rm *</code>: 删除所有文件（不包括文件夹）,eg. <code>rm a/*</code> 删除目录a下的所有文件</p><p><code>rm * -r</code>: 删除所有文件夹(不会删除隐藏文件), 支持正则表达式</p><p>(10) <strong><code>mv</code>: 剪切 + 粘贴 + 重命名</strong></p><p><code>mv XXX YYY</code>: 将XXX文件移动到YYY，</p><p>和cp命令一样，XXX和YYY可以是一个路径，重命名也是用这个命令</p><p>(11) <code>touch XXX</code>: 创建一个文件</p><p>(12) <code>cat XXX</code>: 展示文件XXX中的内容</p><p>(13) 复制文本<br>    Windows/Linux下：<code>Ctrl + insert</code>，Mac下：<code>command + c</code></p><p>(14) 粘贴文本<br>    Windows/Linux下：<code>shift + insert</code>，Mac下：<code>command + v</code></p><p>ps: 其他命令</p><pre><code>`tmux`:（一种工具） 可以让任务一直挂在后台运行`tree`: 可以用树状图列出目录的内容`history`: 可查看输入命令的历史记录</code></pre><h2 id="2-创建作业-amp-测试作业的正确性"><a href="#2-创建作业-amp-测试作业的正确性" class="headerlink" title="2. 创建作业 &amp; 测试作业的正确性"></a>2. 创建作业 &amp; 测试作业的正确性</h2><pre><code>`homework 1 create` 可以重新创建所有lesson_1的作业`homework 1 create id` 可以单独创建lesson_1的第id个作业. e.g.`homework 1 create 0` 可以只重新创建lesson_1的第0个作业`homework 1 test` 可以评测lesson_1的所有作业</code></pre><h2 id="3-作业"><a href="#3-作业" class="headerlink" title="3. 作业"></a>3. 作业</h2><pre><code>见AcWing课程打卡笔记。第一次课截图打卡hhh![lesson_1](https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640533.jpg)</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4. 参考文章"></a>4. 参考文章</h2><pre><code>[AcWing工程课系列 - Linux基础课](https://www.acwing.com/activity/content/57/)[讲义1. 常用文件管理命令](https://www.acwing.com/file_system/file/content/whole/index/content/2855530/)[zst同学笔记](https://www.acwing.com/blog/content/13214/)</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="第一讲-常用文件管理命令"><a href="#第一讲-常用文件管理命令" class="headerlink" title="第一讲 常用文件管理命令"></a>第一讲 常用文件管理命令</h1><p>PS：（Linux学习基础：需具备一定的算法基础） ​<br> ​<strong>各种命令学习注重实用主义，应用为主</strong><br> ​<strong>各种命令的用法学习不能求全，不会的现查即可，边学先查。</strong></p><h2 id="0-课程概论"><a href="#0-课程概论" class="headerlink" title="0. 课程概论"></a>0. 课程概论</h2><h3 id="1-课程概论"><a href="#1-课程概论" class="headerlink" title="1)  课程概论"></a>1)  课程概论</h3><p>（1）目标：锻炼动手能力，学完之后可以做出什么项目</p><p>后端服务端开发必备技能。</p><p>（2）什么是Linux ? Ubuntu、CentOS ?</p><p><a href="https://baike.baidu.com/item/Linux?fromModule=lemma_search-box">Linux-百度百科</a></p><p>Ubuntu 和 Centos 都是基于Linux的操作系统(Linux的不同发行版本)，它们的编译方式有所不同。</p><p>（3）未来工作方式，Terminal,  命令行交互方式<br>入云（数字化）</p><p>Terminal：终端就是连接内核与交互界面的这座桥，并且使用命令行的交互方式。</p><h3 id="2-文件系统"><a href="#2-文件系统" class="headerlink" title="2) 文件系统"></a>2) 文件系统</h3><p>（1）文件系统结构</p><p>​    在 Linux 或 Unix 操作系统中，所有的文件和目录都被组织成以一个根节点<code>/</code> 开始的倒置的树状结构。</p><p>​    <code>tree</code>: 该命令可以用树状图列出目录的内容。</p><p>（2）路径</p><p>绝对路径、相对路径、根目录</p><p>​    </p><p><strong>a. 绝对路径</strong>：从<code>/</code> 开始描述</p><p><strong>b. 相对路径</strong>:  （可使用<code>pwd</code>命令）输出当前所在的路径</p><p><strong>c. 根目录名称</strong>：<code>/</code>（除号）</p><p>根目录下常见的子目录有，</p><p><code>bin</code>: 包含常用的可执行文件的命令</p><p><code>etc</code>: 一些配置文件，比如nginx服务器</p><p><code>var</code>:  存一些日志文件（log）</p><p><code>lib</code>: 存一些安装包（静态文件库）、头文件</p><p><code>home</code>: 系统用户的家目录</p><p>补充：</p><p><code>.</code>  ，一个点： 表示当前目录</p><p><code>..</code> ，两个点：到上级目录</p><p><code>~/ </code> ,  表示家目录（等价于用户的目录<code>/home/user01/</code>）</p><hr><h2 id="1-常用命令介绍"><a href="#1-常用命令介绍" class="headerlink" title="1. 常用命令介绍"></a>1. 常用命令介绍</h2><p>(1)  <code>ctrl c</code>:  取消命令，并且换行(换行并清空)</p><p>(2)  <code>ctrl u</code>:  清空本行命令</p><p>(3) <code>tab键</code>： 可以补全命令和文件名，如果补全不了快速按两下tab键，可以显示备选选项</p><p>(4) <code>ls</code>:  列出当前目录下所有文件，蓝色的是文件夹，白色的是普通文件，绿色的是可执行文件</p><p><code>ls -l</code>:  查看文件详细信息（权限、创建时间、名称等）<br><code>ls -h</code>:  命令加h,可将文件大小按格式化输出<br><code>ls -a</code>:  查看隐藏文件（文件名以<code>.</code>开头的）<br><code>ll </code>: 等价于<code> ls -la</code>, 查看所有文件详细信息<br><code>ls -文件名</code> : 查看该文件目录下的所有文件</p><p><code>ls -l | wc -l</code>:  统计当前目录下的文件数量</p><p>(5) <code>pwd</code>:  显示当前路径</p><p>(6)<code>cd XXX</code>:  进入XXX目录下(绝对或相对), </p><p><code>cd</code>:  回到家目录<br><code>cd .. </code>：返回上层目录<br><code>cd ~</code>: 返回改变路径前的路径</p><p>(7)  <strong><code>cp</code> : 复制 + 粘贴 + 重命名</strong></p><p><code>cp XXX YYY</code>:  将XXX文件复制成YYY，XXX和YYY可以是一个路径，</p><p><code>cp XXX YYY -r</code> 将XXX目录（文件夹）复制到YYY下</p><p><code>../dir_c/a.txt</code>，表示上层目录下的dir_c文件夹下的文件a.txt</p><p>(8) <code>mkdir XXX</code>: 创建目录XXX（文件夹）</p><p><code>mkdir XXX -p</code>：如果文件夹XXX不存在，会自动创建</p><p>(9) <code>rm XXX</code>: 删除普通文件</p><p><code>rm XXX -r</code>:  删除文件夹, -r是递归删</p><p><code>rm *.txt</code>:  删除所有<code>.txt</code>类型文件,文件名是支持正则表达式的</p><p><code>rm *</code>: 删除所有文件（不包括文件夹）,eg. <code>rm a/*</code> 删除目录a下的所有文件</p><p><code>rm * -r</code>: 删除所有文件夹(不会删除隐藏文件), 支持正则表达式</p><p>(10) <strong><code>mv</code>: 剪切 + 粘贴 + 重命名</strong></p><p><code>mv XXX YYY</code>: 将XXX文件移动到YYY，</p><p>和cp命令一样，XXX和YYY可以是一个路径，重命名也是用这个命令</p><p>(11) <code>touch XXX</code>: 创建一个文件</p><p>(12) <code>cat XXX</code>: 展示文件XXX中的内容</p><p>(13) 复制文本<br>    Windows/Linux下：<code>Ctrl + insert</code>，Mac下：<code>command + c</code></p><p>(14) 粘贴文本<br>    Windows/Linux下：<code>shift + insert</code>，Mac下：<code>command + v</code></p><p>ps: 其他命令</p><p><code>tmux</code>:（一种工具） 可以让任务一直挂在后台运行</p><p><code>tree</code>: 可以用树状图列出目录的内容</p><p><code>history</code>: 可查看输入命令的历史记录</p><h2 id="2-创建作业-amp-测试作业的正确性"><a href="#2-创建作业-amp-测试作业的正确性" class="headerlink" title="2. 创建作业 &amp; 测试作业的正确性"></a>2. 创建作业 &amp; 测试作业的正确性</h2><pre><code>`homework 1 create` 可以重新创建所有lesson_1的作业`homework 1 create id` 可以单独创建lesson_1的第id个作业. e.g.`homework 1 create 0` 可以只重新创建lesson_1的第0个作业`homework 1 test` 可以评测lesson_1的所有作业</code></pre><h2 id="3-作业"><a href="#3-作业" class="headerlink" title="3. 作业"></a>3. 作业</h2><p>见AcWing课程打卡笔记。</p><p>第一次课截图打卡hhh</p><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202303051640533.jpg" alt="img-202303051640533"></p><h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><p><a href="https://www.acwing.com/activity/content/57/">AcWing工程课系列 - Linux基础课</a></p><p><a href="https://www.acwing.com/file_system/file/content/whole/index/content/2855530/">讲义1. 常用文件管理命令</a></p><p><a href="https://www.acwing.com/blog/content/13214/">zst同学笔记</a></p>]]></content>
       
       
       <categories>
