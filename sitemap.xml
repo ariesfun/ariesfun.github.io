@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ariesfun.gitee.io/posts/3f57.html</loc>
+    
+    <lastmod>2023-05-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ariesfun.gitee.io/friends/index.html</loc>
     
     <lastmod>2023-05-22</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://ariesfun.gitee.io/posts/6086.html</loc>
     
     <lastmod>2023-05-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/posts/3f57.html</loc>
-    
-    <lastmod>2023-05-08</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -401,6 +401,27 @@
   </url>
   
   <url>
+    <loc>https://ariesfun.gitee.io/tags/Hexo/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/Gitee/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/Markdown/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://ariesfun.gitee.io/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -415,7 +436,14 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/Markdown/</loc>
+    <loc>https://ariesfun.gitee.io/tags/blog/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/hexo/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -443,41 +471,6 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/blog/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/hexo/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/Hexo/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/Gitee/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ariesfun.gitee.io/tags/%E9%9A%8F%E6%83%B3/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -485,7 +478,7 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/NumPy/</loc>
+    <loc>https://ariesfun.gitee.io/tags/Pandas/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -506,7 +499,7 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/Pandas/</loc>
+    <loc>https://ariesfun.gitee.io/tags/NumPy/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -520,13 +513,6 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/OpenCV/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ariesfun.gitee.io/tags/Numpy/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -534,7 +520,14 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/tags/MySQL/</loc>
+    <loc>https://ariesfun.gitee.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/OpenCV/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -549,6 +542,13 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/tags/scp/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/tags/MySQL/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -578,7 +578,7 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E6%89%93%E5%8D%A1/</loc>
+    <loc>https://ariesfun.gitee.io/categories/Hexo%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -586,6 +586,13 @@
   
   <url>
     <loc>https://ariesfun.gitee.io/categories/Markdown/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E6%89%93%E5%8D%A1/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -606,20 +613,6 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/categories/Hexo%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ariesfun.gitee.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/</loc>
-    <lastmod>2023-05-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ariesfun.gitee.io/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E6%83%B3/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -634,14 +627,21 @@
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%EF%BC%88CV%EF%BC%89/</loc>
+    <loc>https://ariesfun.gitee.io/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://ariesfun.gitee.io/categories/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://ariesfun.gitee.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C/</loc>
+    <lastmod>2023-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ariesfun.gitee.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%EF%BC%88CV%EF%BC%89/</loc>
     <lastmod>2023-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
