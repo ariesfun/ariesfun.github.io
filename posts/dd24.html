@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>23生产实习 Day03(05/31) Zookeeper的安装方式 | AriesfunのBlog</title><meta name="keywords" content="学习记录,大数据框架,Linux,Java"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Day03(05&#x2F;31) Zookeeper的安装方式查看笔记合集 一、单机模式以下操作在第一个节点上进行。 1.关闭防火墙12sudo systemctl stop firewalld # 临时关闭sudo systemctl disable firewalld # 永久关闭  2.解压Zookeeper的安装包并进入conf目录  需要将Zookeeper安装包上传至第一个节点Linux本地，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="23生产实习 Day03(05&#x2F;31) Zookeeper的安装方式">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/dd24.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="Day03(05&#x2F;31) Zookeeper的安装方式查看笔记合集 一、单机模式以下操作在第一个节点上进行。 1.关闭防火墙12sudo systemctl stop firewalld # 临时关闭sudo systemctl disable firewalld # 永久关闭  2.解压Zookeeper的安装包并进入conf目录  需要将Zookeeper安装包上传至第一个节点Linux本地，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg">
+<meta property="article:published_time" content="2023-06-03T17:11:42.895Z">
+<meta property="article:modified_time" content="2023-06-03T17:31:25.595Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="大数据框架">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/dd24"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '23生产实习 Day03(05/31) Zookeeper的安装方式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-04 01:31:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">23生产实习 Day03(05/31) Zookeeper的安装方式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-03T17:11:42.895Z" title="发表于 2023-06-04 01:11:42">2023-06-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-03T17:31:25.595Z" title="更新于 2023-06-04 01:31:25">2023-06-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91/">大数据开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">940</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="23生产实习 Day03(05/31) Zookeeper的安装方式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Day03-05-31-Zookeeper的安装方式"><a href="#Day03-05-31-Zookeeper的安装方式" class="headerlink" title="Day03(05/31) Zookeeper的安装方式"></a>Day03(05/31) Zookeeper的安装方式</h2><p><strong><a href="https://ariesfun.gitee.io/posts/5544.html">查看笔记合集</a></strong></p>
+<h3 id="一、单机模式"><a href="#一、单机模式" class="headerlink" title="一、单机模式"></a>一、单机模式</h3><p>以下操作在第一个节点上进行。</p>
+<h4 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1.关闭防火墙"></a>1.关闭防火墙</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld # 临时关闭</span><br><span class="line">sudo systemctl disable firewalld # 永久关闭</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="2-解压Zookeeper的安装包并进入conf目录"><a href="#2-解压Zookeeper的安装包并进入conf目录" class="headerlink" title="2.解压Zookeeper的安装包并进入conf目录"></a>2.解压Zookeeper的安装包并进入conf目录</h4><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032018191.png" alt="img-202306032018191" style="zoom:80%;" />
+
+<p>需要将Zookeeper安装包上传至第一个节点Linux本地，并进行解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf zookeeoer-3.4.7.tar.gz -C /home/software/</span><br><span class="line">cd /home/software/zookeeper-3.4.7/conf/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-将模板文件复制并重命名"><a href="#3-将模板文件复制并重命名" class="headerlink" title="3.将模板文件复制并重命名"></a>3.将模板文件复制并重命名</h4><p><code>cp zoo_sample.cfg zoo.cfg</code></p>
+<hr>
+<h4 id="4-编辑文件将dataDir属性进行配置"><a href="#4-编辑文件将dataDir属性进行配置" class="headerlink" title="4.编辑文件将dataDir属性进行配置"></a>4.编辑文件将dataDir属性进行配置</h4><p><code>vim zoo.cfg</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/home/software/zookeeper-3.4.7/tmp</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-进入bin目录并启动Zookeeper"><a href="#5-进入bin目录并启动Zookeeper" class="headerlink" title="5.进入bin目录并启动Zookeeper"></a>5.进入bin目录并启动Zookeeper</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/software/zookeeper-3.4.7/bin</span><br><span class="line">sh zkServer.sh start</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="6-成功启动后，查看运行状态"><a href="#6-成功启动后，查看运行状态" class="headerlink" title="6.成功启动后，查看运行状态"></a>6.成功启动后，查看运行状态</h4><p><code>sh zkServer.sh status</code></p>
+<p>单机模式的状态:<strong>standalone</strong></p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032022362.png" alt="img-202306032022362" style="zoom:80%;" />
+
+<p><strong>到这说明，Zookeeper单机模式安装成功。</strong></p>
+<p><strong>！！！切记下一步需要关闭单机模式</strong></p>
+<p><code>sh zkServer.sh stop</code></p>
+<hr>
+<h4 id="7-远程拷贝Zookeeper文件给其他节点"><a href="#7-远程拷贝Zookeeper文件给其他节点" class="headerlink" title="7.远程拷贝Zookeeper文件给其他节点"></a>7.远程拷贝Zookeeper文件给其他节点</h4><p>进入<code>/home/software/</code>目录，</p>
+<p>将当前节点Zookeeper文件夹拷贝给其他节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ../../ </span><br><span class="line">scp -r zookeeper-3.4.7/ root@qianfeng02:/home/software/ </span><br><span class="line">scp -r zookeeper-3.4.7/ root@qianfeng02:/home/software/</span><br></pre></td></tr></table></figure>
+
+<p>方便为下面的完全分布式安装做准备。</p>
+<hr>
+<h3 id="二、完全分布式"><a href="#二、完全分布式" class="headerlink" title="二、完全分布式"></a>二、完全分布式</h3><p><strong>三节点需要联动</strong>进行下面的操作，使用MobaXterm工具。</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032032644.png" alt="img-202306032032644.png" style="zoom:80%;" />
+
+<h4 id="1-关闭防火墙-1"><a href="#1-关闭防火墙-1" class="headerlink" title="1.关闭防火墙"></a>1.关闭防火墙</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld # 临时关闭</span><br><span class="line">sudo systemctl disable firewalld # 永久关闭</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-解压Zookeeper的安装包进入conf目录"><a href="#2-解压Zookeeper的安装包进入conf目录" class="headerlink" title="2.解压Zookeeper的安装包进入conf目录"></a>2.解压Zookeeper的安装包进入conf目录</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /home/software/zookeeper-3.4.7/conf/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-将模板文件复制一份并且重命名"><a href="#3-将模板文件复制一份并且重命名" class="headerlink" title="3.将模板文件复制一份并且重命名"></a>3.将模板文件复制一份并且重命名</h4><p><code>cp zoo_sample.cfg zoo.cfg</code></p>
+<hr>
+<h4 id="4-编辑文件将dataDir属性进行配置-1"><a href="#4-编辑文件将dataDir属性进行配置-1" class="headerlink" title="4.编辑文件将dataDir属性进行配置"></a>4.编辑文件将dataDir属性进行配置</h4><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032035607.png" alt="img-202306032035607" style="zoom: 50%;" />
+
+<p><code>vim zoo.cfg</code></p>
+<p>添加以下配置信息后，保存并退出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/home/software/zookeeper-3.4.7/tmp</span><br><span class="line">server.1=xx.xx.xx.xx:2888:3888</span><br><span class="line">server.2=xx.xx.xx.xx:2888:3888</span><br><span class="line">server.3=xx.xx.xx.xx:2888:3888</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-进入tmp目录编辑myid文件"><a href="#5-进入tmp目录编辑myid文件" class="headerlink" title="5.进入tmp目录编辑myid文件"></a>5.进入tmp目录编辑myid文件</h4><p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032039453.png" alt="image-20230603203951597"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/software/zookeeper-3.4.7/tmp/</span><br><span class="line">rm -rf vesion-2/ # 删除version-2文件，保证tmp文件夹为空</span><br></pre></td></tr></table></figure>
+
+<p><code>vim myid</code> 然后编辑myid文件</p>
+<p>在文件中添加当前节点的编号，三个节点需要同时操作</p>
+<p>编号对应的就是server后面的数字,三个节点分别改为1，2，3（与各自节点IP要对应）</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032043460.png" alt="img-202306032043460" style="zoom: 50%;" />
+
+<hr>
+<h4 id="6-三个节点都需要进入bin目录，启动Zookeeper"><a href="#6-三个节点都需要进入bin目录，启动Zookeeper" class="headerlink" title="6.三个节点都需要进入bin目录，启动Zookeeper"></a>6.三个节点都需要进入bin目录，启动Zookeeper</h4><p><code>sh zkServer.sh start</code></p>
+<hr>
+<h4 id="7-三个节点都需要查询状态"><a href="#7-三个节点都需要查询状态" class="headerlink" title="7.三个节点都需要查询状态"></a>7.三个节点都需要查询状态</h4><p><code>sh zkServer.sh status</code></p>
+<p><strong>若出现2个follower和1个leader说明完全分布式启动成功</strong>。</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306031302630.png" alt="image-20230603130214328"></p>
+<hr>
+<h4 id="8-Zookeeper集群启动及格式化"><a href="#8-Zookeeper集群启动及格式化" class="headerlink" title="8.Zookeeper集群启动及格式化"></a>8.Zookeeper集群启动及格式化</h4><p><code>cd /home/software/zookeeper-3.4.7/bin</code></p>
+<p><strong>(1).在第一个节点上，格式化Zookeeper</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs zkfc -formatZK</span><br></pre></td></tr></table></figure>
+
+<p>执行后出现成功创建，说明格式化成功。</p>
+<p><strong>如果没有，噩梦开始。</strong></p>
+<p>你需要检查你的Hadoop和Zookeeper配置信息是否有误。</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306031310187.png" alt="image-20230603131003772"></p>
+<hr>
+<p><strong>(2).接着在三个节点上启动JournalNode</strong></p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032047071.png" alt="image-20230603204715878"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop-daemen.sh start journalnode</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>(3).第一个节点上，格式化NameNode</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+
+<p>若出现以下提示，说明NameNode格式化成功。</p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032052361.png" alt="image-20230603205221035"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23/06/01 11:22:00 INFO common.Storage: Storage directory /home/software/hadoop-2.7.6/tmp/hdfs/name has been successfully formatted.</span><br></pre></td></tr></table></figure>
+
+<p>如果不能格式化成功，可以参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/c-w20140301/p/10469315.html">解决namenode格式化时报错</a>。</p>
+<hr>
+<p><strong>(4).在第一个节点上启动NameNode</strong></p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032055407.png" alt="img-202306032055407"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop-daemen.sh start namenode</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>(5).第二个节点上进行格式化</strong></p>
+<p><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306032055926.png" alt="img-202306032055926"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -bootstrapStandby</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看是否出现下面的提示信息</span></span><br><span class="line">23/06/01 11:34:37 INFO common.Storage: Storage directory /home/software/hadoop-2.7.6/tmp/hdfs/name has been successfully formatted.</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>(6).在三个节点上同时执行以下命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop-deamen.sh start namenode # 启动NameNode</span><br><span class="line">hadoop-deamen.sh start datanode # 启动DataNode</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>(7).在第一、三节点上分别执行以下命令</strong></p>
+<p>在第三个节点，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-yearn.sh</span><br></pre></td></tr></table></figure>
+
+<p>在第一个节点，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn-dameon.sh start resourcemanager</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>(8).检查三个节点的进程数量</strong></p>
+<p>在三个节点都输入<code>jps</code></p>
+<p><strong>查看进程数量，正确应该是8，7，6</strong></p>
+<p>到此，完全分布式的Zookeeper安装完毕~~</p>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/dd24.html">https://ariesfun.gitee.io/posts/dd24.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="post-meta__tags" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/">大数据框架</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/34c8.html"><img class="prev-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">23生产实习 Day04(06/01) HDFS的API及字符统计案例 (CharCount)</div></div></a></div><div class="next-post pull-right"><a href="/posts/3d5e.html"><img class="next-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">23生产实习 Day02(05/30) Hadoop核心技术</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/5544.html" title="23生产实习 大数据开发实训笔记合集 更新中..."><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 大数据开发实训笔记合集 更新中...</div></div></a></div><div><a href="/posts/34c8.html" title="23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)</div></div></a></div><div><a href="/posts/3d5e.html" title="23生产实习 Day02(05&#x2F;30) Hadoop核心技术"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day02(05&#x2F;30) Hadoop核心技术</div></div></a></div><div><a href="/posts/a63b.html" title="23生产实习 Day01(05&#x2F;29) Hadoop运行环境搭建及配置"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day01(05&#x2F;29) Hadoop运行环境搭建及配置</div></div></a></div><div><a href="/posts/4f1a.html" title="数据挖掘与机器学习 线性回归设计 实训1"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202304301552690.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据挖掘与机器学习 线性回归设计 实训1</div></div></a></div><div><a href="/posts/1908.html" title="数据分析与可视化 上机实践4（Matplotlib 数据可视化）"><img class="cover" src="https://matplotlib.org/stable/_static/images/logo2.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-30</div><div class="title">数据分析与可视化 上机实践4（Matplotlib 数据可视化）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:ariesfun2019@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一些资源共享: (仅限校友内网访问)
+http://10.200.21.35:8100/s/WJhg
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Day03-05-31-Zookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-text">Day03(05&#x2F;31) Zookeeper的安装方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">一、单机模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">1.关闭防火墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%A7%A3%E5%8E%8BZookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%E5%B9%B6%E8%BF%9B%E5%85%A5conf%E7%9B%AE%E5%BD%95"><span class="toc-text">2.解压Zookeeper的安装包并进入conf目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B0%86%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%B9%B6%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-text">3.将模板文件复制并重命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6%E5%B0%86dataDir%E5%B1%9E%E6%80%A7%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="toc-text">4.编辑文件将dataDir属性进行配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%BF%9B%E5%85%A5bin%E7%9B%AE%E5%BD%95%E5%B9%B6%E5%90%AF%E5%8A%A8Zookeeper"><span class="toc-text">5.进入bin目录并启动Zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%88%90%E5%8A%9F%E5%90%AF%E5%8A%A8%E5%90%8E%EF%BC%8C%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="toc-text">6.成功启动后，查看运行状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E8%BF%9C%E7%A8%8B%E6%8B%B7%E8%B4%9DZookeeper%E6%96%87%E4%BB%B6%E7%BB%99%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9"><span class="toc-text">7.远程拷贝Zookeeper文件给其他节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%8C%E5%85%A8%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-text">二、完全分布式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99-1"><span class="toc-text">1.关闭防火墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%A7%A3%E5%8E%8BZookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%E8%BF%9B%E5%85%A5conf%E7%9B%AE%E5%BD%95"><span class="toc-text">2.解压Zookeeper的安装包进入conf目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B0%86%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E4%B8%80%E4%BB%BD%E5%B9%B6%E4%B8%94%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-text">3.将模板文件复制一份并且重命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6%E5%B0%86dataDir%E5%B1%9E%E6%80%A7%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE-1"><span class="toc-text">4.编辑文件将dataDir属性进行配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%BF%9B%E5%85%A5tmp%E7%9B%AE%E5%BD%95%E7%BC%96%E8%BE%91myid%E6%96%87%E4%BB%B6"><span class="toc-text">5.进入tmp目录编辑myid文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E4%B8%89%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E9%9C%80%E8%A6%81%E8%BF%9B%E5%85%A5bin%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%90%AF%E5%8A%A8Zookeeper"><span class="toc-text">6.三个节点都需要进入bin目录，启动Zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E4%B8%89%E4%B8%AA%E8%8A%82%E7%82%B9%E9%83%BD%E9%9C%80%E8%A6%81%E6%9F%A5%E8%AF%A2%E7%8A%B6%E6%80%81"><span class="toc-text">7.三个节点都需要查询状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Zookeeper%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8%E5%8F%8A%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-text">8.Zookeeper集群启动及格式化</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/5544.html" title="23生产实习 大数据开发实训笔记合集 更新中..."><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="23生产实习 大数据开发实训笔记合集 更新中..."/></a><div class="content"><a class="title" href="/posts/5544.html" title="23生产实习 大数据开发实训笔记合集 更新中...">23生产实习 大数据开发实训笔记合集 更新中...</a><time datetime="2023-06-03T17:11:50.065Z" title="发表于 2023-06-04 01:11:50">2023-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/34c8.html" title="23生产实习 Day04(06/01) HDFS的API及字符统计案例 (CharCount)"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="23生产实习 Day04(06/01) HDFS的API及字符统计案例 (CharCount)"/></a><div class="content"><a class="title" href="/posts/34c8.html" title="23生产实习 Day04(06/01) HDFS的API及字符统计案例 (CharCount)">23生产实习 Day04(06/01) HDFS的API及字符统计案例 (CharCount)</a><time datetime="2023-06-03T17:11:46.692Z" title="发表于 2023-06-04 01:11:46">2023-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/dd24.html" title="23生产实习 Day03(05/31) Zookeeper的安装方式"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="23生产实习 Day03(05/31) Zookeeper的安装方式"/></a><div class="content"><a class="title" href="/posts/dd24.html" title="23生产实习 Day03(05/31) Zookeeper的安装方式">23生产实习 Day03(05/31) Zookeeper的安装方式</a><time datetime="2023-06-03T17:11:42.895Z" title="发表于 2023-06-04 01:11:42">2023-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3d5e.html" title="23生产实习 Day02(05/30) Hadoop核心技术"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="23生产实习 Day02(05/30) Hadoop核心技术"/></a><div class="content"><a class="title" href="/posts/3d5e.html" title="23生产实习 Day02(05/30) Hadoop核心技术">23生产实习 Day02(05/30) Hadoop核心技术</a><time datetime="2023-06-03T17:11:39.424Z" title="发表于 2023-06-04 01:11:39">2023-06-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a63b.html" title="23生产实习 Day01(05/29) Hadoop运行环境搭建及配置"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="23生产实习 Day01(05/29) Hadoop运行环境搭建及配置"/></a><div class="content"><a class="title" href="/posts/a63b.html" title="23生产实习 Day01(05/29) Hadoop运行环境搭建及配置">23生产实习 Day01(05/29) Hadoop运行环境搭建及配置</a><time datetime="2023-06-03T17:11:35.942Z" title="发表于 2023-06-04 01:11:35">2023-06-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
