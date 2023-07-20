@@ -123,9 +123,9 @@
     <link href="https://ariesfun.gitee.io/posts/5544.html"/>
     <id>https://ariesfun.gitee.io/posts/5544.html</id>
     <published>2023-06-03T17:11:50.065Z</published>
-    <updated>2023-06-04T03:20:07.549Z</updated>
+    <updated>2023-07-20T18:03:23.862Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="23生产实习-大数据开发实训笔记合集-更新中…"><a href="#23生产实习-大数据开发实训笔记合集-更新中…" class="headerlink" title="23生产实习 大数据开发实训笔记合集 更新中…"></a>23生产实习 大数据开发实训笔记合集 更新中…</h2><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>感谢学校为本专业开展了线下的实训机会，千锋教育的倪讲师也是保姆级别的哈哈，且行且珍惜。</p><p>老师会从环境搭建，到上手完成一个简单的基于亚马逊平台的推荐系统。</p><p>用到的开发框架涉及，Hadoop、Zookeeper、Flume、Kafka、Scala、HBase、Spark、Hive等。</p><p><a href="http://10.200.21.35:8100/s/WJhg">用到的软件资源</a>，注意本实训用到的软件资源文件只对校友开放，如有需要可以联系作者。</p><p><strong>特别鸣谢：</strong>提供上课笔记的<strong>小李同学(LHW)，小王同学(WQK)</strong> 。Respect！！</p><p><strong>笔记正在更新中，如有内容遗漏或错误欢迎随时指正，可在评论区互动交流~</strong></p><hr><h3 id="笔记合集"><a href="#笔记合集" class="headerlink" title="笔记合集"></a>笔记合集</h3><p>点击链接，即可跳转到对应文章</p><p><a href="https://ariesfun.gitee.io/posts/a63b.html">Day01(0529) Hadoop运行环境搭建及配置</a></p><p><a href="https://ariesfun.gitee.io/posts/3d5e.html">Day02(0530) Hadoop核心技术</a></p><p><a href="https://ariesfun.gitee.io/posts/dd24.html">Day03(0531) Zookeeper的安装方式</a></p><p><a href="https://ariesfun.gitee.io/posts/34c8.html">Day04(0601) HDFS的API及字符统计案例 (CharCount)</a></p><p>未完待续。。。</p><hr><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>笔记整理于千锋教育课堂讲义和代码，部分同学笔记及自己的小总结。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="23生产实习-大数据开发实训笔记合集-更新中…"><a href="#23生产实习-大数据开发实训笔记合集-更新中…" class="headerlink" title="23生产实习 大数据开发实训笔记合集 更新中…"></a>23生产实习 大数据开发实训笔记合集 更新中…</h2><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>感谢学校为本专业开展了线下的实训机会，千锋教育的倪讲师也是保姆级别的哈哈，且行且珍惜。</p><p>老师会从环境搭建，到上手完成一个简单的基于亚马逊平台的推荐系统。</p><p>用到的开发框架涉及，Hadoop、Zookeeper、Flume、Kafka、Scala、HBase、Spark、Hive等。</p><p><a href="http://10.200.21.35:8100/s/WJhg">用到的软件资源</a>，注意本实训用到的软件资源文件只对校友开放，如有需要可以联系作者。</p><p><strong>特别鸣谢：</strong>提供上课笔记的<strong>小李同学(LHW)，小王同学(WQK)</strong> 。Respect！！</p><p><strong>笔记正在更新中，如有内容遗漏或错误欢迎随时指正，可在评论区互动交流~</strong></p><hr><h3 id="笔记合集"><a href="#笔记合集" class="headerlink" title="笔记合集"></a>笔记合集</h3><p>点击链接，即可跳转到对应文章</p><p><a href="https://ariesfun.gitee.io/posts/a63b.html">Day01(0529) Hadoop运行环境搭建及配置</a></p><p><a href="https://ariesfun.gitee.io/posts/3d5e.html">Day02(0530) Hadoop核心技术</a></p><p><a href="https://ariesfun.gitee.io/posts/dd24.html">Day03(0531) Zookeeper的安装方式</a></p><p><a href="https://ariesfun.gitee.io/posts/34c8.html">Day04(0601) HDFS的API及字符统计案例 (CharCount)</a></p><p>未完待续。。。</p><p>笔记基本整理完毕，后续考虑会完善放出来…</p><hr><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>笔记整理于千锋教育课堂讲义和代码，部分同学笔记及自己的小总结。</p>]]></content>
     
     
       
@@ -405,9 +405,9 @@
     
     <category term="学习记录" scheme="https://ariesfun.gitee.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
-    
     <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
+    
+    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
     
   </entry>
   
@@ -433,9 +433,9 @@
     
     <category term="学习记录" scheme="https://ariesfun.gitee.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
-    
     <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
+    
+    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
     
   </entry>
   
@@ -461,9 +461,9 @@
     
     <category term="学习记录" scheme="https://ariesfun.gitee.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
-    
     <category term="NumPy" scheme="https://ariesfun.gitee.io/tags/NumPy/"/>
+    
+    <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
     
   </entry>
   
@@ -489,9 +489,9 @@
     
     <category term="学习记录" scheme="https://ariesfun.gitee.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
-    
     <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
+    
+    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
     
   </entry>
   
@@ -517,9 +517,9 @@
     
     <category term="学习记录" scheme="https://ariesfun.gitee.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
-    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
-    
     <category term="Python" scheme="https://ariesfun.gitee.io/tags/Python/"/>
+    
+    <category term="Pandas" scheme="https://ariesfun.gitee.io/tags/Pandas/"/>
     
   </entry>
   
