@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C/C++ 内存四区总结 | AriesfunのBlog</title><meta name="keywords" content="学习记录,C/C++"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C&#x2F;C++ 内存四区总结目录[TOC]  0.简单概述C&#x2F;C++程序在执行时，将内存大方向划分为4个区域（内存四区）来存放所有数据。   程序运行前产生  代码区：存放函数体的二进制代码，由操作系统进行管理的  全局区：存放全局变量、静态变量以及常量    程序运行后产生  栈区：由编译器自动分配释放, 存放函数的参数值、局部变量等  堆区：**由程序员分配和释放,**若程序员不释放,程序结束时由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++ 内存四区总结">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/6d6b.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="C&#x2F;C++ 内存四区总结目录[TOC]  0.简单概述C&#x2F;C++程序在执行时，将内存大方向划分为4个区域（内存四区）来存放所有数据。   程序运行前产生  代码区：存放函数体的二进制代码，由操作系统进行管理的  全局区：存放全局变量、静态变量以及常量    程序运行后产生  栈区：由编译器自动分配释放, 存放函数的参数值、局部变量等  堆区：**由程序员分配和释放,**若程序员不释放,程序结束时由">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg">
+<meta property="article:published_time" content="2023-08-08T16:29:53.008Z">
+<meta property="article:modified_time" content="2023-08-08T16:28:21.798Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/6d6b"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C/C++ 内存四区总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-09 00:28:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C/C++ 内存四区总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-08T16:29:53.008Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-08T16:28:21.798Z" title="更新于 2023-08-09 00:28:21">2023-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">CPP学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C/C++ 内存四区总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="C-C-内存四区总结"><a href="#C-C-内存四区总结" class="headerlink" title="C/C++ 内存四区总结"></a>C/C++ 内存四区总结</h2><h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>[TOC]</p>
+<hr>
+<h3 id="0-简单概述"><a href="#0-简单概述" class="headerlink" title="0.简单概述"></a>0.简单概述</h3><p>C/C++程序在执行时，将内存大方向划分为<strong>4个区域</strong>（内存四区）来存放所有数据。</p>
+<blockquote>
+<p> 程序运行前产生</p>
+<ul>
+<li><p><strong>代码区</strong>：存放函数体的二进制代码，由操作系统进行管理的</p>
+</li>
+<li><p><strong>全局区</strong>：存放全局变量、静态变量以及常量</p>
+</li>
+</ul>
+<p> 程序运行后产生</p>
+<ul>
+<li><p><strong>栈区</strong>：<strong>由编译器自动分配释放</strong>, 存放函数的参数值、局部变量等</p>
+</li>
+<li><p><strong>堆区</strong>：**由程序员分配和释放,**若程序员不释放,程序结束时由操作系统回收</p>
+</li>
+</ul>
+<p> <strong>内存四区意义：</strong><u>不同区域存放的数据，赋予不同的生命周期, 给我们更大的灵活编程。</u></p>
+</blockquote>
+<p>按是否在全局区来划分变量和常量：</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/image-20230805161358288.png" alt="image-20230805161358288" style="zoom: 67%;" />
+
+<p><strong>虚拟地址空间（操作系统的视角）</strong></p>
+<p>虚拟地址空间被分配给进程，用于存储程序代码、数据和堆栈等。</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/image-20230707120709782.png" alt="image-20230707120709782" style="zoom:50%;" />
+
+<hr>
+<p><strong>小总结：</strong></p>
+<p>(1).全局区存放哪些数据？</p>
+<p><strong>全局变量、静态变量、常量（字符串常量，const修饰的全局常量或变量）</strong></p>
+<p>(2).不在全局区中的有哪些？</p>
+<p><strong>局部变量（栈区），const修饰的局部常量或变量</strong></p>
+<p>(3).区分const修饰的局部常量或变量：</p>
+<p><code>const</code> 修饰的局部常量或变量<strong>在声明时必须初始化</strong>，并且一旦初始化后，就不能再改变它们的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">修饰常量：</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_VALUE = <span class="number">100</span>; <span class="comment">// 这里用const声明并初始化了一个常量，其值不能被修改</span></span><br><span class="line"></span><br><span class="line">修饰指针变量：</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* ptr = &amp;x; <span class="comment">// ptr是一个指向常量的指针，指针内容不可修改</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> ptr2 = &amp;y; <span class="comment">// ptr2是一个常量指针，指针本身地址不可修改</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> ptr3 = &amp;z; <span class="comment">// ptr3是一个指向常量的常量指针，指针本身及内容都不可修改</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* ptr = &amp;x; <span class="comment">// ptr 是一个指向常量的指针，指向的内容不能通过指针修改</span></span><br><span class="line">    <span class="comment">// *ptr = 10; error</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> y = <span class="number">15</span>;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> ptr2 = &amp;y; <span class="comment">// ptr2 是一个常量指针，指针本身不能被修改</span></span><br><span class="line">    *ptr2 = <span class="number">20</span>; <span class="comment">// 指向的内容可以修改，可以修改y的值</span></span><br><span class="line">    <span class="comment">// ptr2 = &amp;x; error 常量指针本身地址不能被修改</span></span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> z = <span class="number">25</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> ptr3 = &amp;z; <span class="comment">// ptr3 是一个指向常量的常量指针，既不能修改指针本身，也不能通过指针修改指向的内容</span></span><br><span class="line">    <span class="comment">// *ptr3 = 30; error</span></span><br><span class="line">    <span class="comment">// ptr3 = &amp;x; error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-程序运行前"><a href="#1-程序运行前" class="headerlink" title="1.程序运行前"></a>1.程序运行前</h3><p>在C++程序编译后，Windows环境下生成了<code>.exe</code>可执行程序，<u><strong>未执行该程序前</strong>分为两个区域：代码区和全局区。</u></p>
+<p><strong>程序运行前总结：</strong></p>
+<blockquote>
+<ul>
+<li>C++中在程序运行前分为全局区和代码区</li>
+<li>代码区特点是<strong>共享和只读</strong></li>
+<li>全局区中存放<strong>全局变量、静态变量、常量</strong></li>
+<li>常量区中存放 <strong>const修饰的全局常量 和 字符串常量</strong></li>
+</ul>
+</blockquote>
+<h4 id="01-代码区"><a href="#01-代码区" class="headerlink" title="01.代码区"></a>01.代码区</h4><p>特点：只读、共享</p>
+<p>存放 CPU 执行的机器指令（即二进制0101）</p>
+<p>代码区是<strong>只读</strong>的，使其只读的原因是防止程序意外地修改了它的指令；</p>
+<p>代码区是<strong>共享</strong>的，共享的目的是对于频繁被执行的程序，只需要在内存中有一份代码可。</p>
+<hr>
+<h4 id="02-全局区"><a href="#02-全局区" class="headerlink" title="02.全局区"></a>02.全局区</h4><p><strong>全局变量和静态变量</strong>，还包含<strong>常量区, 字符串常量和其他常量</strong>也存放在此。</p>
+<p><strong>该区域的数据在程序结束后由操作系统释放。</strong></p>
+<p><strong>代码示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局区(存放的变量): 全局变量、静态变量、常量（字符串常量，const修饰的全局常量或变量）</span></span><br><span class="line"><span class="comment">// 数据在程序结束后，由操作系统释放</span></span><br><span class="line"><span class="type">int</span> g_a = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> g_b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const修饰的全局常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> c_g_a = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> c_g_b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;在全局区中&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="comment">// 全局变量</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;全局变量g_a的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;g_a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;全局变量g_b的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;g_b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 静态变量</span></span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> s_a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> s_b = <span class="number">10</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;静态变量s_a的地址：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;s_a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;静态变量s_b的地址：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;s_b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 常量</span></span><br><span class="line">	<span class="comment">// 字符串常量(双引号引起来的) 即&quot;xxxxxxx&quot;</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;字符串常量的地址：&quot;</span> &lt;&lt; (<span class="type">int</span>)&amp;<span class="string">&quot;hhhhh&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// const修饰的全局(global)常量</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;const修饰的全局常量c_g_a的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;c_g_a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;const修饰的全局常量c_g_b的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>) &amp;c_g_b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;------------------------------------------------&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;不在全局区中&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建普通局部变量(写在函数体内)，局部变量存放在栈区</span></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;局部变量a的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>)&amp;a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;局部变量b的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>)&amp;b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// const修饰的局部(local)常量</span></span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> c_l_a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> c_l_b = <span class="number">110</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;const修饰的局部常量c_l_a的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>)&amp;c_l_a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;const修饰的局部常量c_l_b的地址为：&quot;</span> &lt;&lt; (<span class="type">int</span>)&amp;c_l_b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">在全局区中</span><br><span class="line">全局变量g_a的地址为：<span class="number">653516800</span></span><br><span class="line">全局变量g_b的地址为：<span class="number">653516804</span></span><br><span class="line">静态变量s_a的地址：<span class="number">653516808</span></span><br><span class="line">静态变量s_b的地址：<span class="number">653516812</span></span><br><span class="line">字符串常量的地址：<span class="number">653504136</span></span><br><span class="line"><span class="type">const</span>修饰的全局常量c_g_a的地址为：<span class="number">653503408</span></span><br><span class="line"><span class="type">const</span>修饰的全局常量c_g_b的地址为：<span class="number">653503412</span></span><br><span class="line">------------------------------------------------</span><br><span class="line">不在全局区中</span><br><span class="line">局部变量a的地址为：<span class="number">1060109108</span></span><br><span class="line">局部变量b的地址为：<span class="number">1060109140</span></span><br><span class="line"><span class="type">const</span>修饰的局部常量c_l_a的地址为：<span class="number">1060109172</span></span><br><span class="line"><span class="type">const</span>修饰的局部常量c_l_b的地址为：<span class="number">1060109204</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-程序运行后"><a href="#2-程序运行后" class="headerlink" title="2.程序运行后"></a>2.程序运行后</h3><p>程序运行后分为栈区和堆区。</p>
+<h4 id="01-栈区"><a href="#01-栈区" class="headerlink" title="01.栈区"></a>01.栈区</h4><p>由编译器管理开辟和释放, <strong>存放局部变量、函数的形参等。</strong></p>
+<p>注意事项：<strong>不要返回局部变量的地址或引用</strong></p>
+<p>(1).返回局部变量的地址，<code>warning: address of local variable ‘a’ returned</code></p>
+<p>当一个函数返回指向栈内存的地址时，栈上的局部变量会被释放，这意味着返回的地址将指向一个已经不再有效的内存区域。</p>
+<p>在后续使用该地址时，相当于访问已经释放的内存，可能会导致程序崩溃或产生不可预测的行为。</p>
+<p>(2).返回局部变量的引用，<code>warning: reference to local variable ‘a’ returned</code></p>
+<p>当函数执行完毕后，局部变量 <code>a</code> 将被销毁，这意味着返回的引用将成为悬挂引用 (dangling reference)。这个操作比较危险，会导致数据不可控。</p>
+<p><strong>悬挂引用是指指向已经被销毁的内存的引用。</strong></p>
+<p>当调用者试图使用这个引用时，会访问一个无效的内存位置，导致未定义的行为，很可能会导致程序崩溃或产生不可预测的结果。</p>
+<p><strong>(3).解决方案：</strong></p>
+<p>如果函数需要返回一个局部变量的值，可以通过值传递的方式返回，</p>
+<p>或者返回一个动态分配的内存对象，可以使用智能指针（如 <code>std::unique_ptr</code> 或 <code>std::shared_ptr</code>）来管理动态内存的释放。</p>
+<p><strong>代码示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 栈区：局部变量，形参</span></span><br><span class="line"><span class="comment">// 栈区注意事项，不要返回局部变量的地址</span></span><br><span class="line"><span class="comment">// 栈区的数据由编译器管理开辟和释放</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">func</span><span class="params">(<span class="type">int</span> b)</span> </span>&#123; <span class="comment">// 写法一</span></span><br><span class="line">	b = <span class="number">20</span>;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>; <span class="comment">// 栈上，局部变量存放在栈区，函数执行完后自动释放</span></span><br><span class="line">	<span class="keyword">return</span> &amp;a; <span class="comment">// 返回了局部变量的地址（不建议）</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>&amp; <span class="title">func1</span><span class="params">()</span> </span>&#123; <span class="comment">// 写法二</span></span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>; </span><br><span class="line">	<span class="keyword">return</span> a; <span class="comment">// 返回了局部变量的引用 (不建议)</span></span><br><span class="line">&#125; <span class="comment">// int &amp;temp = a;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span>* p = <span class="built_in">func</span>(<span class="number">1</span>); </span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl; <span class="comment">// 第一次，编译器做了保留，可以打印正确的值（visual studio里可以正常打印）</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl; <span class="comment">// 第二次，这个数据就不会被保留了，相当于是访问已经释放的内存，这是非法操作。</span></span><br><span class="line">    					<span class="comment">// error 程序运行发生 Segmentation fault，段错误</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;-------------&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>&amp; q = <span class="built_in">func1</span>();</span><br><span class="line">	cout &lt;&lt; q &lt;&lt; endl; <span class="comment">// error 也发生了 Segmentation fault，段错误</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改后的函数如下,</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用值传递</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    b = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> a; <span class="comment">// 返回局部变量的值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回动态分配的内存对象</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="function">std::unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">func</span><span class="params">(<span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    b = <span class="number">20</span>;</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt; ptr = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> ptr; <span class="comment">// 返回 std::unique_ptr，它会负责释放内存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="02-堆区"><a href="#02-堆区" class="headerlink" title="02.堆区"></a>02.堆区</h4><p>在C++中主要利用<code>new</code>关键字，<strong>在堆区开辟内存；</strong></p>
+<p>堆区开辟的数据，由程序员手动开辟，手动释放，**释放利用操作符<code>delete</code>**；若程序员不释放, 程序结束时则由操作系统回收。</p>
+<p>语法：<code> new 数据类型</code></p>
+<p><strong>利用new创建的数据，会返回该数据对应的类型的指针。</strong></p>
+<p><strong>小总结：</strong></p>
+<blockquote>
+<p>堆区数据由程序员管理开辟和释放</p>
+<p>堆区数据利用<code>new关键字</code>进行开辟内存</p>
+</blockquote>
+<p>指针是放在栈区（局部变量），指针存放的数据在堆区。</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/image-20230805181400667.png" alt="image-20230805181400665" style="zoom:50%;" />
+
+<p><strong>代码示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 堆区，由程序员来管理</span></span><br><span class="line"><span class="function"><span class="type">int</span>* <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 利用new关键字，可以将数据开辟到堆区</span></span><br><span class="line">	<span class="comment">// 指针是放在栈区（局部变量）,指针存放的数据在堆区</span></span><br><span class="line">    <span class="comment">// new返回的是该数据类型的指针</span></span><br><span class="line">	<span class="type">int</span>* p = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span>* x = <span class="built_in">func</span>();</span><br><span class="line">	cout &lt;&lt; *x &lt;&lt; endl; <span class="comment">// 100</span></span><br><span class="line">	cout &lt;&lt; *x &lt;&lt; endl; <span class="comment">// 100</span></span><br><span class="line">	<span class="keyword">delete</span> x; <span class="comment">// 释放堆区数据</span></span><br><span class="line">	<span class="comment">// cout &lt;&lt; *x &lt;&lt; endl; // error 释放的空间不可访问，非法访问</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 在堆区利用new开辟数组</span></span><br><span class="line">	<span class="type">int</span>* arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>]; <span class="comment">// 创建一个有10个元素的地址</span></span><br><span class="line">							<span class="comment">// 返回对应类型的指针</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		arr[i] = i + <span class="number">100</span>;</span><br><span class="line">		cout &lt;&lt; arr[i] &lt;&lt; endl; <span class="comment">// 100 ~109</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 释放数组</span></span><br><span class="line">	<span class="keyword">delete</span>[] arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//test1();</span></span><br><span class="line">	<span class="built_in">test2</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1et411b73Z/?p=84&share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 黑马程序员 C++教程 p84开始】</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/6d6b.html">https://ariesfun.gitee.io/posts/6d6b.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="post-meta__tags" href="/tags/C-C/">C/C++</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/21e5.html"><img class="prev-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 设计模式(单例+工厂)</div></div></a></div><div class="next-post pull-right"><a href="/posts/7d34.html"><img class="next-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307250329115.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LeetCode Hot100 分类刷题汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/21e5.html" title="C++ 设计模式(单例+工厂)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-09</div><div class="title">C++ 设计模式(单例+工厂)</div></div></a></div><div><a href="/posts/b9aa.html" title="机器学习与数据挖掘 刷题练习(复习版)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040216162.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">机器学习与数据挖掘 刷题练习(复习版)</div></div></a></div><div><a href="/posts/5544.html" title="23生产实习 大数据开发实训笔记合集 更新中..."><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 大数据开发实训笔记合集 更新中...</div></div></a></div><div><a href="/posts/34c8.html" title="23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)</div></div></a></div><div><a href="/posts/dd24.html" title="23生产实习 Day03(05&#x2F;31) Zookeeper的安装方式"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day03(05&#x2F;31) Zookeeper的安装方式</div></div></a></div><div><a href="/posts/3d5e.html" title="23生产实习 Day02(05&#x2F;30) Hadoop核心技术"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day02(05&#x2F;30) Hadoop核心技术</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:ariesfun2019@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一些资源共享: (仅限校友内网访问)
+http://10.200.21.35:8100/s/WJhg
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-C-%E5%86%85%E5%AD%98%E5%9B%9B%E5%8C%BA%E6%80%BB%E7%BB%93"><span class="toc-text">C&#x2F;C++ 内存四区总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E7%AE%80%E5%8D%95%E6%A6%82%E8%BF%B0"><span class="toc-text">0.简单概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%89%8D"><span class="toc-text">1.程序运行前</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-%E4%BB%A3%E7%A0%81%E5%8C%BA"><span class="toc-text">01.代码区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-%E5%85%A8%E5%B1%80%E5%8C%BA"><span class="toc-text">02.全局区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E5%90%8E"><span class="toc-text">2.程序运行后</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-%E6%A0%88%E5%8C%BA"><span class="toc-text">01.栈区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-%E5%A0%86%E5%8C%BA"><span class="toc-text">02.堆区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/21e5.html" title="C++ 设计模式(单例+工厂)"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 设计模式(单例+工厂)"/></a><div class="content"><a class="title" href="/posts/21e5.html" title="C++ 设计模式(单例+工厂)">C++ 设计模式(单例+工厂)</a><time datetime="2023-08-08T16:29:53.011Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/6d6b.html" title="C/C++ 内存四区总结"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C/C++ 内存四区总结"/></a><div class="content"><a class="title" href="/posts/6d6b.html" title="C/C++ 内存四区总结">C/C++ 内存四区总结</a><time datetime="2023-08-08T16:29:53.008Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7d34.html" title="LeetCode Hot100 分类刷题汇总"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307250329115.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode Hot100 分类刷题汇总"/></a><div class="content"><a class="title" href="/posts/7d34.html" title="LeetCode Hot100 分类刷题汇总">LeetCode Hot100 分类刷题汇总</a><time datetime="2023-07-24T19:29:53.728Z" title="发表于 2023-07-25 03:29:53">2023-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8b7.html" title="C++ 算法刷题 - 常用技巧汇总"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307210218346.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 算法刷题 - 常用技巧汇总"/></a><div class="content"><a class="title" href="/posts/8b7.html" title="C++ 算法刷题 - 常用技巧汇总">C++ 算法刷题 - 常用技巧汇总</a><time datetime="2023-07-20T17:36:58.938Z" title="发表于 2023-07-21 01:36:58">2023-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8b87.html" title="C++ 常用STL及用法 - 速查文档"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307210133034.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 常用STL及用法 - 速查文档"/></a><div class="content"><a class="title" href="/posts/8b87.html" title="C++ 常用STL及用法 - 速查文档">C++ 常用STL及用法 - 速查文档</a><time datetime="2023-07-20T17:36:58.935Z" title="发表于 2023-07-21 01:36:58">2023-07-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C++ 设计模式(单例+工厂) | AriesfunのBlog</title><meta name="keywords" content="学习记录,C/C++"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++ 设计模式(单例+工厂)0.目录[TOC]  1.单例模式推荐一个讲解单例视频，整体概述比较全面：【视频 C++单例模式：从设计到实现】 工作具体项目中的应用，可以看看这个视频，讲了单例的各种用法：【视频 C++单例模式】 下面是我自己从上面视频中的整理的一些讲解的理解和代码实现，主要是懒汉式单例模式。 (1).概念通过单例模式的方法创建的类在当前进程中有且仅有一个实例。单例模式，属于创建类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 设计模式(单例+工厂)">
+<meta property="og:url" content="https://ariesfun.gitee.io/posts/21e5.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="C++ 设计模式(单例+工厂)0.目录[TOC]  1.单例模式推荐一个讲解单例视频，整体概述比较全面：【视频 C++单例模式：从设计到实现】 工作具体项目中的应用，可以看看这个视频，讲了单例的各种用法：【视频 C++单例模式】 下面是我自己从上面视频中的整理的一些讲解的理解和代码实现，主要是懒汉式单例模式。 (1).概念通过单例模式的方法创建的类在当前进程中有且仅有一个实例。单例模式，属于创建类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png">
+<meta property="article:published_time" content="2023-08-08T16:29:53.011Z">
+<meta property="article:modified_time" content="2023-08-08T16:29:23.962Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.gitee.io/posts/21e5"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 设计模式(单例+工厂)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-09 00:29:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++ 设计模式(单例+工厂)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-08T16:29:53.011Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-08T16:29:23.962Z" title="更新于 2023-08-09 00:29:23">2023-08-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">CPP学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++ 设计模式(单例+工厂)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="C-设计模式-单例-工厂"><a href="#C-设计模式-单例-工厂" class="headerlink" title="C++ 设计模式(单例+工厂)"></a>C++ 设计模式(单例+工厂)</h2><h3 id="0-目录"><a href="#0-目录" class="headerlink" title="0.目录"></a>0.目录</h3><p>[TOC]</p>
+<hr>
+<h3 id="1-单例模式"><a href="#1-单例模式" class="headerlink" title="1.单例模式"></a>1.单例模式</h3><p>推荐一个讲解单例视频，整体概述比较全面：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11P411N7mu/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C++单例模式：从设计到实现】</a></p>
+<p>工作具体项目中的应用，可以看看这个视频，讲了单例的各种用法：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1U34y1t7Qb/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C++单例模式】</a></p>
+<p>下面是我自己从上面视频中的整理的一些讲解的理解和代码实现，主要是懒汉式单例模式。</p>
+<h4 id="1-概念"><a href="#1-概念" class="headerlink" title="(1).概念"></a>(1).概念</h4><p>通过单例模式的方法创建的<strong>类在当前进程中有且仅有一个实例</strong>。单例模式，属于创建类型的一种常用的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/2117635?fromModule=lemma_inlink">软件设计模式</a>。</p>
+<blockquote>
+<p>具体细分：</p>
+<ul>
+<li><p>懒汉式单例，会提供一个创建对象的方法（需要使用时创建）</p>
+</li>
+<li><p>饿汉式单例，在类加载的时候就创建对象（程序运行时创建，比较着急）</p>
+</li>
+</ul>
+<p>共同点：</p>
+<p>01.要声明一个静态的类引用变量</p>
+<p>02.类的构造函数要私有</p>
+<p>03.提供一个公有的创建对象的方法，能够全局访问</p>
+<p>区别：</p>
+<p><strong>懒汉式单例是在方法调用时创建对象，而饿汉式是在类加载是创建对象；</strong></p>
+<p>多线程情况下，懒汉式单例存在线程安全问题，饿汉式不存在线程安全问题。</p>
+</blockquote>
+<hr>
+<h4 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="(2).应用场景"></a>(2).应用场景</h4><p><strong>对程序运行期间对全局唯一资源的统一访问。</strong></p>
+<p>比如，配置管理、日志记录、线程池、连接池、内存池、对象池、消息队列等。</p>
+<p>自己最近学习的tcp服务端，就用到了<strong>单例模式(懒汉式)<strong>，这种写法是使用</strong>局部静态变量方式</strong>(与进程生命周期同步)；</p>
+<p>可以避免进行释放内存操作，这种单例模式的写法比较推荐；</p>
+<p>这是因为静态局部变量在<strong>C++11标准</strong>之后的编译器实现中会进行线程安全的初始化，<strong>保证局部变量初始化严格发生一次。</strong></p>
+<p>在初始化过程中，编译器会确保<strong>只有一个线程能够执行该静态局部变量的初始化代码</strong>，从而避免了多线程竞争的问题。</p>
+<p>具体的说明，可以看这篇文档，<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/storage_duration#.E9.9D.99.E6.80.81.E5.B1.80.E9.83.A8.E5.8F.98.E9.87.8F">【文档 静态局部变量】</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过静态成员变量实现单例</span></span><br><span class="line"><span class="comment">//懒汉式 （多数情况下，这种单例模式是安全的）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton &amp;<span class="keyword">operator</span>=(<span class="type">const</span> Singleton &amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton &amp;<span class="title">GetInst</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">static</span> Singleton single;</span><br><span class="line">        <span class="keyword">return</span> single;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>具体项目中应用的例子，</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/image-20230807084123870.png" alt="image-20230807084123870" style="zoom:50%;" />
+
+<hr>
+<h4 id="3-实现单例模式-懒汉式较常用"><a href="#3-实现单例模式-懒汉式较常用" class="headerlink" title="(3).实现单例模式(懒汉式较常用)"></a>(3).实现单例模式(懒汉式较常用)</h4><p>在大的实际项目中可能有多个类用到了单例，不可能把他们单独放在一起集中来初始化，所以多用懒汉式单例，具体使用时来创建单例。</p>
+<blockquote>
+<ul>
+<li><p>实现步骤 </p>
+<ul>
+<li>step1.将类的构造方法定义为私有。</li>
+<li>step2.定义一个私有类的静态实例。</li>
+<li>step3.提供一个公有的获取实例的静态方法。</li>
+</ul>
+</li>
+<li><p>涉及的知识点</p>
+<p>static静态成员变量，fiend友元类，template模板类</p>
+</li>
+</ul>
+</blockquote>
+<h5 id="3-1-单例模式实现-懒汉-饿汉"><a href="#3-1-单例模式实现-懒汉-饿汉" class="headerlink" title="(3-1).单例模式实现(懒汉+饿汉)"></a>(3-1).单例模式实现(懒汉+饿汉)</h5><p><strong>懒汉式单例，比较常用</strong></p>
+<p><strong>代码实现：</strong><code>a.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: <span class="comment">// step1.让类的构造函数私有(或受保护)</span></span><br><span class="line">    <span class="built_in">A</span>() : <span class="built_in">m_name</span>(<span class="string">&quot;A&quot;</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">const</span> A &amp;other) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">    A&amp; <span class="keyword">operator</span> = (<span class="type">const</span> A &amp;other);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: <span class="comment">// step2.定义一个私有静态类的实例</span></span><br><span class="line">    <span class="type">static</span> A* m_instance;</span><br><span class="line">    std::string m_name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">// step3.提供公有的获取实例的静态方法</span></span><br><span class="line">    <span class="function"><span class="type">static</span> A* <span class="title">instance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_instance == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            m_instance = <span class="keyword">new</span> <span class="built_in">A</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> m_instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;m_name: &quot;</span> &lt;&lt; m_name &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A* A::m_instance = <span class="literal">nullptr</span>; <span class="comment">// 静态变量初始化</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>主程序，</strong><code>main.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="comment">// #include &quot;b.h&quot; // 可仿照&quot;a.h&quot;可以写一个B类来实现单例模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">单例模式：保证全局有且仅有一个实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 编写两个头文件让A类，B类都实现单例</span></span><br><span class="line">    A* a1 = A::<span class="built_in">instance</span>();</span><br><span class="line">    a1-&gt;<span class="built_in">show</span>();</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a1: &quot;</span> &lt;&lt; a1 &lt;&lt; endl;  </span><br><span class="line">    <span class="keyword">auto</span> a2 = A::<span class="built_in">instance</span>();</span><br><span class="line">    a2-&gt;<span class="built_in">show</span>();</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a2: &quot;</span> &lt;&lt; a2 &lt;&lt; endl; <span class="comment">// a1,a2都指向同一地址（表示是同一实例）</span></span><br><span class="line">    </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码运行结果，</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">m_name: A</span><br><span class="line">a1: 0x55b10376d270</span><br><span class="line">m_name: A</span><br><span class="line">a2: 0x55b10376d270</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>饿汉式单例(不常用)，是线程安全的</strong></p>
+<p><strong>代码实现：</strong><code>Singleton.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;&#125; <span class="comment">// step1.将类的构造方法定义为私有。</span></span><br><span class="line">    <span class="comment">// 定义一个私有类的静态实例。(饿汉式单例类的实例会在类被加载时就创建好,多线程下是安全的)</span></span><br><span class="line">    <span class="type">static</span> Singleton* instance;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getSingleton</span><span class="params">()</span> </span>&#123; <span class="comment">// 提供一个公有的获取实例的静态方法。</span></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::instance = <span class="keyword">new</span> <span class="built_in">Singleton</span>(); <span class="comment">// 在类外部进行初始化,确保了实例只会在程序启动时被创建一次</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>具体使用，</strong><code>main.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Singleton.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 单例模式测试</span></span><br><span class="line">    Singleton* a1 = Singleton::<span class="built_in">getSingleton</span>();</span><br><span class="line">    Singleton* a2 = Singleton::<span class="built_in">getSingleton</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;a1&#x27;s addr: &quot;</span> &lt;&lt; a1 &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;a2&#x27;s addr: &quot;</span> &lt;&lt; a2 &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果如下，</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a1<span class="number">&#x27;</span>s addr: <span class="number">0x6c1780</span></span><br><span class="line">a2<span class="number">&#x27;</span>s addr: <span class="number">0x6c1780</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h5 id="3-2-用类模板优化写法-懒汉式"><a href="#3-2-用类模板优化写法-懒汉式" class="headerlink" title="(3-2).用类模板优化写法(懒汉式)"></a>(3-2).用类模板优化写法(懒汉式)</h5><p>定义一个类模板，<code>singleton.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">namespace</span> ariesfun &#123;</span><br><span class="line"><span class="keyword">namespace</span> utility &#123;</span><br><span class="line">	<span class="comment">// 使用模板类来实现单例模式</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>: <span class="comment">// 提供公有访问实例的方法</span></span><br><span class="line">        <span class="function"><span class="type">static</span> T* <span class="title">instance</span><span class="params">()</span> <span class="comment">// 多线程环境下，可能会出安全问题</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(m_instance == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                m_instance = <span class="keyword">new</span> <span class="built_in">T</span>(); <span class="comment">// 这里要访问对应私有类的构造函数，需要将当前类在类A中声明为友元类</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> m_instance; <span class="comment">// 返回全局实例的指针</span></span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="built_in">Singleton</span>() &#123;&#125;</span><br><span class="line">        <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&lt;T&gt; &amp;another);</span><br><span class="line">        ~<span class="built_in">Singleton</span>() &#123;&#125;</span><br><span class="line">        Singleton&lt;T&gt;&amp; <span class="keyword">operator</span> = (<span class="type">const</span> Singleton&lt;T&gt; &amp;another);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="type">static</span> T* m_instance;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意模板类的static成员要放在.h文件里初始化</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    T* Singleton&lt;T&gt;::m_instance = <span class="literal">nullptr</span>; <span class="comment">// 模板类的静态成员初始化</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>改写</strong><code>a.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;singleton.h&quot;</span> <span class="comment">// 引入头文件和对应作用域</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> ariesfun::utility;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: <span class="comment">// step1.让类的构造函数私有(或受保护)</span></span><br><span class="line">    <span class="built_in">A</span>() : <span class="built_in">m_name</span>(<span class="string">&quot;A&quot;</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">const</span> A &amp;other) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">A</span>() &#123;&#125;</span><br><span class="line">    A&amp; <span class="keyword">operator</span> = (<span class="type">const</span> A &amp;other);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>: <span class="comment">// step2.定义一个私有静态类的实例</span></span><br><span class="line">    <span class="comment">// static A* m_instance; （在类模板中已经实现）</span></span><br><span class="line">    std::string m_name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">// step3.提供公有的获取实例的静态方法</span></span><br><span class="line">    <span class="comment">// static A* instance() &#123;...&#125; （在类模板中已经实现）</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	std::cout &lt;&lt; <span class="string">&quot;m_name: &quot;</span> &lt;&lt; m_name &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Singleton</span>&lt;A&gt;; <span class="comment">// 让Singleton能访问A的私有成员</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// A* A::m_instance = nullptr; // 静态变量初始化</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>新的</strong><code>main.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="comment">// #include &quot;b.h&quot;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;singleton.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> ariesfun::utility;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">    <span class="comment">// 编写类模板实现单例</span></span><br><span class="line">    <span class="keyword">auto</span> sa1 = Singleton&lt;A&gt;::<span class="built_in">instance</span>();</span><br><span class="line">    sa1-&gt;<span class="built_in">show</span>();</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;sa1: &quot;</span> &lt;&lt; sa1 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> sa2 = Singleton&lt;A&gt;::<span class="built_in">instance</span>();</span><br><span class="line">    sa2-&gt;<span class="built_in">show</span>();</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;sa2: &quot;</span> &lt;&lt; sa2 &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码运行结果，</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">m_name: A</span><br><span class="line">sa1: <span class="number">0x5568f0b07270</span></span><br><span class="line">m_name: A</span><br><span class="line">sa2: <span class="number">0x5568f0b07270</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="3-3-其他拓展"><a href="#3-3-其他拓展" class="headerlink" title="(3-3).其他拓展"></a>(3-3).其他拓展</h5><p>你可能见到过有些官方源码还有其他人，写法是宏定义或者在使用默认构造、拷贝、赋值后，加上了一些关键字(defalut,delete)，这是一种优化的写法。</p>
+<p>比如，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SINGLETON(classname)                                    \</span></span><br><span class="line"><span class="meta">    friend class Singleton<span class="string">&lt;classname&gt;</span>;                          \</span></span><br><span class="line"><span class="meta">    private:                                                    \</span></span><br><span class="line"><span class="meta">        classname() = default;                                  \ <span class="comment">// 使用默认构造</span></span></span><br><span class="line">        <span class="built_in">classname</span>(<span class="type">const</span> classname &amp;) = <span class="keyword">delete</span>;                  \ <span class="comment">// 禁用拷贝构造</span></span><br><span class="line">        classname &amp; <span class="keyword">operator</span> = (<span class="type">const</span> classname &amp;) = <span class="keyword">delete</span>;    \ <span class="comment">// 禁用赋值操作符</span></span><br><span class="line">        ~<span class="built_in">classname</span>() = <span class="keyword">default</span>									  <span class="comment">// 使用默认析构</span></span><br></pre></td></tr></table></figure>
+
+<p>(1).<code>private:</code>: 这是一个访问权限标识符，表示以下成员都将是私有的，只能在类的内部访问。</p>
+<p>(2).<code>classname() = default;</code>: 表示使用编译器生成默认的构造函数实现。在单例模式中，通常会将构造函数设为私有，以防止从外部直接创建类的实例。</p>
+<p>(3).<code>classname(const classname &amp;) = delete;</code>: 使用 <code>= delete</code> 表示禁用拷贝构造函数。这样做是为了防止通过拷贝构造函数创建多个实例，从而维护单例的唯一性。</p>
+<p>(4).<code>classname &amp; operator=(const classname &amp;) = delete;</code>: 使用 <code>= delete</code> 表示禁用赋值操作符。这也是为了避免通过赋值操作创建多个实例。</p>
+<p>(5).<code>~classname() = default;</code>: 使用 <code>= default</code> 表示使用编译器生成默认的析构函数实现。在单例模式中，通常不需要特殊的析构函数逻辑。</p>
+<p>这段代码的目的是创建一个单例模式的类，其中通过私有化构造函数、拷贝构造函数和赋值操作符，以及声明友元类，来确保只有 <code>Singleton</code> 类能够创建和管理<code>classname</code> 类的唯一实例。</p>
+<p>使用 <code>= default</code> 和 <code>= delete</code> 是一种简洁的方式来指定默认的函数实现或禁用特定的函数。</p>
+<hr>
+<h4 id="4-考虑多线程下的安全问题-懒汉式"><a href="#4-考虑多线程下的安全问题-懒汉式" class="headerlink" title="(4).考虑多线程下的安全问题(懒汉式)"></a>(4).考虑多线程下的安全问题(懒汉式)</h4><p><strong>最佳解决是直接规避掉这个问题，而不是找方法去解决这个问题(加锁等)。 乱码哥牛啊，哈哈</strong></p>
+<p>其他加锁的方法，实际有需求或遇到线程安全问题，可以参考一下这篇博客介绍的解决方案：<a target="_blank" rel="noopener" href="https://llfc.club/category?catid=225RaiVNI8pFDD5L4m807g7ZwmF#!aid/2MANJ6kCMuMtkgLbxigwVHmKC55">【<strong>文档 再谈单例模式</strong>】</a></p>
+<p>乱码哥建议，可在main函数中这样使用，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决多线程下的安全问题,可以使用如下的方案(来规避安全问题)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主线程中 (创建实例)</span></span><br><span class="line">Singleton&lt;A&gt;::<span class="built_in">instance</span>();</span><br><span class="line">Singleton&lt;B&gt;::<span class="built_in">instance</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子线程中 (使用)</span></span><br><span class="line">Singleton&lt;A&gt;::<span class="built_in">instance</span>()-&gt;<span class="built_in">show</span>();</span><br><span class="line">Singleton&lt;B&gt;::<span class="built_in">instance</span>()-&gt;<span class="built_in">show</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-工厂模式"><a href="#2-工厂模式" class="headerlink" title="2.工厂模式"></a>2.工厂模式</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="(1).概念"></a>(1).概念</h4><p><strong>工厂模式：原来是要自己创建对象，现在是不需要自己创建对象，而是创建这个对象的工厂。</strong></p>
+<p><strong>工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F?fromModule=lemma_search-box">百度百科-工厂模式</a>就相当于创建实例对象的new，我们经常要根据类<code>class</code>生成实例对象，</p>
+<p>如<code>A a=new A();</code>工厂模式也是用来创建实例对象的，所以以后new时就要多个心眼，是否可以考虑使用工厂模式，</p>
+<p>虽然这样做，可能多做一些工作，但会给你系统带来更大的可扩展性和尽量少的修改量。</p>
+<hr>
+<h4 id="2-应用场景-1"><a href="#2-应用场景-1" class="headerlink" title="(2).应用场景"></a>(2).应用场景</h4><p>工厂模式的主要目的，<strong>是封装对象的创建过程，提供更高层次的抽象，降低代码之间的耦合度，使代码更加可扩展和可维护。</strong></p>
+<p>让我们来学习一下ChatGpt的回答，讲得倒是很全面。</p>
+<img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/image-20230808180910381.png" alt="image-20230808180910381" style="zoom: 50%;" />
+
+
+
+<hr>
+<h4 id="3-实现工厂模式"><a href="#3-实现工厂模式" class="headerlink" title="(3).实现工厂模式"></a>(3).实现工厂模式</h4><p>下面用创建一个车的工厂来举例，</p>
+<p>先定义两个父类的头文件，车类和车工厂类，并尝试用CMake管理，采用多文件编写。</p>
+<p><strong>项目目录如下，</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── docs</span><br><span class="line">├── include</span><br><span class="line">│   ├── Baoma.h</span><br><span class="line">│   ├── BaomaFactory.h</span><br><span class="line">│   ├── Benchi.h</span><br><span class="line">│   ├── BenchiFactory.h</span><br><span class="line">│   ├── Car.h</span><br><span class="line">│   ├── CarFactory.h</span><br><span class="line">│   └── singleton.h  # 可以忽略，这是测试单例模式时使用的类</span><br><span class="line">└── src</span><br><span class="line">    ├── Baoma.cpp</span><br><span class="line">    ├── BaomaFactory.cpp</span><br><span class="line">    ├── Benchi.cpp</span><br><span class="line">    ├── BenchiFactory.cpp</span><br><span class="line">    └── main.cpp</span><br></pre></td></tr></table></figure>
+
+<p><code>Car.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> FACTORY_PATTERN_CAR_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FACTORY_PATTERN_CAR_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> std::string <span class="title">get_name</span><span class="params">()</span> </span>= <span class="number">0</span>; <span class="comment">// 定义虚函数，让子类来实现</span></span><br><span class="line">    <span class="built_in">Car</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//FACTORY_PATTERN_CAR_H</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>CarFactory.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> FACTORY_PATTERN_CARFACTORY_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FACTORY_PATTERN_CARFACTORY_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Car.h&quot;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CarFactory</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Car* <span class="title">getCar</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//FACTORY_PATTERN_CARFACTORY_H</span></span></span><br></pre></td></tr></table></figure>
+
+<p>当我们需要创建一个车对象（奔驰车）时，我们需要创建这个车和对于这个车工厂（继承各自父类），当我们要使用这个车时，直接从它工厂里拿就行。</p>
+<p>下面以创建奔驰车对象为例，</p>
+<p><strong>奔驰车类</strong>，<code>Benchi.h</code> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> FACTORY_PATTERN_BENCHI_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FACTORY_PATTERN_BENCHI_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Car.h&quot;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Benchi</span> :<span class="keyword">public</span> Car &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">std::string <span class="title">get_name</span><span class="params">()</span> <span class="keyword">override</span></span>; <span class="comment">// 加override，可帮助编译器检查是否正确地重写了父类的虚函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//FACTORY_PATTERN_BENCHI_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在对应的源文件里写函数声明的实现</span></span><br><span class="line"><span class="string">&quot;Benchi.cpp&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Benchi.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">Benchi::get_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;benchi&quot;</span>;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p><strong>奔驰车工厂，</strong><code>BenchiFactory.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> FACTORY_PATTERN_BENCHIFACTORY_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FACTORY_PATTERN_BENCHIFACTORY_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CarFactory.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BenchiFactory</span> :<span class="keyword">public</span> CarFactory &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Car* <span class="title">getCar</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//FACTORY_PATTERN_BENCHIFACTORY_H</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在对应的源文件里写函数声明的实现</span></span><br><span class="line"><span class="string">&quot;BenchiFactory.cpp&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;BenchiFactory.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Benchi.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">Car* <span class="title">BenchiFactory::getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Benchi</span>();</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p>编写测试类，<code>main.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Car.h&quot;</span></span></span><br><span class="line"><span class="comment">// #include &quot;Benchi.h&quot;</span></span><br><span class="line"><span class="comment">// #include &quot;BenchiFactory.h&quot;</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Baoma.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;BaomaFactory.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    // 原来创建对象</span></span><br><span class="line"><span class="comment">    Car* c = new Benchi();</span></span><br><span class="line"><span class="comment">    std::cout &lt;&lt; &quot;Car name: &quot; &lt;&lt; c-&gt;get_name() &lt;&lt; std::endl; // Car name: benchi</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 工厂模式测试</span></span><br><span class="line">    <span class="comment">// 使用工厂来创建一辆奔驰车</span></span><br><span class="line">    Car* c1 = (<span class="keyword">new</span> BenchiFactory)-&gt;<span class="built_in">getCar</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Car1 name: &quot;</span> &lt;&lt; c1-&gt;<span class="built_in">get_name</span>() &lt;&lt; std::endl; <span class="comment">// Car1 name: benchi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 同样，我们使用工厂来创建一辆宝马车(写法与奔驰车类似)</span></span><br><span class="line">    <span class="comment">// Car* c2 = (new BaomaFactory)-&gt;getCar();</span></span><br><span class="line">    <span class="comment">// std::cout &lt;&lt; &quot;Car2 name: &quot; &lt;&lt; c2-&gt;get_name() &lt;&lt; std::endl; // Car2 name: baoma</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><strong>单例模式：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://hkrb7870j3.feishu.cn/docx/doxcnLkN4DIVd5sEz35QRnBdMeh">【文档 单例模式】</a></p>
+<p><a target="_blank" rel="noopener" href="https://llfc.club/category?catid=225RaiVNI8pFDD5L4m807g7ZwmF#!aid/2MANJ6kCMuMtkgLbxigwVHmKC55">【文档 再谈单例模式】</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11P411N7mu/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C++单例模式：从设计到实现】</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1U34y1t7Qb/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C++单例模式】</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LS4y1t7eE/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C++单例模式总结】</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1du411V7ns/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 Java单例设计模式】</a></p>
+<p><strong>工厂模式：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bd4y1D7on/?share_source=copy_web&vd_source=64863a79f6edd334371cb7b41a0df347">【视频 C/C++项目实战-前置知识】</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SYaoJun/SystemProgramming/tree/fa98dfd6aac2e7ece663bbeb0b3ff0956bcdcc5d">【仓库代码 SYaoJun/SystemProgramming】</a></p>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io">Ariesfun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ariesfun.gitee.io/posts/21e5.html">https://ariesfun.gitee.io/posts/21e5.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ariesfun.gitee.io" target="_blank">AriesfunのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="post-meta__tags" href="/tags/C-C/">C/C++</a></div><div class="post_share"><div class="social-share" data-image="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/6d6b.html"><img class="next-cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C/C++ 内存四区总结</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/6d6b.html" title="C&#x2F;C++ 内存四区总结"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-09</div><div class="title">C&#x2F;C++ 内存四区总结</div></div></a></div><div><a href="/posts/b9aa.html" title="机器学习与数据挖掘 刷题练习(复习版)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040216162.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">机器学习与数据挖掘 刷题练习(复习版)</div></div></a></div><div><a href="/posts/5544.html" title="23生产实习 大数据开发实训笔记合集 更新中..."><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 大数据开发实训笔记合集 更新中...</div></div></a></div><div><a href="/posts/34c8.html" title="23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day04(06&#x2F;01) HDFS的API及字符统计案例 (CharCount)</div></div></a></div><div><a href="/posts/dd24.html" title="23生产实习 Day03(05&#x2F;31) Zookeeper的安装方式"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day03(05&#x2F;31) Zookeeper的安装方式</div></div></a></div><div><a href="/posts/3d5e.html" title="23生产实习 Day02(05&#x2F;30) Hadoop核心技术"><img class="cover" src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202306040105742.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">23生产实习 Day02(05&#x2F;30) Hadoop核心技术</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:ariesfun2019@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一些资源共享: (仅限校友内网访问)
+http://10.200.21.35:8100/s/WJhg
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E4%BE%8B-%E5%B7%A5%E5%8E%82"><span class="toc-text">C++ 设计模式(单例+工厂)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E7%9B%AE%E5%BD%95"><span class="toc-text">0.目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">1.单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="toc-text">(1).概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">(2).应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E6%87%92%E6%B1%89%E5%BC%8F%E8%BE%83%E5%B8%B8%E7%94%A8"><span class="toc-text">(3).实现单例模式(懒汉式较常用)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0-%E6%87%92%E6%B1%89-%E9%A5%BF%E6%B1%89"><span class="toc-text">(3-1).单例模式实现(懒汉+饿汉)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E7%94%A8%E7%B1%BB%E6%A8%A1%E6%9D%BF%E4%BC%98%E5%8C%96%E5%86%99%E6%B3%95-%E6%87%92%E6%B1%89%E5%BC%8F"><span class="toc-text">(3-2).用类模板优化写法(懒汉式)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-%E5%85%B6%E4%BB%96%E6%8B%93%E5%B1%95"><span class="toc-text">(3-3).其他拓展</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%80%83%E8%99%91%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-%E6%87%92%E6%B1%89%E5%BC%8F"><span class="toc-text">(4).考虑多线程下的安全问题(懒汉式)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A6%82%E5%BF%B5-1"><span class="toc-text">(1).概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-text">(2).应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%9E%E7%8E%B0%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">(3).实现工厂模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/21e5.html" title="C++ 设计模式(单例+工厂)"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 设计模式(单例+工厂)"/></a><div class="content"><a class="title" href="/posts/21e5.html" title="C++ 设计模式(单例+工厂)">C++ 设计模式(单例+工厂)</a><time datetime="2023-08-08T16:29:53.011Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/6d6b.html" title="C/C++ 内存四区总结"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C/C++ 内存四区总结"/></a><div class="content"><a class="title" href="/posts/6d6b.html" title="C/C++ 内存四区总结">C/C++ 内存四区总结</a><time datetime="2023-08-08T16:29:53.008Z" title="发表于 2023-08-09 00:29:53">2023-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7d34.html" title="LeetCode Hot100 分类刷题汇总"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307250329115.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode Hot100 分类刷题汇总"/></a><div class="content"><a class="title" href="/posts/7d34.html" title="LeetCode Hot100 分类刷题汇总">LeetCode Hot100 分类刷题汇总</a><time datetime="2023-07-24T19:29:53.728Z" title="发表于 2023-07-25 03:29:53">2023-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8b7.html" title="C++ 算法刷题 - 常用技巧汇总"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307210218346.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 算法刷题 - 常用技巧汇总"/></a><div class="content"><a class="title" href="/posts/8b7.html" title="C++ 算法刷题 - 常用技巧汇总">C++ 算法刷题 - 常用技巧汇总</a><time datetime="2023-07-20T17:36:58.938Z" title="发表于 2023-07-21 01:36:58">2023-07-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8b87.html" title="C++ 常用STL及用法 - 速查文档"><img src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202307210133034.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++ 常用STL及用法 - 速查文档"/></a><div class="content"><a class="title" href="/posts/8b87.html" title="C++ 常用STL及用法 - 速查文档">C++ 常用STL及用法 - 速查文档</a><time datetime="2023-07-20T17:36:58.935Z" title="发表于 2023-07-21 01:36:58">2023-07-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090027619.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ariesfun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/weather.js"></script> <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
