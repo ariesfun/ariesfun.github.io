@@ -1,0 +1,324 @@
+/* ==========================================================================
+   阅读体验优化 · typography.css
+   ==========================================================================
+   目标：中文长文阅读的舒适度。
+   依据（业界通行值）：
+     · 屏幕正文字号 15-17px
+     · 行距为字号的 1.6-1.8 倍，长文取 1.75
+     · 字色用深灰而非纯黑，降低长时间阅读的对比疲劳
+     · 中文每行 25-40 字
+     · 代码行高比正文紧，行内代码需要内边距避免与汉字粘连
+
+   注意：本文件内不要出现「整行由三个以上横线组成」的分隔线。
+   Hexo 的 front-matter 回退正则为
+     /^([\s\S]+?)\n(-{3,}|;{3,})\n?([\s\S]*)/
+   它没有锚定字符串开头，因此只要文件里任意一行是三个以上横线，
+   就会被误判为「带 front-matter 的文件」，进而拿前面的 CSS 去解析 YAML
+   并抛 YAMLException。同理，三个以上分号也会触发。分隔线请用等号。
+   ========================================================================== */
+
+/* ========== 1. 覆盖主题变量 ========== */
+
+:root {
+  --global-font-size: 16px;
+  --text-line-height: 1.75;
+}
+
+/* ========== 2. 中文字体 ==========
+   正文用「霞鹜文楷 屏幕版」（LXGW WenKai Screen），基于 Klee One 衍生的
+   开源楷体，笔画有书写感、灰度均匀，长时间阅读比黑体更放松。
+   字体通过 inject.head 的 <link> 从 jsdelivr 引入，按 unicode-range 分成
+   97 个分片，浏览器只下载页面实际用到的字，不会一次拉全量。
+   声明了 font-display: swap，CDN 慢或不可用时自动回落到系统黑体。
+
+   只作用于正文容器 #article-container：导航、侧栏等 UI 保持系统黑体，
+   形成「UI 黑体 + 正文文楷」的编辑式对比。
+   ================================================================ */
+
+#article-container {
+  font-family: 'LXGW WenKai Screen', system-ui, -apple-system, 'Segoe UI',
+               'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei UI',
+               'Noto Sans CJK SC', sans-serif;
+}
+
+/* 标题保持系统黑体：文楷只提供 400 字重，若在标题上要求 600
+   会触发浏览器合成粗体，笔画会发虚。用黑体反而层级更清晰。 */
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC',
+               'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei UI', sans-serif;
+}
+
+/* 强调文字改用系统黑体。
+   原因：文楷只提供 400 字重，`**强调**` 会被浏览器「合成粗体」——
+   把笔画横向加粗，中文小字号下会糊成一团。交给系统黑体可用真实的
+   SemiBold 字重，既清晰，也符合「楷体正文 + 黑体强调」的中文排版惯例。 */
+#article-container strong,
+#article-container b {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC',
+               'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei UI', sans-serif;
+  font-weight: 600;
+  font-synthesis: none;
+}
+
+/* ========== 3. 正文排版 ========== */
+
+#article-container {
+  font-size: var(--global-font-size);
+  line-height: 1.75;
+  color: #2b3445;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  word-break: break-word;
+}
+
+/* 段落用 margin 分隔，不靠空行 */
+#article-container p {
+  margin: 0 0 1.15em;
+}
+
+/* 中英混排：数字用比例字形，避免与汉字挤在一起 */
+#article-container :is(p, li) {
+  font-variant-numeric: proportional-nums;
+}
+
+/* ========== 4. 标题层级 ========== */
+
+#article-container h1,
+#article-container h2,
+#article-container h3,
+#article-container h4,
+#article-container h5,
+#article-container h6 {
+  line-height: 1.35;
+  font-weight: 600;
+  margin-top: 1.7em;
+  margin-bottom: 0.75em;
+}
+
+#article-container h1 { font-size: 1.6em; }
+#article-container h2 { font-size: 1.4em; }
+#article-container h3 { font-size: 1.2em; }
+#article-container h4 { font-size: 1.08em; }
+
+/* ========== 5. 代码 ========== */
+
+#article-container code,
+#article-container pre,
+#article-container kbd,
+#article-container figure.highlight {
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular,
+               Menlo, Consolas, 'PingFang SC', monospace;
+}
+
+#article-container pre,
+#article-container figure.highlight {
+  font-size: var(--code-font-size, 14px);
+  line-height: 1.6;
+}
+
+#article-container p code,
+#article-container li code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+/* ========== 6. 引用与列表 ========== */
+
+#article-container blockquote {
+  line-height: 1.7;
+  margin: 1.2em 0;
+}
+
+#article-container li {
+  margin: 0.35em 0;
+}
+
+/* ========== 7. 链接 ========== */
+
+#article-container a:not(.headerlink) {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+/* ========== 8. 小屏微调 ========== */
+
+@media (max-width: 768px) {
+  :root {
+    --global-font-size: 15px;
+  }
+  #article-container {
+    letter-spacing: 0;
+  }
+}
+
+/* ========== 9. 阅读宽度 ==========
+   版面总宽与列占比已在第 11 节加宽（总宽 1200→1400px，正文列 74%→72%）。
+   加宽后的实测计算：
+     .layout max-width 1400px，扣左右内边距 30px → 1370px
+     正文列 72% → 986px；卡片内边距左右各 40px → 文字可用 906px
+   下面把文字列限制在 50em（800px ≈ 50 个汉字/行），避免在超宽屏上
+   每行过长难以换行阅读。两侧余下的约 53px 由卡片内部承担，形成留白。
+   注意：代码块与图片会一起受此限制。想更宽就把 50em 调大（如 56em），
+   想恢复满宽则删掉本段。
+   ================================================================ */
+
+@media (min-width: 1100px) {
+  #post #article-container {
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ========== 10. 内容页版面精简 ==========
+   目标：文章页只保留「正文 / 目录 / 最近文档相关」，以及标题区的元信息。
+
+   保留：标题下方的元信息行（更新时间 / 字数总计 / 阅读时长 / 阅读量）
+        与关键词标签 —— 让读者一眼判断「新旧 + 长度 + 主题」。
+   移除分两层，各取所长：
+     · 能用主题配置关掉的，已在 _config.butterfly.yml 里关闭 ——
+       分类、标签、版权声明、上下篇导航、分享按钮、文末标签列表。
+       配置关掉是「真的不渲染」，不浪费请求也不留 DOM。
+     · 剩下两处只能用 CSS —— 侧栏的作者卡与公告卡是主题的全局开关，
+       关配置会连首页侧栏一起改掉；文末空的 .tag_share 容器主题始终渲染。
+
+   作用域用 #body-wrap.post：主题在文章页给它 class="post"，
+   其他页面是 class="page"，所以首页、归档页、关于页完全不受影响。
+   ================================================================ */
+
+/* 元信息行：更新时间 / 字数总计 / 阅读时长 / 阅读量。
+   位于标题与关键词标签下方。 */
+#body-wrap.post #post-meta {
+  margin-top: 10px;
+  font-size: 92%;
+  letter-spacing: .02em;
+}
+
+/* 有封面图时，#post-info 位于 .post-bg 深色头图内，
+   主题默认色 var(--light-grey) 偏暗，这里提亮到半透明白。
+   无封面图的文章不匹配此规则，沿用主题的 #78818a 深灰，
+   保证在浅色背景上同样可读。 */
+#body-wrap.post .post-bg #post-meta {
+  color: rgba(255, 255, 255, .82);
+}
+
+/* 分隔符「|」压暗，避免抢视觉；图标同理 */
+#body-wrap.post #post-meta .post-meta-separator {
+  margin: 0 9px;
+  opacity: .4;
+}
+
+#body-wrap.post #post-meta .post-meta-icon {
+  margin-right: 5px;
+  opacity: .85;
+}
+
+/* 侧栏：只留「目录」与「最新文章」。
+   .card-info 是作者卡（头像/昵称/简介/Follow Me），
+   .card-announcement 是公告卡。两者在首页侧栏仍然显示。 */
+#body-wrap.post #aside-content .card-widget.card-info,
+#body-wrap.post #aside-content .card-widget.card-announcement {
+  display: none;
+}
+
+/* 正文末尾的 .tag_share 容器。标签列表与分享按钮已由配置关闭，
+   但主题始终渲染这个容器，且其中的 .post_share 带 margin-top: 8px，
+   会留下一条空白。这里用 :empty 精确匹配空壳 —— 将来若重新开启
+   分享按钮，容器有内容后本规则自动失效，无需改这里。 */
+#body-wrap.post .tag_share .post_share:empty {
+  display: none;
+}
+
+/* ========== 11. 加宽版面 ==========
+   主题原值（themes/butterfly/source/css/_page/common.styl 与 _layout/aside.styl）：
+     .layout             max-width: 1200px（屏幕 > 2000px 时 1500px）
+     .layout > div:first-child  width: 74%   ← 正文列
+     #aside-content      width: 26%          ← 侧栏（目录所在）
+   本文件加载在主题 index.css 之后，同优先级下后加载者胜，因此可直接覆盖。
+
+   两处坑必须避开，否则会改坏别的场景：
+     · 列占比的覆盖要放进 min-width: 900px。
+       主题在 max-width: 900px 时把 #aside-content 设为 width: 100%，
+       而媒体查询不增加优先级 —— 若不加限定，我的 28% 会连带把移动端
+       的单列布局压成 28%，页面直接坏掉。
+     · 必须补一条 min-width: 2000px 的规则。
+       主题在该断点把 .layout 放宽到 1500px；若我只写 1400px，
+       在没有这条补充时，大屏上反而比原来更窄。
+   ================================================================ */
+
+/* 总宽 1200px → 1400px */
+.layout {
+  max-width: 1400px;
+}
+
+/* 正文列 74% → 72%，侧栏 26% → 28%（目录更宽，长标题少折行） */
+@media (min-width: 900px) {
+  .layout > div:first-child {
+    width: 72%;
+  }
+
+  #aside-content {
+    width: 28%;
+  }
+}
+
+/* 大屏同步放宽：1500px → 1700px */
+@media (min-width: 2000px) {
+  .layout {
+    max-width: 1700px;
+  }
+}
+
+/* ========== 12. 标题处的关键词标签 ==========
+   标记来自 themes/butterfly/layout/includes/header/post-info.pug 的
+   .post-keywords 块，开关是 _config.butterfly.yml 的
+   post_meta.post.keyword_links。
+
+   位置背景需要留意：#post-info 是绝对定位在 #page-header 封面图底部、
+   居中显示的，而封面图上有 alpha($dark-black, .5) 的暗色蒙层、文字为白色。
+   所以标签用「半透明白底 + 白字 + 半透明白边」，
+   这样配深色封面或浅色封面都能看清，不必为每张封面单独调色。
+
+   作用域用 #body-wrap.post，首页/归档页等不含 .post-keywords，
+   本规则对它们无影响。 */
+
+#body-wrap.post .post-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+#body-wrap.post .post-keyword {
+  padding: 3px 12px;
+  border: 1px solid rgba(255, 255, 255, .38);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  font-size: 12.5px;
+  line-height: 1.7;
+  text-shadow: none;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+#body-wrap.post .post-keyword:hover {
+  border-color: rgba(255, 255, 255, .85);
+  background: rgba(255, 255, 255, .3);
+  color: #fff;
+}
+
+/* 主题在 max-width: 900px 时把 #post-info 改为左对齐（head.styl:112），
+   标签跟着左对齐，保持与标题一致。 */
+@media (max-width: 900px) {
+  #body-wrap.post .post-keywords {
+    justify-content: flex-start;
+  }
+}
