@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+    <marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#6366f1"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="380" fill="url(#bg3)" rx="12"/>
+  <text x="430" y="38" text-anchor="middle" font-size="19" font-weight="700" fill="#1e293b">把本地模型接进 AI 编码工具（harness 模式）</text>
+  <text x="430" y="62" text-anchor="middle" font-size="12.5" fill="#64748b">工具只认 OpenAI 兼容接口，指向 Tailscale IP 即可无缝切换本地算力</text>
+
+  <!-- 客户端工具 -->
+  <g>
+    <rect x="50" y="100" width="200" height="200" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <text x="150" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">AI 编码工具</text>
+    <line x1="70" y1="140" x2="230" y2="140" stroke="#e2e8f0"/>
+    <g font-size="11.5" fill="#334155">
+      <rect x="70" y="152" width="160" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="150" y="172" text-anchor="middle">Codex CLI</text>
+      <rect x="70" y="190" width="160" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="150" y="210" text-anchor="middle">Claude Code</text>
+      <rect x="70" y="228" width="160" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="150" y="248" text-anchor="middle">Continue 等插件</text>
+    </g>
+    <text x="150" y="282" text-anchor="middle" font-size="10" fill="#7c3aed">自定义 Base URL</text>
+  </g>
+
+  <!-- 配置块 -->
+  <g>
+    <rect x="320" y="118" width="220" height="164" rx="10" fill="#0f172a"/>
+    <text x="430" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">harness 配置</text>
+    <g font-size="10.5" font-family="ui-monospace, monospace">
+      <text x="338" y="170" fill="#64748b">{</text>
+      <text x="350" y="190" fill="#7dd3fc">"base_url"<tspan fill="#94a3b8">: </tspan><tspan fill="#86efac">"100.64.0.1:8081/v1"</tspan><tspan fill="#64748b">,</tspan></text>
+      <text x="350" y="212" fill="#7dd3fc">"api_key"<tspan fill="#94a3b8">: </tspan><tspan fill="#86efac">"llama-local-2026"</tspan><tspan fill="#64748b">,</tspan></text>
+      <text x="350" y="234" fill="#7dd3fc">"model"<tspan fill="#94a3b8">: </tspan><tspan fill="#86efac">"&lt;精确模型名&gt;"</tspan></text>
+      <text x="338" y="256" fill="#64748b">}</text>
+      <text x="350" y="274" fill="#fca5a5" font-size="9.5">⚠ model 名需与 /v1/models 完全一致</text>
+    </g>
+  </g>
+  <line x1="250" y1="200" x2="320" y2="200" stroke="#6366f1" stroke-width="2" marker-end="url(#arr3)"/>
+  <line x1="540" y1="200" x2="610" y2="200" stroke="#6366f1" stroke-width="2" marker-end="url(#arr3)"/>
+
+  <!-- 服务端 -->
+  <g>
+    <rect x="610" y="128" width="200" height="144" rx="12" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="710" y="156" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">本地模型服务</text>
+    <line x1="630" y1="168" x2="790" y2="168" stroke="#e2e8f0"/>
+    <text x="710" y="192" text-anchor="middle" font-size="11.5" fill="#334155">llama-server / LM Studio</text>
+    <text x="710" y="214" text-anchor="middle" font-size="11" font-family="ui-monospace, monospace" fill="#3b82f6">OpenAI 兼容 :8081</text>
+    <text x="710" y="240" text-anchor="middle" font-size="11" fill="#059669">✅ 原生 tool calling</text>
+    <text x="710" y="258" text-anchor="middle" font-size="10" fill="#94a3b8">（agent 场景必需）</text>
+  </g>
+
+  <text x="430" y="352" text-anchor="middle" font-size="11.5" fill="#64748b">换模型 = 改 base_url，工具无需改动；算力始终来自你指定的机器</text>
+</svg>
