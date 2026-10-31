@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2f7"/>
+    </linearGradient>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr2b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="400" fill="url(#bg2)" rx="12"/>
+  <text x="430" y="38" text-anchor="middle" font-size="19" font-weight="700" fill="#1e293b">远程调用本机大模型 · 数据流</text>
+  <text x="430" y="62" text-anchor="middle" font-size="12.5" fill="#64748b">客户端经 Tailscale 虚拟内网，直连家里 Mac 上的模型服务（OpenAI 兼容接口）</text>
+
+  <!-- 左：客户端设备 -->
+  <g>
+    <rect x="40" y="110" width="190" height="210" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <text x="135" y="138" text-anchor="middle" font-size="13.5" font-weight="700" fill="#4f46e5">客户端（任意设备）</text>
+    <line x1="60" y1="150" x2="210" y2="150" stroke="#e2e8f0"/>
+    <g font-size="11.5" fill="#334155">
+      <rect x="60" y="162" width="150" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="135" y="182" text-anchor="middle">💻 笔记本 / 编辑器插件</text>
+      <rect x="60" y="200" width="150" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="135" y="220" text-anchor="middle">📱 手机 / 平板</text>
+      <rect x="60" y="238" width="150" height="30" rx="7" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="135" y="258" text-anchor="middle">🤖 AI 编码工具 (harness)</text>
+    </g>
+    <text x="135" y="296" text-anchor="middle" font-size="10.5" fill="#7c3aed" font-family="ui-monospace, monospace">Base URL: 100.64.0.1:8081/v1</text>
+  </g>
+
+  <!-- 中：Tailscale 隧道 -->
+  <g>
+    <rect x="275" y="160" width="180" height="110" rx="12" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="365" y="188" text-anchor="middle" font-size="13" font-weight="700" fill="#047857">Tailscale 虚拟内网</text>
+    <text x="365" y="210" text-anchor="middle" font-size="11" fill="#059669">WireGuard · P2P 直连</text>
+    <text x="365" y="230" text-anchor="middle" font-size="11" fill="#059669">🔒 加密 · 不暴露公网</text>
+    <text x="365" y="252" text-anchor="middle" font-size="10.5" fill="#64748b">跨网络 / 跨地区稳定可达</text>
+  </g>
+  <line x1="230" y1="200" x2="275" y2="200" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr2)"/>
+  <line x1="455" y1="230" x2="500" y2="230" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr2)"/>
+
+  <!-- 右：Mac 服务端 -->
+  <g>
+    <rect x="500" y="95" width="320" height="240" rx="12" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="660" y="123" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1d4ed8">Mac 主力机（算力源）</text>
+    <line x1="520" y1="135" x2="800" y2="135" stroke="#e2e8f0"/>
+
+    <g>
+      <rect x="520" y="148" width="135" height="52" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="587" y="169" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">LM Studio</text>
+      <text x="587" y="188" text-anchor="middle" font-size="10.5" font-family="ui-monospace, monospace" fill="#3b82f6">:1234</text>
+    </g>
+    <g>
+      <rect x="665" y="148" width="135" height="52" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="732" y="169" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">llama-server</text>
+      <text x="732" y="188" text-anchor="middle" font-size="10.5" font-family="ui-monospace, monospace" fill="#3b82f6">:8081</text>
+    </g>
+
+    <text x="660" y="222" text-anchor="middle" font-size="11.5" fill="#64748b">均提供 OpenAI 兼容接口</text>
+
+    <g>
+      <rect x="520" y="238" width="280" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="660" y="259" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">本地模型（GGUF / MLX）</text>
+      <text x="660" y="280" text-anchor="middle" font-size="10.5" fill="#64748b">Qwen3-Coder-Next · Qwen3-30B-A3B</text>
+      <text x="660" y="299" text-anchor="middle" font-size="10.5" fill="#64748b">Qwen3.8-27B · 其他 GGUF / MLX 模型</text>
+    </g>
+  </g>
+
+  <!-- 数据不出内网 提示 -->
+  <g>
+    <rect x="300" y="330" width="400" height="34" rx="8" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="500" y="352" text-anchor="middle" font-size="11.5" fill="#92400e">🔐 推理全部在本地完成，数据不出内网，不经过第三方云端</text>
+  </g>
+
+  <text x="430" y="388" text-anchor="middle" font-size="11" fill="#94a3b8">请求流：客户端 → Tailscale 加密隧道 → 本地模型服务 → 流式返回结果</text>
+</svg>
