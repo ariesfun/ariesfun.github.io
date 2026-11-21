@@ -1,0 +1,8 @@
+/* 背景渐变 */
+#web_bg{
+    /*粉白蓝*/
+    /*background-image: linear-gradient(-225deg, #dfbacd 0%, #B8DCFF 48%, #58abf3 100%);*/
+    
+    /*灰底*/
+	background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+}

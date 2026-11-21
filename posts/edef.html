@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法) | AriesfunのBlog</title><meta name="keywords" content="C/C++,操作系统,操作系统实验,进程调度算法设计动"><meta name="author" content="Ariesfun"><meta name="copyright" content="Ariesfun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="操作系统实验(一)  进程调度算法设计(动态优先数+时间片轮转法)模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度一、实验要求1．内容： 设计一个简单的进程调度算法，模拟OS中的进程调度过程2．要求：① 进程数不少于5个；② 进程调度算法任选；最好选用动态优先数法，每运行一个时间片优先数减3；③ 用C++（或C）语言编程；④ 程序运行时显示进程调度过程。 3．步骤：① 设计PCB及其数据结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)">
+<meta property="og:url" content="https://ariesfun.github.io/posts/edef.html">
+<meta property="og:site_name" content="AriesfunのBlog">
+<meta property="og:description" content="操作系统实验(一)  进程调度算法设计(动态优先数+时间片轮转法)模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度一、实验要求1．内容： 设计一个简单的进程调度算法，模拟OS中的进程调度过程2．要求：① 进程数不少于5个；② 进程调度算法任选；最好选用动态优先数法，每运行一个时间片优先数减3；③ 用C++（或C）语言编程；④ 程序运行时显示进程调度过程。 3．步骤：① 设计PCB及其数据结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211161808150.jpg">
+<meta property="article:published_time" content="2022-11-16T08:14:39.000Z">
+<meta property="article:modified_time" content="2022-11-30T08:57:47.000Z">
+<meta property="article:author" content="Ariesfun">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211161808150.jpg"><link rel="shortcut icon" href="/img/logo_22.png"><link rel="canonical" href="https://ariesfun.github.io/posts/edef"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/css/fontawesome/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"本文距上次更新已","messageNext":"天，内容可能已过时"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ariesfun","link":"链接: ","source":"来源: AriesfunのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-30 08:57:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/gradient_background.css"><link rel="stylesheet" href="/css/typography.css"><link rel="stylesheet" href="/css/footer-banner.css?v=3"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="AriesfunのBlog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/logo_22.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211161808150.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AriesfunのBlog</a></span><div id="he-plugin-simple"></div><div id="none_space"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/friends/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)</h1><div class="post-keywords"><a class="post-keyword" href="/tags/C-C/">C/C++</a><a class="post-keyword" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon fas fa-history"></i><span class="post-meta-label">更新于</span><time datetime="2022-11-30T08:57:47.000Z" title="更新于 2022-11-30 08:57:47">2022-11-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">978</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="操作系统实验(一)  进程调度算法设计动(动态优先数+时间片轮转法)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="操作系统实验-一-进程调度算法设计-动态优先数-时间片轮转法"><a href="#操作系统实验-一-进程调度算法设计-动态优先数-时间片轮转法" class="headerlink" title="操作系统实验(一)  进程调度算法设计(动态优先数+时间片轮转法)"></a>操作系统实验(一)  进程调度算法设计(动态优先数+时间片轮转法)</h1><h2 id="模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度"><a href="#模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度" class="headerlink" title="模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度"></a>模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度</h2><h2 id="一、实验要求"><a href="#一、实验要求" class="headerlink" title="一、实验要求"></a>一、实验要求</h2><h3 id="1．内容：-设计一个简单的进程调度算法，模拟OS中的进程调度过程"><a href="#1．内容：-设计一个简单的进程调度算法，模拟OS中的进程调度过程" class="headerlink" title="1．内容： 设计一个简单的进程调度算法，模拟OS中的进程调度过程"></a>1．内容： 设计一个简单的进程调度算法，模拟OS中的进程调度过程</h3><h3 id="2．要求："><a href="#2．要求：" class="headerlink" title="2．要求："></a>2．要求：</h3><p>① 进程数不少于5个；<br>② 进程调度算法任选；最好选用动态优先数法，每运行一个时间片优先数减3；<br>③ 用C++（或C）语言编程；<br>④ 程序运行时显示进程调度过程。</p>
+<h3 id="3．步骤："><a href="#3．步骤：" class="headerlink" title="3．步骤："></a>3．步骤：</h3><p>① 设计PCB及其数据结构：</p>
+<p>  进程标识数：ID</p>
+<p>  进程优先数：PRIORITY（优先数越大，优先级越高）</p>
+<p>  进程已占用时间片：CPUTIME</p>
+<p>  进程尚需时间片：ALLTIME（一旦运行完毕，ALLTIME为0）</p>
+<p>  进程队列指针：NEXT，用来将PCB排成队列</p>
+<p>  进程状态：STATE（一般为就绪，不用）</p>
+<p>② 设计进程就绪队列及数据结构；</p>
+<p>③ 设计进程调度算法，并画出程序流程图；</p>
+<p>④ 设计输入数据和输出格式；</p>
+<p>​     结构格式：当前正运行的进程：0</p>
+<p>​     当前就绪队列：2，1，3，4</p>
+<p>⑤ 编程上机，验证结果。</p>
+<h3 id="4．提示："><a href="#4．提示：" class="headerlink" title="4．提示："></a>4．提示：</h3><p>假设调度前，系统中有5个进程，其初始状态如下：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PRIORITY</td>
+<td>9</td>
+<td>38</td>
+<td>30</td>
+<td>29</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CPUTIME</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ALLTIME</td>
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>STATE</td>
+<td>ready</td>
+<td>ready</td>
+<td>ready</td>
+<td>ready</td>
+<td>read</td>
+</tr>
+</tbody></table>
+<p>① 以时间片为单位调度运行；</p>
+<p>② 每次总是从ALLTIME中不为0，且PRIORITY最大的进程调度运行一个时间片；</p>
+<p>③ 上述进程运行后其优先数减3，再修改其CPUTIME和ALLTIME，重复②，③;</p>
+<p>④ 直到所有进程的ALLTIME均变为0。</p>
+<h3 id="5-书写实验报告"><a href="#5-书写实验报告" class="headerlink" title="5.书写实验报告"></a>5.书写实验报告</h3><p>① 实验题目；</p>
+<p>② 程序中所用数据结构及说明；</p>
+<p>③ 程序清单及描述；</p>
+<p>④ 执行结果。</p>
+<h2 id="二、算法实现："><a href="#二、算法实现：" class="headerlink" title="二、算法实现："></a>二、算法实现：</h2><h3 id="1-具体代码："><a href="#1-具体代码：" class="headerlink" title="1.具体代码："></a>1.具体代码：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//进程PCB结构体</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></span><br><span class="line">&#123;	</span><br><span class="line">  	<span class="type">int</span> id, priority, cputime, alltime, state;	<span class="comment">//state,结束-1，就绪0，运行1 </span></span><br><span class="line">&#125;pcb;</span><br><span class="line"></span><br><span class="line">pcb a[<span class="number">110</span>];	<span class="comment">//定义进程队列 </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">(<span class="type">int</span> n, pcb a[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;----------------------------------------------\n&quot;</span>);</span><br><span class="line">  	<span class="built_in">printf</span>(<span class="string">&quot;id  priority  cputime  alltime  state\n&quot;</span>);	<span class="comment">//alltime,进程所需时间片 </span></span><br><span class="line">  	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">    	<span class="built_in">printf</span>(<span class="string">&quot;%d\t %d\t %d\t %d\t %d\n&quot;</span>, a[i].id, a[i].priority, a[i].cputime, a[i].alltime, a[i].state);</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)	</span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">if</span>(a[i].state == <span class="number">1</span>)</span><br><span class="line">    		cout &lt;&lt; <span class="string">&quot;当前运行的进程id号：&quot;</span> &lt;&lt; a[i].id &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;当前的就绪进程id号：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)	</span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">if</span>(a[i].state == <span class="number">0</span>)</span><br><span class="line">    		cout &lt;&lt; a[i].id &lt;&lt; <span class="string">&quot; &quot;</span>;  	</span><br><span class="line">	&#125;</span><br><span class="line">  	<span class="built_in">printf</span>(<span class="string">&quot;\n----------------------------------------------\n\n&quot;</span>);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">prior_sort</span><span class="params">(<span class="type">int</span> n, pcb a[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> 	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; n - <span class="number">1</span> - i; j ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( (a[j].priority &lt;= a[j + <span class="number">1</span>].priority))</span><br><span class="line">            	<span class="built_in">swap</span>(a[j], a[j + <span class="number">1</span>]); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">if</span>(a[<span class="number">0</span>].state != <span class="number">-1</span>) a[<span class="number">0</span>].state = <span class="number">1</span>;<span class="comment">//设为运行态 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">process_scheduling</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(a[<span class="number">0</span>].state == <span class="number">1</span>)	<span class="comment">//运行态1，完成一次调度</span></span><br><span class="line">        &#123;</span><br><span class="line">        	a[<span class="number">0</span>].priority -= <span class="number">3</span>;</span><br><span class="line">            a[<span class="number">0</span>].cputime += <span class="number">1</span>;</span><br><span class="line">            a[<span class="number">0</span>].alltime -= <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[<span class="number">0</span>].alltime == <span class="number">0</span>) </span><br><span class="line">            &#123;</span><br><span class="line">				a[<span class="number">0</span>].state= <span class="number">-1</span>;<span class="comment">//该进程结束(-1)</span></span><br><span class="line">				m ++;</span><br><span class="line">				<span class="built_in">swap</span>(a[<span class="number">0</span>], a[n - m]);</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="keyword">else</span> a[<span class="number">0</span>].state= <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">prior_sort</span>(n - m,a);</span><br><span class="line">        <span class="built_in">show</span>(n,a);</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">while</span>(a[<span class="number">0</span>].alltime != <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n; </span><br><span class="line">	<span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;请输入进程个数：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;请依次输入这&quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;个进程的ID号、进程优先数、已占用时间片、需要的时间片：&quot;</span>&lt;&lt; endl;<span class="comment">//初始化进程队列 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin &gt;&gt; a[i].id &gt;&gt; a[i].priority &gt;&gt; a[i].cputime &gt;&gt; a[i].alltime;</span><br><span class="line">		a[i].state = <span class="number">0</span>; <span class="comment">//进程状态（默认就绪态0）</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;进程队列初始状态如下：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">show</span>(n,a);</span><br><span class="line">	<span class="built_in">prior_sort</span>(n,a); </span><br><span class="line">	<span class="built_in">show</span>(n,a); <span class="comment">//进程第一次调度状况</span></span><br><span class="line">	<span class="built_in">process_scheduling</span>(n, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-运行截图："><a href="#2-运行截图：" class="headerlink" title="2.运行截图："></a>2.运行截图：</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211161808150.jpg" alt="img-202211161808150"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202211161808077.jpg" alt="img-202211161808077"></p>
+</article><div class="tag_share"><div class="post_share"></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/3cf4.html" title="C++11 多线程编程基础(上)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/multi_thread_001.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-05</div><div class="title">C++11 多线程编程基础(上)</div></div></a></div><div><a href="/posts/acf5.html" title="C++11 多线程编程基础(下)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/multi_thread_002.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-05</div><div class="title">C++11 多线程编程基础(下)</div></div></a></div><div><a href="/posts/cmu445p1.html" title="CMU15-445-P1 Buffer Pool Manager"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/image-20230827120007265.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-27</div><div class="title">CMU15-445-P1 Buffer Pool Manager</div></div></a></div><div><a href="/posts/cmu445p0.html" title="CMU15-445-P0 C++ Primer"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/image-20230827120007265.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-27</div><div class="title">CMU15-445-P0 C++ Primer</div></div></a></div><div><a href="/posts/cmu15445.html" title="CMU 15-445 2023-Spring Lab记录合集"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/image-20230827120007265.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-27</div><div class="title">CMU 15-445 2023-Spring Lab记录合集</div></div></a></div><div><a href="/posts/6d6b.html" title="C&#x2F;C++ 内存四区总结"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/202308090026441.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-09</div><div class="title">C&#x2F;C++ 内存四区总结</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/logo_22.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ariesfun</div><div class="author-info__description">这里有互联网技术分享、计算机专业知识学习和生活日志...</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">41</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ariesfun"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2018351840&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/172382106" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="mailto:ariesfun2019@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/ariesfun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一些资源共享: (仅限校友内网访问)
+http://10.200.21.35:8100/s/WJhg
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-%E4%B8%80-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1-%E5%8A%A8%E6%80%81%E4%BC%98%E5%85%88%E6%95%B0-%E6%97%B6%E9%97%B4%E7%89%87%E8%BD%AE%E8%BD%AC%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">操作系统实验(一)  进程调度算法设计(动态优先数+时间片轮转法)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E7%94%A8%E5%8A%A8%E6%80%81%E4%BC%98%E5%85%88%E6%95%B0%E5%8F%8A%E6%97%B6%E9%97%B4%E7%89%87%E8%BD%AE%E8%BD%AC%E6%B3%95%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">模拟进程调度算法，用动态优先数及时间片轮转法实现进程调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">一、实验要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8E%E5%86%85%E5%AE%B9%EF%BC%9A-%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%EF%BC%8C%E6%A8%A1%E6%8B%9FOS%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">1．内容： 设计一个简单的进程调度算法，模拟OS中的进程调度过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8E%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">2．要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8E%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.2.3.</span> <span class="toc-text">3．步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%8E%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="toc-number">1.2.4.</span> <span class="toc-text">4．提示：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%B9%A6%E5%86%99%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A"><span class="toc-number">1.2.5.</span> <span class="toc-text">5.书写实验报告</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">二、算法实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.具体代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C%E6%88%AA%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.运行截图：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/8181.html" title="让博客壁纸跟着 B 站首页走 —— 实时同步的完整实现"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/bili-banner-cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="让博客壁纸跟着 B 站首页走 —— 实时同步的完整实现"/></a><div class="content"><a class="title" href="/posts/8181.html" title="让博客壁纸跟着 B 站首页走 —— 实时同步的完整实现">让博客壁纸跟着 B 站首页走 —— 实时同步的完整实现</a><time datetime="2026-09-18T16:00:00.000Z" title="发表于 2026-09-18 16:00:00">2026-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b063.html" title="远程也能用上家里的本地大模型：Tailscale 实战（附 LM Studio / llama.cpp 接入）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/tailscale-local-ai-cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="远程也能用上家里的本地大模型：Tailscale 实战（附 LM Studio / llama.cpp 接入）"/></a><div class="content"><a class="title" href="/posts/b063.html" title="远程也能用上家里的本地大模型：Tailscale 实战（附 LM Studio / llama.cpp 接入）">远程也能用上家里的本地大模型：Tailscale 实战（附 LM Studio / llama.cpp 接入）</a><time datetime="2026-09-10T10:00:00.000Z" title="发表于 2026-09-10 10:00:00">2026-09-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3cf4.html" title="C++11 多线程编程基础(上)"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgbed-funblog.oss-cn-chengdu.aliyuncs.com/img/multi_thread_001.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++11 多线程编程基础(上)"/></a><div class="content"><a class="title" href="/posts/3cf4.html" title="C++11 多线程编程基础(上)">C++11 多线程编程基础(上)</a><time datetime="2023-09-05T01:56:56.000Z" title="发表于 2023-09-05 01:56:56">2023-09-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/acf5.html" title="C++11 多线程编程基础(下)"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/multi_thread_002.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++11 多线程编程基础(下)"/></a><div class="content"><a class="title" href="/posts/acf5.html" title="C++11 多线程编程基础(下)">C++11 多线程编程基础(下)</a><time datetime="2023-09-05T01:56:56.000Z" title="发表于 2023-09-05 01:56:56">2023-09-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/cmu445p1.html" title="CMU15-445-P1 Buffer Pool Manager"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/covers/image-20230827120007265.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CMU15-445-P1 Buffer Pool Manager"/></a><div class="content"><a class="title" href="/posts/cmu445p1.html" title="CMU15-445-P1 Buffer Pool Manager">CMU15-445-P1 Buffer Pool Manager</a><time datetime="2023-08-27T12:03:59.000Z" title="发表于 2023-08-27 12:03:59">2023-08-27</time></div></div></div></div></div></div></main><footer id="footer"><div class="bili-banner" id="bili-banner" data-fingerprint="42b37263aa958e73" data-width="3840" data-height="360" aria-hidden="true"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/daa0341c3bbb8b342a3c9982f93c2a24c3a8ad82.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:1"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/50312b568b8c9e77420fafd77f279ccd2aec7d7d.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0.0000158" style="z-index:2"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/060aabb9f1510f85d35291bb325cef439c515c7a.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0.0000079" style="z-index:3"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/587d666b2e242d3c8bac6a3132401f48949c0623.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.001739" data-ks="-0.0000237" style="z-index:4"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/d37a459df931a19029766a401696bf2049eb68b3.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:5"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/b437c98006d42b8bba029c155db2c8b669a8af4f.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.003478" data-ks="0" style="z-index:6"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/ba58a4f9cf1db762956c6eb0bb0e5b2d3aa59940.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.001043" data-ks="-0.0000158" style="z-index:7"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/caf1c3b096a61a230d7a783bd7e08f42745b6706.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:8"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/5dd8253e7780d8c4c3e79a702c36bc1b7c8ab575.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.006957" data-ks="-0.0000253" style="z-index:9"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/b487ee14524c59cb805b9a954d226f36e7e9c803.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.010435" data-ks="-0.0000158" style="z-index:10"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/3d117b7a7276fcc9f337e1df5ea7265696d338d5.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.003478" data-ks="-0.0000079" style="z-index:11"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/757614ea36fb1544cb790c44da51b714451364f0.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.003478" data-ks="-0.0000158" style="z-index:12"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/014a91614c869b05abdc6ef062b9f7c4333cd1af.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.003478" data-ks="-0.0000158" style="z-index:13"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/f2c58161e4018a672b2d422bd6e58ee3ce57b964.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:14"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/c418010c5a5851be61609f126f4d15e96fa63776.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="-0.0000079" style="z-index:15"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/ff959cd5fc147e07fc49804e3b10031c0bc07df9.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.006482" data-ks="-0.0000079" style="z-index:16"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/24aa834d42d13922b066c20c140bac8ceb33dc3f.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.002783" data-ks="-0.000004" style="z-index:17"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/3414ed509e8054ad3cefa7a7b1fa90c6a4e1a3dc.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.006957" data-ks="0.0000079" style="z-index:18"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/f02ff85f6a3d7d1850e1545f1c8f79f9f8988ab4.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.015652" data-ks="0.0000158" style="z-index:19"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/a7cf8d3e80932d6341e0338f60d3ecb93b44f209.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:20"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/6e73660a07b754d5437e68e01195dee6a04cf4a8.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.003478" data-ks="0" style="z-index:21"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/70eac5d924a14405fe0e8ca11e3b81b8238f6eeb.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:22"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/e2b7230f6dac62da2e61fcb3443e435d69be9b3f.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.005217" data-ks="0" style="z-index:23"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/e2172b4e09446930eba81328a220a62ad00ab307.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0" data-ks="0" style="z-index:24"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/19091569ac9b766687fca327d1d2f7312518edc1.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.005217" data-ks="0" style="z-index:25"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/c30fb43d34984c4e0eaaccd0cb729126e5b9fc92.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.005217" data-ks="0" style="z-index:26"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/e57c56053b84eac7822b14791e6a569f5837f17a.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="0.02087" data-ks="0" style="z-index:27"><img class="bili-layer" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://i2.hdslb.com/bfs/vc/dcf1a2e6ebdbdf882ba1a6825061b43ace3d7a91.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" data-no-lazy data-kx="-0.034783" data-ks="0" style="z-index:28"></div><div id="footer-wrap"><div class="copyright">&copy;2022 - 2026 By Ariesfun</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-teal-two.vercel.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="/js/footer-banner.js?v=8"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
